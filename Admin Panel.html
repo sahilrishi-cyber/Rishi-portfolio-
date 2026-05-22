@@ -5,171 +5,127 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Panel — Rishi.K</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <style>
 :root{--cyan:#00f5ff;--pink:#ff006e;--purple:#bf00ff;--green:#00ff88;--yellow:#fff200;--bg:#020408;--bg2:#060d12;--surface:#0a1520;--border:#0d2535;--text:#8ab4cc;--white:#e0f4ff;}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+*{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;min-height:100vh;}
 body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.02) 2px,rgba(0,0,0,0.02) 4px);pointer-events:none;z-index:9999;}
 
-/* ─── LOGIN SCREEN ─── */
-#loginScreen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000;transition:opacity .6s,transform .6s;}
-#loginScreen.hide{opacity:0;pointer-events:none;transform:scale(1.04);}
+/* LOGIN */
+#loginScreen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000;transition:opacity .6s;}
+#loginScreen.hide{opacity:0;pointer-events:none;}
 .login-box{background:var(--surface);border:1px solid rgba(0,245,255,.15);padding:50px 44px;width:380px;position:relative;overflow:hidden;}
 .login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),var(--pink),transparent);}
-.login-corners span{position:absolute;width:16px;height:16px;}
-.login-corners .tl{top:0;left:0;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);}
-.login-corners .tr{top:0;right:0;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan);}
-.login-corners .bl{bottom:0;left:0;border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan);}
-.login-corners .br{bottom:0;right:0;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);}
+.cn{position:absolute;width:16px;height:16px;}
+.tl{top:0;left:0;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);}
+.tr{top:0;right:0;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan);}
+.bl{bottom:0;left:0;border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan);}
+.br{bottom:0;right:0;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);}
 .login-logo{font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--cyan);letter-spacing:4px;text-shadow:0 0 20px var(--cyan);margin-bottom:4px;}
 .login-logo span{color:var(--pink);}
 .login-sub{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--text);margin-bottom:36px;text-transform:uppercase;}
 .l-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--text);text-transform:uppercase;display:block;margin-bottom:8px;}
-.l-input{width:100%;background:rgba(0,245,255,.02);border:1px solid var(--border);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:16px;padding:12px 14px;outline:none;transition:border-color .3s,box-shadow .3s;margin-bottom:20px;letter-spacing:1px;}
-.l-input:focus{border-color:var(--cyan);box-shadow:0 0 0 1px rgba(0,245,255,.1);}
-.l-btn{width:100%;font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:3px;padding:14px;background:transparent;border:2px solid var(--cyan);color:var(--cyan);text-transform:uppercase;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;margin-top:4px;}
+.l-input{width:100%;background:rgba(0,245,255,.02);border:1px solid var(--border);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:16px;padding:12px 14px;outline:none;transition:border-color .3s;margin-bottom:20px;}
+.l-input:focus{border-color:var(--cyan);}
+.l-btn{width:100%;font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:3px;padding:14px;background:transparent;border:2px solid var(--cyan);color:var(--cyan);text-transform:uppercase;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
 .l-btn::before{content:'';position:absolute;inset:0;background:var(--cyan);transform:scaleX(0);transform-origin:left;transition:transform .3s;z-index:-1;}
-.l-btn:hover{color:#000;box-shadow:0 0 30px rgba(0,245,255,.3);}
+.l-btn:hover{color:#000;}
 .l-btn:hover::before{transform:scaleX(1);}
 .l-err{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--pink);text-transform:uppercase;margin-top:12px;opacity:0;transition:opacity .3s;text-align:center;}
 .l-err.show{opacity:1;}
-.l-shake{animation:shake .4s ease;}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
 
-/* ─── ADMIN PANEL ─── */
+/* PANEL */
 #adminPanel{display:none;min-height:100vh;}
 #adminPanel.visible{display:flex;}
-
-/* SIDEBAR */
-.sidebar{width:240px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;}
+.sidebar{width:240px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;overflow-y:auto;}
 .s-logo{padding:24px 20px;border-bottom:1px solid var(--border);}
 .s-logo-txt{font-family:'Orbitron',monospace;font-size:15px;font-weight:900;color:var(--cyan);letter-spacing:3px;text-shadow:0 0 15px var(--cyan);}
 .s-logo-txt span{color:var(--pink);}
-.s-badge{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text);margin-top:4px;text-transform:uppercase;}
-.s-nav{flex:1;padding:20px 0;overflow-y:auto;}
+.s-badge{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text);margin-top:4px;}
+.s-nav{flex:1;padding:20px 0;}
 .s-group{margin-bottom:24px;}
 .s-group-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;color:rgba(138,180,204,.4);text-transform:uppercase;padding:0 20px;margin-bottom:8px;}
-.s-item{display:flex;align-items:center;gap:12px;padding:11px 20px;cursor:pointer;transition:all .2s;border-left:2px solid transparent;color:var(--text);font-size:14px;font-weight:600;letter-spacing:.5px;}
+.s-item{display:flex;align-items:center;gap:12px;padding:11px 20px;cursor:pointer;transition:all .2s;border-left:2px solid transparent;color:var(--text);font-size:14px;font-weight:600;}
 .s-item:hover{background:rgba(0,245,255,.04);color:var(--white);border-left-color:rgba(0,245,255,.3);}
 .s-item.active{background:rgba(0,245,255,.07);color:var(--cyan);border-left-color:var(--cyan);}
-.s-icon{font-size:16px;width:20px;text-align:center;}
 .s-bottom{padding:20px;border-top:1px solid var(--border);}
-.s-user{display:flex;align-items:center;gap:12px;}
 .s-av{width:36px;height:36px;background:linear-gradient(135deg,var(--cyan),var(--pink));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:11px;font-weight:900;color:#000;flex-shrink:0;}
 .s-uname{font-size:13px;font-weight:700;color:var(--white);}
-.s-urole{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;}
+.s-urole{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);}
 .s-logout{margin-top:12px;width:100%;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;padding:9px;background:transparent;border:1px solid rgba(255,0,110,.3);color:var(--pink);text-transform:uppercase;cursor:pointer;transition:all .3s;}
-.s-logout:hover{background:rgba(255,0,110,.08);border-color:var(--pink);}
-
-/* MAIN CONTENT */
+.s-logout:hover{background:rgba(255,0,110,.08);}
 .main{margin-left:240px;flex:1;min-height:100vh;}
 .topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
 .tb-title{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;}
-.tb-right{display:flex;align-items:center;gap:16px;}
 .tb-time{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--text);}
-.tb-notif{width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:border-color .3s;}
-.tb-notif:hover{border-color:var(--cyan);}
-.tb-dot{display:inline-block;width:7px;height:7px;background:var(--pink);border-radius:50%;position:absolute;margin-left:-8px;margin-top:-8px;box-shadow:0 0 6px var(--pink);}
 .content{padding:28px 32px;}
-
-/* PAGES */
 .page{display:none;}
 .page.active{display:block;}
 
-/* CARDS ROW */
+/* CARDS */
 .cards-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
 .stat-card{background:var(--surface);border:1px solid var(--border);padding:22px 20px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;}
 .stat-card:hover{border-color:rgba(0,245,255,.2);transform:translateY(-3px);}
-.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:opacity .3s;}
-.stat-card:nth-child(1)::before{background:var(--cyan);box-shadow:0 0 8px var(--cyan);}
-.stat-card:nth-child(2)::before{background:var(--pink);box-shadow:0 0 8px var(--pink);}
-.stat-card:nth-child(3)::before{background:var(--green);box-shadow:0 0 8px var(--green);}
-.stat-card:nth-child(4)::before{background:var(--yellow);box-shadow:0 0 8px var(--yellow);}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.stat-card:nth-child(1)::before{background:var(--cyan);}
+.stat-card:nth-child(2)::before{background:var(--pink);}
+.stat-card:nth-child(3)::before{background:var(--green);}
+.stat-card:nth-child(4)::before{background:var(--yellow);}
 .sc-icon{font-size:26px;margin-bottom:12px;}
 .sc-val{font-family:'Orbitron',monospace;font-size:28px;font-weight:900;color:var(--white);line-height:1;margin-bottom:4px;}
 .sc-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text);text-transform:uppercase;}
-.sc-change{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;margin-top:8px;}
-.sc-change.up{color:var(--green);}
-.sc-change.dn{color:var(--pink);}
 
 /* SECTION HEADER */
 .s-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
 .s-hdr-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;}
-.s-hdr-tag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;padding:5px 12px;border:1px solid rgba(0,245,255,.2);cursor:pointer;transition:all .3s;}
-.s-hdr-tag:hover{background:rgba(0,245,255,.05);border-color:var(--cyan);}
+.s-hdr-btn{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan);padding:6px 14px;border:1px solid rgba(0,245,255,.2);cursor:pointer;background:transparent;text-transform:uppercase;transition:all .3s;}
+.s-hdr-btn:hover{background:rgba(0,245,255,.07);border-color:var(--cyan);}
+.s-hdr-btn.pink{color:var(--pink);border-color:rgba(255,0,110,.2);}
+.s-hdr-btn.pink:hover{background:rgba(255,0,110,.07);border-color:var(--pink);}
 
 /* TABLE */
-.tbl-wrap{background:var(--surface);border:1px solid var(--border);overflow:hidden;margin-bottom:24px;}
-table{width:100%;border-collapse:collapse;}
+.tbl-wrap{background:var(--surface);border:1px solid var(--border);overflow:hidden;margin-bottom:24px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;min-width:600px;}
 thead{background:rgba(0,0,0,.3);}
 th{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--text);text-transform:uppercase;padding:12px 16px;text-align:left;border-bottom:1px solid var(--border);}
 td{padding:13px 16px;font-size:13px;border-bottom:1px solid rgba(13,37,53,.6);vertical-align:middle;}
 tr:last-child td{border-bottom:none;}
 tr:hover td{background:rgba(0,245,255,.02);}
-.badge{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;padding:3px 8px;border-radius:0;text-transform:uppercase;}
+.badge{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;padding:3px 8px;text-transform:uppercase;}
 .badge.done{background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.3);color:var(--green);}
 .badge.prog{background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.3);color:var(--cyan);}
 .badge.pend{background:rgba(255,0,110,.1);border:1px solid rgba(255,0,110,.3);color:var(--pink);}
+.tbl-action{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 8px;border:1px solid;background:transparent;cursor:pointer;text-transform:uppercase;transition:all .3s;margin-right:4px;}
+.tbl-action.edit{border-color:rgba(0,245,255,.3);color:var(--cyan);}
+.tbl-action.edit:hover{background:rgba(0,245,255,.07);}
+.tbl-action.del{border-color:rgba(255,0,110,.3);color:var(--pink);}
+.tbl-action.del:hover{background:rgba(255,0,110,.07);}
 
-/* GRID 2COL */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(2,4,8,.9);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;}
+.modal-bg.hide{display:none;}
+.modal{background:var(--surface);border:1px solid rgba(0,245,255,.2);padding:32px;width:100%;max-width:480px;position:relative;}
+.modal::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--pink));}
+.modal-title{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;}
+.fg{margin-bottom:16px;}
+.fg label{display:block;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--text);text-transform:uppercase;margin-bottom:7px;}
+.fg input,.fg textarea,.fg select{width:100%;background:rgba(0,245,255,.02);border:1px solid var(--border);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:15px;padding:11px 13px;outline:none;transition:border-color .3s;}
+.fg textarea{height:90px;resize:none;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--cyan);}
+.fg select option{background:var(--bg2);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.modal-btns{display:flex;gap:12px;margin-top:20px;}
+.m-btn{flex:1;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:2px;padding:12px;border:2px solid;background:transparent;cursor:pointer;text-transform:uppercase;transition:all .3s;}
+.m-btn.save{border-color:var(--cyan);color:var(--cyan);}
+.m-btn.save:hover{background:var(--cyan);color:#000;}
+.m-btn.cancel{border-color:rgba(255,255,255,.15);color:var(--text);}
+.m-btn.cancel:hover{border-color:var(--text);}
 
-/* MINI CHART */
-.mini-chart{background:var(--surface);border:1px solid var(--border);padding:20px;}
-.chart-bars{display:flex;align-items:flex-end;gap:5px;height:80px;margin-top:16px;}
-.cb{flex:1;background:linear-gradient(to top,rgba(0,245,255,.6),rgba(0,245,255,.15));border-top:1px solid var(--cyan);border-radius:0;transition:all .3s;cursor:pointer;position:relative;}
-.cb:hover{background:linear-gradient(to top,var(--cyan),rgba(0,245,255,.4));}
-.cb:hover::after{content:attr(data-val);position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--cyan);white-space:nowrap;}
-.chart-xlbls{display:flex;gap:5px;margin-top:6px;}
-.chart-xlbls span{flex:1;font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text);text-align:center;letter-spacing:.5px;}
-
-/* ACTIVITY FEED */
-.act-feed{background:var(--surface);border:1px solid var(--border);padding:20px;}
-.act-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(13,37,53,.6);}
-.act-item:last-child{border-bottom:none;}
-.act-dot{width:8px;height:8px;border-radius:50%;margin-top:4px;flex-shrink:0;box-shadow:0 0 6px;}
-.act-dot.c{background:var(--cyan);box-shadow:0 0 6px var(--cyan);}
-.act-dot.p{background:var(--pink);box-shadow:0 0 6px var(--pink);}
-.act-dot.g{background:var(--green);box-shadow:0 0 6px var(--green);}
-.act-dot.y{background:var(--yellow);box-shadow:0 0 6px var(--yellow);}
-.act-txt{font-size:13px;color:var(--text);line-height:1.5;}
-.act-txt strong{color:var(--white);}
-.act-time{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(138,180,204,.4);margin-top:3px;letter-spacing:1px;}
-
-/* SETTINGS PAGE */
-.set-section{background:var(--surface);border:1px solid var(--border);padding:24px;margin-bottom:16px;}
-.set-title{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);}
-.set-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(13,37,53,.5);}
-.set-row:last-child{border-bottom:none;}
-.set-key{font-size:14px;color:var(--white);font-weight:600;}
-.set-desc{font-size:12px;color:var(--text);margin-top:2px;}
-.toggle{width:42px;height:22px;background:var(--border);border-radius:11px;cursor:pointer;position:relative;transition:background .3s;flex-shrink:0;}
-.toggle.on{background:var(--cyan);}
-.toggle::after{content:'';position:absolute;width:16px;height:16px;background:#fff;border-radius:50%;top:3px;left:3px;transition:transform .3s;box-shadow:0 1px 4px rgba(0,0,0,.4);}
-.toggle.on::after{transform:translateX(20px);}
-.set-inp{background:rgba(0,245,255,.02);border:1px solid var(--border);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:14px;padding:8px 12px;outline:none;width:220px;transition:border-color .3s;}
-.set-inp:focus{border-color:var(--cyan);}
-.set-btn{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;padding:9px 18px;border:1px solid var(--cyan);background:transparent;color:var(--cyan);cursor:pointer;text-transform:uppercase;transition:all .3s;}
-.set-btn:hover{background:rgba(0,245,255,.08);}
-.set-btn.danger{border-color:var(--pink);color:var(--pink);}
-.set-btn.danger:hover{background:rgba(255,0,110,.08);}
-
-/* PORTFOLIO MANAGER */
-.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;}
-.proj-card{background:var(--surface);border:1px solid var(--border);overflow:hidden;transition:border-color .3s;}
-.proj-card:hover{border-color:rgba(0,245,255,.2);}
-.proj-thumb{height:100px;display:flex;align-items:center;justify-content:center;font-size:32px;position:relative;}
-.proj-info{padding:14px;}
-.proj-name{font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px;}
-.proj-type{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;}
-.proj-actions{display:flex;gap:8px;margin-top:12px;}
-.pact{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;padding:6px 10px;border:1px solid;background:transparent;cursor:pointer;text-transform:uppercase;transition:all .3s;}
-.pact.edit{border-color:rgba(0,245,255,.3);color:var(--cyan);}
-.pact.edit:hover{background:rgba(0,245,255,.07);}
-.pact.del{border-color:rgba(255,0,110,.3);color:var(--pink);}
-.pact.del:hover{background:rgba(255,0,110,.07);}
-
-/* MESSAGES PAGE */
+/* MESSAGES */
 .msg-list{background:var(--surface);border:1px solid var(--border);}
 .msg-item{padding:16px 20px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s;display:flex;gap:14px;align-items:flex-start;}
 .msg-item:last-child{border-bottom:none;}
@@ -179,66 +135,89 @@ tr:hover td{background:rgba(0,245,255,.02);}
 .msg-meta{flex:1;}
 .msg-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
 .msg-name{font-size:14px;font-weight:700;color:var(--white);}
-.msg-time{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text);letter-spacing:1px;}
+.msg-time{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text);}
 .msg-subj{font-size:13px;color:var(--text);margin-bottom:3px;}
 .msg-prev{font-size:12px;color:rgba(138,180,204,.5);}
 .unread-dot{width:7px;height:7px;background:var(--cyan);border-radius:50%;flex-shrink:0;margin-top:5px;box-shadow:0 0 6px var(--cyan);}
+.msg-empty{padding:40px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--text);}
 
-/* Notification toast */
+/* SETTINGS */
+.set-section{background:var(--surface);border:1px solid var(--border);padding:24px;margin-bottom:16px;}
+.set-title{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.set-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(13,37,53,.5);}
+.set-row:last-child{border-bottom:none;}
+.set-key{font-size:14px;color:var(--white);font-weight:600;}
+.set-desc{font-size:12px;color:var(--text);margin-top:2px;}
+.set-inp{background:rgba(0,245,255,.02);border:1px solid var(--border);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:14px;padding:8px 12px;outline:none;width:220px;transition:border-color .3s;}
+.set-inp:focus{border-color:var(--cyan);}
+.set-btn{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;padding:9px 18px;border:1px solid var(--cyan);background:transparent;color:var(--cyan);cursor:pointer;text-transform:uppercase;transition:all .3s;}
+.set-btn:hover{background:rgba(0,245,255,.08);}
+.toggle{width:42px;height:22px;background:var(--border);border-radius:11px;cursor:pointer;position:relative;transition:background .3s;flex-shrink:0;}
+.toggle.on{background:var(--cyan);}
+.toggle::after{content:'';position:absolute;width:16px;height:16px;background:#fff;border-radius:50%;top:3px;left:3px;transition:transform .3s;}
+.toggle.on::after{transform:translateX(20px);}
+
+/* LOADING */
+.loading{text-align:center;padding:40px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;}
+.loading::after{content:'...';animation:dots 1.5s infinite;}
+@keyframes dots{0%{content:''}33%{content:'.'}66%{content:'..'}100%{content:'...'}}
+
+/* TOAST */
 .toast{position:fixed;bottom:28px;right:28px;background:var(--surface);border:1px solid var(--green);border-left:3px solid var(--green);padding:14px 20px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--green);text-transform:uppercase;z-index:9000;transform:translateY(80px);opacity:0;transition:all .4s;}
 .toast.show{transform:translateY(0);opacity:1;}
+.toast.error{border-color:var(--pink);border-left-color:var(--pink);color:var(--pink);}
 
-/* Scrollbar */
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:rgba(0,245,255,.2);border-radius:2px;}
+::-webkit-scrollbar-thumb{background:rgba(0,245,255,.2);}
+
+@media(max-width:768px){
+  .sidebar{width:200px;}
+  .main{margin-left:200px;}
+  .cards-row{grid-template-columns:1fr 1fr;}
+  .content{padding:16px;}
+  .topbar{padding:12px 16px;}
+}
 </style>
 </head>
 <body>
 
-<!-- ─── LOGIN SCREEN ─── -->
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
-    <div class="login-corners">
-      <span class="tl"></span><span class="tr"></span>
-      <span class="bl"></span><span class="br"></span>
-    </div>
+    <span class="cn tl"></span><span class="cn tr"></span>
+    <span class="cn bl"></span><span class="cn br"></span>
     <div class="login-logo">RISHI<span>.</span>K</div>
-    <div class="login-sub">// Admin Portal — Restricted Access</div>
+    <div class="login-sub">// Admin Portal — Restricted</div>
     <label class="l-label">Password</label>
-    <input type="password" class="l-input" id="pwInput" placeholder="Enter access key..." maxlength="30">
+    <input type="password" class="l-input" id="pwInput" placeholder="Enter access key...">
     <button class="l-btn" id="loginBtn">Access Panel →</button>
-    <div class="l-err" id="loginErr">⚠ Invalid credentials — access denied</div>
+    <div class="l-err" id="loginErr">⚠ Invalid credentials</div>
   </div>
 </div>
 
-<!-- ─── ADMIN PANEL ─── -->
+<!-- ADMIN PANEL -->
 <div id="adminPanel">
-  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="s-logo">
       <div class="s-logo-txt">RISHI<span>.</span>K</div>
-      <div class="s-badge">// Admin Dashboard v1.0</div>
+      <div class="s-badge">// Admin v2.0 — Firebase</div>
     </div>
     <div class="s-nav">
       <div class="s-group">
         <div class="s-group-lbl">Main</div>
-        <div class="s-item active" data-page="dashboard"><span class="s-icon">⬡</span> Dashboard</div>
-        <div class="s-item" data-page="portfolio"><span class="s-icon">🎬</span> Portfolio</div>
-        <div class="s-item" data-page="messages"><span class="s-icon">✉</span> Messages <span style="margin-left:auto;background:var(--pink);color:#000;font-family:'Share Tech Mono',monospace;font-size:8px;padding:2px 6px;border-radius:0">3</span></div>
-      </div>
-      <div class="s-group">
-        <div class="s-group-lbl">Analytics</div>
-        <div class="s-item" data-page="analytics"><span class="s-icon">📊</span> Analytics</div>
-        <div class="s-item" data-page="clients"><span class="s-icon">👤</span> Clients</div>
+        <div class="s-item active" data-page="dashboard">⬡ Dashboard</div>
+        <div class="s-item" data-page="portfolio">🎬 Portfolio</div>
+        <div class="s-item" data-page="messages">✉ Messages <span id="unreadBadge" style="display:none;margin-left:auto;background:var(--pink);color:#000;font-family:'Share Tech Mono',monospace;font-size:8px;padding:2px 6px;">0</span></div>
+        <div class="s-item" data-page="clients">👤 Clients</div>
       </div>
       <div class="s-group">
         <div class="s-group-lbl">System</div>
-        <div class="s-item" data-page="settings"><span class="s-icon">⚙</span> Settings</div>
+        <div class="s-item" data-page="settings">⚙ Settings</div>
       </div>
     </div>
     <div class="s-bottom">
-      <div class="s-user">
+      <div style="display:flex;align-items:center;gap:12px;">
         <div class="s-av">RK</div>
         <div><div class="s-uname">Rishi Kushwaha</div><div class="s-urole">Super Admin</div></div>
       </div>
@@ -246,240 +225,68 @@ tr:hover td{background:rgba(0,245,255,.02);}
     </div>
   </div>
 
-  <!-- MAIN -->
   <div class="main">
     <div class="topbar">
       <div class="tb-title" id="pageTitle">Dashboard</div>
-      <div class="tb-right">
-        <div class="tb-time" id="clock">--:-- --</div>
-        <div class="tb-notif" style="position:relative">🔔<span class="tb-dot"></span></div>
-      </div>
+      <div class="tb-time" id="clock"></div>
     </div>
-
     <div class="content">
 
-      <!-- ─── DASHBOARD ─── -->
+      <!-- DASHBOARD -->
       <div class="page active" id="page-dashboard">
         <div class="cards-row">
-          <div class="stat-card"><div class="sc-icon">🎬</div><div class="sc-val">150</div><div class="sc-lbl">Total Projects</div><div class="sc-change up">▲ +12 this month</div></div>
-          <div class="stat-card"><div class="sc-icon">👤</div><div class="sc-val">80</div><div class="sc-lbl">Happy Clients</div><div class="sc-change up">▲ +5 this month</div></div>
-          <div class="stat-card"><div class="sc-icon">👁</div><div class="sc-val">50M+</div><div class="sc-lbl">Views Generated</div><div class="sc-change up">▲ +8M this quarter</div></div>
-          <div class="stat-card"><div class="sc-icon">✉</div><div class="sc-val">3</div><div class="sc-lbl">New Messages</div><div class="sc-change dn">▼ Reply pending</div></div>
+          <div class="stat-card"><div class="sc-icon">🎬</div><div class="sc-val" id="projCount">-</div><div class="sc-lbl">Total Projects</div></div>
+          <div class="stat-card"><div class="sc-icon">👤</div><div class="sc-val" id="clientCount">-</div><div class="sc-lbl">Clients</div></div>
+          <div class="stat-card"><div class="sc-icon">✉</div><div class="sc-val" id="msgCount">-</div><div class="sc-lbl">Messages</div></div>
+          <div class="stat-card"><div class="sc-icon">⭐</div><div class="sc-val">4.9</div><div class="sc-lbl">Avg Rating</div></div>
         </div>
-
-        <div class="grid2">
-          <div>
-            <div class="s-hdr"><div class="s-hdr-title">Monthly Revenue</div><span class="s-hdr-tag">View All</span></div>
-            <div class="mini-chart">
-              <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text);">LAST 7 MONTHS — INR (₹)</div>
-              <div class="chart-bars">
-                <div class="cb" style="height:55%" data-val="₹22K"></div>
-                <div class="cb" style="height:68%" data-val="₹27K"></div>
-                <div class="cb" style="height:45%" data-val="₹18K"></div>
-                <div class="cb" style="height:80%" data-val="₹32K"></div>
-                <div class="cb" style="height:60%" data-val="₹24K"></div>
-                <div class="cb" style="height:92%" data-val="₹37K"></div>
-                <div class="cb" style="height:75%;background:linear-gradient(to top,var(--cyan),rgba(0,245,255,.6));border-top-color:var(--cyan);" data-val="₹30K"></div>
-              </div>
-              <div class="chart-xlbls"><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span></div>
-            </div>
-          </div>
-          <div>
-            <div class="s-hdr"><div class="s-hdr-title">Recent Activity</div><span class="s-hdr-tag">Clear</span></div>
-            <div class="act-feed">
-              <div class="act-item"><div class="act-dot g"></div><div><div class="act-txt"><strong>New inquiry</strong> from Priya Sharma — Brand Reel</div><div class="act-time">2 min ago</div></div></div>
-              <div class="act-item"><div class="act-dot c"></div><div><div class="act-txt"><strong>Project delivered</strong> — Arjun Fashion Reel ✓</div><div class="act-time">1 hr ago</div></div></div>
-              <div class="act-item"><div class="act-dot p"></div><div><div class="act-txt"><strong>Payment received</strong> ₹18,000 from DigitalEdge Co.</div><div class="act-time">3 hr ago</div></div></div>
-              <div class="act-item"><div class="act-dot y"></div><div><div class="act-txt"><strong>Portfolio updated</strong> — Motion Graphics Reel added</div><div class="act-time">Yesterday</div></div></div>
-              <div class="act-item"><div class="act-dot g"></div><div><div class="act-txt"><strong>Review received</strong> ★★★★★ from Sneha Rao</div><div class="act-time">Yesterday</div></div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="s-hdr"><div class="s-hdr-title">Recent Projects</div><span class="s-hdr-tag" onclick="switchPage('portfolio')">Manage All →</span></div>
+        <div class="s-hdr"><div class="s-hdr-title">Recent Projects</div><button class="s-hdr-btn" onclick="switchPage('portfolio')">Manage →</button></div>
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Project</th><th>Client</th><th>Type</th><th>Deadline</th><th>Status</th><th>Value</th></tr></thead>
-            <tbody>
-              <tr><td style="color:var(--white);font-weight:600">Fashion Brand Reel</td><td>Arjun Kapoor</td><td>Reels</td><td>22 May 2026</td><td><span class="badge done">Done</span></td><td style="color:var(--green)">₹12,000</td></tr>
-              <tr><td style="color:var(--white);font-weight:600">YouTube Podcast Edit</td><td>TechTalk India</td><td>YouTube</td><td>25 May 2026</td><td><span class="badge prog">In Progress</span></td><td style="color:var(--cyan)">₹8,500</td></tr>
-              <tr><td style="color:var(--white);font-weight:600">Wedding Film</td><td>Rahul Verma</td><td>Cinematic</td><td>28 May 2026</td><td><span class="badge prog">In Progress</span></td><td style="color:var(--cyan)">₹25,000</td></tr>
-              <tr><td style="color:var(--white);font-weight:600">Product Launch Video</td><td>DigitalEdge Co.</td><td>Brand</td><td>1 Jun 2026</td><td><span class="badge pend">Pending</span></td><td style="color:var(--text)">₹18,000</td></tr>
-              <tr><td style="color:var(--white);font-weight:600">Motion Graphics Pack</td><td>CreativeX Studio</td><td>Motion</td><td>5 Jun 2026</td><td><span class="badge pend">Pending</span></td><td style="color:var(--text)">₹9,000</td></tr>
-            </tbody>
+            <thead><tr><th>Project</th><th>Client</th><th>Type</th><th>Status</th></tr></thead>
+            <tbody id="dashProjects"><tr><td colspan="4" class="loading">Loading</td></tr></tbody>
           </table>
         </div>
       </div>
 
-      <!-- ─── PORTFOLIO ─── -->
+      <!-- PORTFOLIO -->
       <div class="page" id="page-portfolio">
-        <div class="s-hdr" style="margin-bottom:20px;">
+        <div class="s-hdr">
           <div class="s-hdr-title">Portfolio Manager</div>
-          <span class="s-hdr-tag" onclick="showToast('Add Project feature coming soon!')">+ Add Project</span>
+          <button class="s-hdr-btn" onclick="openModal('project')">+ Add Project</button>
         </div>
-        <div class="proj-grid">
-          <div class="proj-card"><div class="proj-thumb" style="background:linear-gradient(135deg,#1a0035,#0a0020)">🎬</div><div class="proj-info"><div class="proj-name">Fashion Brand Reel</div><div class="proj-type">Reels / Short Form</div><div class="proj-actions"><button class="pact edit" onclick="showToast('Edit mode activated!')">Edit</button><button class="pact del" onclick="showToast('Project deleted!')">Delete</button></div></div></div>
-          <div class="proj-card"><div class="proj-thumb" style="background:linear-gradient(135deg,#0d1a00,#001a10)">🎙</div><div class="proj-info"><div class="proj-name">YouTube Podcast</div><div class="proj-type">YouTube</div><div class="proj-actions"><button class="pact edit" onclick="showToast('Edit mode activated!')">Edit</button><button class="pact del" onclick="showToast('Project deleted!')">Delete</button></div></div></div>
-          <div class="proj-card"><div class="proj-thumb" style="background:linear-gradient(135deg,#1a0a00,#2a1500)">🎞️</div><div class="proj-info"><div class="proj-name">Wedding Short Film</div><div class="proj-type">Cinematic</div><div class="proj-actions"><button class="pact edit" onclick="showToast('Edit mode activated!')">Edit</button><button class="pact del" onclick="showToast('Project deleted!')">Delete</button></div></div></div>
-          <div class="proj-card"><div class="proj-thumb" style="background:linear-gradient(135deg,#001a1a,#002030)">✨</div><div class="proj-info"><div class="proj-name">Motion Graphics Reel</div><div class="proj-type">Motion Graphics</div><div class="proj-actions"><button class="pact edit" onclick="showToast('Edit mode activated!')">Edit</button><button class="pact del" onclick="showToast('Project deleted!')">Delete</button></div></div></div>
-          <div class="proj-card"><div class="proj-thumb" style="background:linear-gradient(135deg,#1a1500,#2a2000)">🎨</div><div class="proj-info"><div class="proj-name">Brand Campaign</div><div class="proj-type">Brand Content</div><div class="proj-actions"><button class="pact edit" onclick="showToast('Edit mode activated!')">Edit</button><button class="pact del" onclick="showToast('Project deleted!')">Delete</button></div></div></div>
-          <div class="proj-card"><div class="proj-thumb" style="background:linear-gradient(135deg,#1a0020,#0a0015)">🎪</div><div class="proj-info"><div class="proj-name">Event Highlights</div><div class="proj-type">Event</div><div class="proj-actions"><button class="pact edit" onclick="showToast('Edit mode activated!')">Edit</button><button class="pact del" onclick="showToast('Project deleted!')">Delete</button></div></div></div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Project Name</th><th>Client</th><th>Type</th><th>Status</th><th>Value</th><th>Actions</th></tr></thead>
+            <tbody id="projectTable"><tr><td colspan="6" class="loading">Loading</td></tr></tbody>
+          </table>
         </div>
       </div>
 
-      <!-- ─── MESSAGES ─── -->
+      <!-- MESSAGES -->
       <div class="page" id="page-messages">
-        <div class="s-hdr" style="margin-bottom:20px;"><div class="s-hdr-title">Inbox — 3 Unread</div><span class="s-hdr-tag" onclick="showToast('All messages marked as read!')">Mark All Read</span></div>
-        <div class="msg-list">
-          <div class="msg-item unread"><div class="msg-av">PS</div><div class="msg-meta"><div class="msg-top"><div class="msg-name">Priya Sharma</div><div class="msg-time">2 min ago</div></div><div class="msg-subj">Brand Reel Inquiry</div><div class="msg-prev">Hi, I need a 30-sec reel for my fashion brand. Budget is...</div></div><div class="unread-dot"></div></div>
-          <div class="msg-item unread"><div class="msg-av">AK</div><div class="msg-meta"><div class="msg-top"><div class="msg-name">Ankit Khanna</div><div class="msg-time">1 hr ago</div></div><div class="msg-subj">YouTube Long Form — 3 Videos/Month</div><div class="msg-prev">We're a startup looking for a consistent editor for our podcast...</div></div><div class="unread-dot"></div></div>
-          <div class="msg-item unread"><div class="msg-av">MR</div><div class="msg-meta"><div class="msg-top"><div class="msg-name">Meera Rawat</div><div class="msg-time">3 hr ago</div></div><div class="msg-subj">Wedding Film Edit</div><div class="msg-prev">Saw your work on Instagram. Loved the color grading. Can we...</div></div><div class="unread-dot"></div></div>
-          <div class="msg-item"><div class="msg-av" style="background:linear-gradient(135deg,var(--green),var(--cyan));">DE</div><div class="msg-meta"><div class="msg-top"><div class="msg-name">DigitalEdge Co.</div><div class="msg-time">Yesterday</div></div><div class="msg-subj">Re: Product Launch Video — Approved ✓</div><div class="msg-prev">The final cut looks amazing. Payment has been processed...</div></div></div>
-          <div class="msg-item"><div class="msg-av" style="background:linear-gradient(135deg,var(--yellow),var(--pink));color:#000">RV</div><div class="msg-meta"><div class="msg-top"><div class="msg-name">Rahul Verma</div><div class="msg-time">2 days ago</div></div><div class="msg-subj">Wedding Film — Revision Request</div><div class="msg-prev">Could you add a slow-mo section in the vows part? Rest is perfect!</div></div></div>
+        <div class="s-hdr">
+          <div class="s-hdr-title">Inbox</div>
+          <button class="s-hdr-btn pink" onclick="clearMessages()">Clear All</button>
         </div>
+        <div class="msg-list" id="msgList"><div class="loading">Loading</div></div>
       </div>
 
-      <!-- ─── ANALYTICS ─── -->
-      <div class="page" id="page-analytics">
-        <div class="cards-row">
-          <div class="stat-card"><div class="sc-icon">📈</div><div class="sc-val">₹1.2L</div><div class="sc-lbl">Total Revenue</div><div class="sc-change up">▲ +18% YoY</div></div>
-          <div class="stat-card"><div class="sc-icon">⏱</div><div class="sc-val">4.2d</div><div class="sc-lbl">Avg Turnaround</div><div class="sc-change up">▲ Faster than avg</div></div>
-          <div class="stat-card"><div class="sc-icon">⭐</div><div class="sc-val">4.9</div><div class="sc-lbl">Avg Rating</div><div class="sc-change up">▲ 98% 5-star</div></div>
-          <div class="stat-card"><div class="sc-icon">🔁</div><div class="sc-val">72%</div><div class="sc-lbl">Repeat Clients</div><div class="sc-change up">▲ +10% vs last yr</div></div>
-        </div>
-        <div class="s-hdr"><div class="s-hdr-title">Revenue by Service Type</div></div>
-        <div class="tbl-wrap">
-          <table>
-            <thead><tr><th>Service</th><th>Projects</th><th>Revenue</th><th>Avg/Project</th><th>Share</th></tr></thead>
-            <tbody>
-              <tr><td style="color:var(--white)">Reels / Short Form</td><td>58</td><td style="color:var(--green)">₹38,000</td><td>₹6,551</td><td><div style="background:rgba(0,245,255,.1);height:6px;width:80%;display:inline-block;border-top:1px solid var(--cyan)"></div></td></tr>
-              <tr><td style="color:var(--white)">YouTube Videos</td><td>32</td><td style="color:var(--green)">₹29,000</td><td>₹9,062</td><td><div style="background:rgba(0,245,255,.1);height:6px;width:62%;display:inline-block;border-top:1px solid var(--cyan)"></div></td></tr>
-              <tr><td style="color:var(--white)">Cinematic Films</td><td>18</td><td style="color:var(--green)">₹28,500</td><td>₹15,833</td><td><div style="background:rgba(0,245,255,.1);height:6px;width:60%;display:inline-block;border-top:1px solid var(--cyan)"></div></td></tr>
-              <tr><td style="color:var(--white)">Brand Content</td><td>24</td><td style="color:var(--green)">₹22,000</td><td>₹9,166</td><td><div style="background:rgba(0,245,255,.1);height:6px;width:47%;display:inline-block;border-top:1px solid var(--cyan)"></div></td></tr>
-              <tr><td style="color:var(--white)">Motion Graphics</td><td>12</td><td style="color:var(--green)">₹9,000</td><td>₹7,500</td><td><div style="background:rgba(0,245,255,.1);height:6px;width:19%;display:inline-block;border-top:1px solid var(--cyan)"></div></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ─── CLIENTS ─── -->
+      <!-- CLIENTS -->
       <div class="page" id="page-clients">
-        <div class="s-hdr" style="margin-bottom:20px;"><div class="s-hdr-title">Client Directory</div><span class="s-hdr-tag" onclick="showToast('Add client feature coming soon!')">+ Add Client</span></div>
+        <div class="s-hdr">
+          <div class="s-hdr-title">Client Directory</div>
+          <button class="s-hdr-btn" onclick="openModal('client')">+ Add Client</button>
+        </div>
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Name</th><th>Contact</th><th>Type</th><th>Projects</th><th>Total Value</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr><td style="color:var(--white);font-weight:600">Arjun Kapoor</td><td>arjun@mail.com</td><td>Influencer</td><td>8</td><td style="color:var(--green)">₹54,000</td><td><span class="badge done">Active</span></td></tr>
-              <tr><td style="color:var(--white);font-weight:600">Sneha Rao</td><td>sneha@brand.in</td><td>Brand Manager</td><td>12</td><td style="color:var(--green)">₹89,000</td><td><span class="badge done">Active</span></td></tr>
-              <tr><td style="color:var(--white);font-weight:600">Rahul Verma</td><td>rahul@films.com</td><td>Filmmaker</td><td>4</td><td style="color:var(--green)">₹32,000</td><td><span class="badge prog">In Progress</span></td></tr>
-              <tr><td style="color:var(--white);font-weight:600">DigitalEdge Co.</td><td>contact@digitale.in</td><td>Agency</td><td>20</td><td style="color:var(--green)">₹1.4L</td><td><span class="badge done">Active</span></td></tr>
-              <tr><td style="color:var(--white);font-weight:600">TechTalk India</td><td>hello@techtalk.in</td><td>YouTuber</td><td>6</td><td style="color:var(--green)">₹38,000</td><td><span class="badge prog">In Progress</span></td></tr>
-              <tr><td style="color:var(--white);font-weight:600">CreativeX Studio</td><td>cx@creativex.io</td><td>Studio</td><td>3</td><td style="color:var(--text)">₹27,000</td><td><span class="badge pend">Pending</span></td></tr>
-            </tbody>
+            <thead><tr><th>Name</th><th>Email</th><th>Type</th><th>Projects</th><th>Value</th><th>Actions</th></tr></thead>
+            <tbody id="clientTable"><tr><td colspan="6" class="loading">Loading</td></tr></tbody>
           </table>
         </div>
       </div>
 
-      <!-- ─── SETTINGS ─── -->
+      <!-- SETTINGS -->
       <div class="page" id="page-settings">
         <div class="set-section">
-          <div class="set-title">Profile Settings</div>
-          <div class="set-row"><div><div class="set-key">Display Name</div><div class="set-desc">Your name shown on the portfolio</div></div><input class="set-inp" value="Rishi Kushwaha"></div>
-          <div class="set-row"><div><div class="set-key">Email Address</div><div class="set-desc">Contact email for inquiries</div></div><input class="set-inp" value="sahil39379@gmail.com"></div>
-          <div class="set-row"><div><div class="set-key">WhatsApp</div><div class="set-desc">WhatsApp business number</div></div><input class="set-inp" value="+91 7800498828"></div>
-          <div class="set-row"><div><div class="set-key">Instagram Handle</div><div class="set-desc">Your Instagram username</div></div><input class="set-inp" value="@mr.sahil__kumar0"></div>
-          <div style="margin-top:16px;"><button class="set-btn" onclick="showToast('Profile saved successfully!')">Save Changes</button></div>
-        </div>
-        <div class="set-section">
-          <div class="set-title">Notifications</div>
-          <div class="set-row"><div><div class="set-key">Email Notifications</div><div class="set-desc">Get notified on new inquiries</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="set-row"><div><div class="set-key">WhatsApp Alerts</div><div class="set-desc">Instant WhatsApp notifications</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="set-row"><div><div class="set-key">Weekly Report</div><div class="set-desc">Weekly analytics summary</div></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
-        </div>
-        <div class="set-section">
-          <div class="set-title">Security</div>
-          <div class="set-row"><div><div class="set-key">Change Admin Password</div><div class="set-desc">Update your access key</div></div><button class="set-btn" onclick="showToast('Password change feature coming soon!')">Change Password</button></div>
-          <div class="set-row"><div><div class="set-key">Active Sessions</div><div class="set-desc">1 active session (this device)</div></div><button class="set-btn danger" onclick="showToast('All other sessions terminated!')">Revoke Others</button></div>
-        </div>
-      </div>
-
-    </div><!-- /content -->
-  </div><!-- /main -->
-</div><!-- /adminPanel -->
-
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
-
-<script>
-const PASS = '@Sahilkumar7800';
-
-// ─── LOGIN ───
-const loginBtn = document.getElementById('loginBtn');
-const pwInput  = document.getElementById('pwInput');
-const loginErr = document.getElementById('loginErr');
-
-function tryLogin(){
-  if(pwInput.value === PASS){
-    document.getElementById('loginScreen').classList.add('hide');
-    setTimeout(()=>{
-      document.getElementById('adminPanel').style.display='flex';
-      document.getElementById('adminPanel').classList.add('visible');
-    },300);
-  } else {
-    loginErr.classList.add('show');
-    document.querySelector('.login-box').classList.add('l-shake');
-    pwInput.value='';
-    setTimeout(()=>{
-      document.querySelector('.login-box').classList.remove('l-shake');
-      loginErr.classList.remove('show');
-    },2000);
-  }
-}
-loginBtn.addEventListener('click', tryLogin);
-pwInput.addEventListener('keydown', e=>{ if(e.key==='Enter') tryLogin(); });
-
-// ─── LOGOUT ───
-document.getElementById('logoutBtn').addEventListener('click',()=>{
-  document.getElementById('adminPanel').style.display='none';
-  document.getElementById('loginScreen').classList.remove('hide');
-  pwInput.value='';
-});
-
-// ─── NAV ───
-document.querySelectorAll('.s-item').forEach(item=>{
-  item.addEventListener('click',()=>{
-    document.querySelectorAll('.s-item').forEach(i=>i.classList.remove('active'));
-    item.classList.add('active');
-    const page = item.dataset.page;
-    switchPage(page);
-  });
-});
-
-function switchPage(name){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  document.getElementById('pageTitle').textContent = name.charAt(0).toUpperCase()+name.slice(1);
-  document.querySelectorAll('.s-item').forEach(i=>{
-    i.classList.toggle('active', i.dataset.page===name);
-  });
-}
-
-// ─── CLOCK ───
-function updateClock(){
-  const now=new Date();
-  let h=now.getHours(), m=now.getMinutes(), s=now.getSeconds();
-  const ap=h>=12?'PM':'AM';
-  h=h%12||12;
-  document.getElementById('clock').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} ${ap}`;
-}
-setInterval(updateClock,1000); updateClock();
-
-// ─── TOAST ───
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2800);
-}
-</script>
-</body>
-</html>
+          <div class="set-title">Profil
