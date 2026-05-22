@@ -289,4 +289,397 @@ tr:hover td{background:rgba(0,245,255,.02);}
       <!-- SETTINGS -->
       <div class="page" id="page-settings">
         <div class="set-section">
-          <div class="set-title">Profil
+          <div class="set-title">Profile Settings</div>
+          <div class="set-row"><div><div class="set-key">Display Name</div></div><input class="set-inp" id="sName" value="Rishi Kushwaha"></div>
+          <div class="set-row"><div><div class="set-key">Email</div></div><input class="set-inp" id="sEmail" value="sahil39379@gmail.com"></div>
+          <div class="set-row"><div><div class="set-key">WhatsApp</div></div><input class="set-inp" id="sWA" value="+91 7800498828"></div>
+          <div class="set-row"><div><div class="set-key">Instagram</div></div><input class="set-inp" id="sIG" value="@mr.sahil__kumar0"></div>
+          <div style="margin-top:16px"><button class="set-btn" onclick="saveSettings()">Save Changes</button></div>
+        </div>
+        <div class="set-section">
+          <div class="set-title">Notifications</div>
+          <div class="set-row"><div><div class="set-key">Email Notifications</div><div class="set-desc">New inquiry alerts</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="set-row"><div><div class="set-key">WhatsApp Alerts</div><div class="set-desc">Instant notifications</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT MODAL -->
+<div class="modal-bg hide" id="projectModal">
+  <div class="modal">
+    <div class="modal-title" id="projectModalTitle">Add Project</div>
+    <div class="form-row">
+      <div class="fg"><label>Project Name</label><input id="pName" placeholder="Fashion Reel"></div>
+      <div class="fg"><label>Client Name</label><input id="pClient" placeholder="Arjun Kapoor"></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Type</label><select id="pType"><option>Reels</option><option>YouTube</option><option>Cinematic</option><option>Motion</option><option>Brand</option><option>Event</option></select></div>
+      <div class="fg"><label>Status</label><select id="pStatus"><option>Pending</option><option>In Progress</option><option>Done</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Value (₹)</label><input id="pValue" placeholder="12000" type="number"></div>
+      <div class="fg"><label>Deadline</label><input id="pDeadline" type="date"></div>
+    </div>
+    <input type="hidden" id="pDocId">
+    <div class="modal-btns">
+      <button class="m-btn cancel" onclick="closeModal('projectModal')">Cancel</button>
+      <button class="m-btn save" onclick="saveProject()">Save Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- CLIENT MODAL -->
+<div class="modal-bg hide" id="clientModal">
+  <div class="modal">
+    <div class="modal-title" id="clientModalTitle">Add Client</div>
+    <div class="form-row">
+      <div class="fg"><label>Name</label><input id="cName" placeholder="Arjun Kapoor"></div>
+      <div class="fg"><label>Email</label><input id="cEmail" placeholder="client@email.com"></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Type</label><select id="cType"><option>Influencer</option><option>Brand Manager</option><option>Filmmaker</option><option>Agency</option><option>YouTuber</option><option>Studio</option></select></div>
+      <div class="fg"><label>Total Value (₹)</label><input id="cValue" placeholder="50000" type="number"></div>
+    </div>
+    <div class="fg"><label>Projects Count</label><input id="cProjects" placeholder="5" type="number"></div>
+    <input type="hidden" id="cDocId">
+    <div class="modal-btns">
+      <button class="m-btn cancel" onclick="closeModal('clientModal')">Cancel</button>
+      <button class="m-btn save" onclick="saveClient()">Save Client</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── FIREBASE CONFIG ───
+const firebaseConfig = {
+  apiKey: "AIzaSyA7IF1sm3ov4WRdLBgABZwe83_MtC4EK0k",
+  authDomain: "rishi-portfolio-a3d07.firebaseapp.com",
+  projectId: "rishi-portfolio-a3d07",
+  storageBucket: "rishi-portfolio-a3d07.firebasestorage.app",
+  messagingSenderId: "504667511628",
+  appId: "1:504667511628:web:0855f21475d082ee81cde9",
+  measurementId: "G-TEX7DJXK1V"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+const PASS = '@Sahilkumar7800';
+
+// ─── LOGIN ───
+document.getElementById('loginBtn').addEventListener('click', tryLogin);
+document.getElementById('pwInput').addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
+
+function tryLogin(){
+  if(document.getElementById('pwInput').value === PASS){
+    document.getElementById('loginScreen').classList.add('hide');
+    document.getElementById('adminPanel').style.display = 'flex';
+    initPanel();
+  } else {
+    document.getElementById('loginErr').classList.add('show');
+    document.querySelector('.login-box').style.animation = 'shake .4s ease';
+    document.getElementById('pwInput').value = '';
+    setTimeout(()=>{
+      document.getElementById('loginErr').classList.remove('show');
+      document.querySelector('.login-box').style.animation = '';
+    }, 2000);
+  }
+}
+
+document.getElementById('logoutBtn').addEventListener('click', ()=>{
+  document.getElementById('adminPanel').style.display = 'none';
+  document.getElementById('loginScreen').classList.remove('hide');
+  document.getElementById('pwInput').value = '';
+});
+
+// ─── NAV ───
+document.querySelectorAll('.s-item').forEach(item => {
+  item.addEventListener('click', () => switchPage(item.dataset.page));
+});
+
+function switchPage(name){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.s-item').forEach(i => i.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.querySelector(`[data-page="${name}"]`).classList.add('active');
+  document.getElementById('pageTitle').textContent = name.charAt(0).toUpperCase()+name.slice(1);
+}
+
+// ─── CLOCK ───
+function updateClock(){
+  const now = new Date();
+  let h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
+  const ap = h>=12?'PM':'AM'; h = h%12||12;
+  document.getElementById('clock').textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} ${ap}`;
+}
+setInterval(updateClock, 1000); updateClock();
+
+// ─── TOAST ───
+function showToast(msg, err=false){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (err?' error':'');
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+// ─── INIT ───
+function initPanel(){
+  loadProjects();
+  loadClients();
+  loadMessages();
+  loadSettings();
+}
+
+// ─── PROJECTS ───
+function loadProjects(){
+  db.collection('projects').orderBy('createdAt','desc').onSnapshot(snap => {
+    document.getElementById('projCount').textContent = snap.size;
+    renderProjects(snap.docs);
+  });
+}
+
+function renderProjects(docs){
+  const tbl = document.getElementById('projectTable');
+  const dash = document.getElementById('dashProjects');
+  if(!docs.length){
+    tbl.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:30px;font-family:\'Share Tech Mono\',monospace;font-size:11px;color:var(--text)">No projects yet — Add one!</td></tr>';
+    dash.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:20px;font-family:\'Share Tech Mono\',monospace;font-size:11px;color:var(--text)">No projects</td></tr>';
+    return;
+  }
+  const statusBadge = s => s==='Done'?'done':s==='In Progress'?'prog':'pend';
+  tbl.innerHTML = docs.map(d => {
+    const p = d.data();
+    return `<tr>
+      <td style="color:var(--white);font-weight:600">${p.name||''}</td>
+      <td>${p.client||''}</td>
+      <td>${p.type||''}</td>
+      <td><span class="badge ${statusBadge(p.status)}">${p.status||''}</span></td>
+      <td style="color:var(--green)">₹${Number(p.value||0).toLocaleString()}</td>
+      <td>
+        <button class="tbl-action edit" onclick="editProject('${d.id}')">Edit</button>
+        <button class="tbl-action del" onclick="deleteProject('${d.id}')">Del</button>
+      </td>
+    </tr>`;
+  }).join('');
+  dash.innerHTML = docs.slice(0,5).map(d => {
+    const p = d.data();
+    return `<tr>
+      <td style="color:var(--white);font-weight:600">${p.name||''}</td>
+      <td>${p.client||''}</td>
+      <td>${p.type||''}</td>
+      <td><span class="badge ${statusBadge(p.status)}">${p.status||''}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function openModal(type){ 
+  if(type==='project'){
+    document.getElementById('projectModalTitle').textContent = 'Add Project';
+    document.getElementById('pName').value='';
+    document.getElementById('pClient').value='';
+    document.getElementById('pValue').value='';
+    document.getElementById('pDeadline').value='';
+    document.getElementById('pDocId').value='';
+    document.getElementById('projectModal').classList.remove('hide');
+  } else {
+    document.getElementById('clientModalTitle').textContent = 'Add Client';
+    document.getElementById('cName').value='';
+    document.getElementById('cEmail').value='';
+    document.getElementById('cValue').value='';
+    document.getElementById('cProjects').value='';
+    document.getElementById('cDocId').value='';
+    document.getElementById('clientModal').classList.remove('hide');
+  }
+}
+
+function closeModal(id){ document.getElementById(id).classList.add('hide'); }
+
+async function saveProject(){
+  const name = document.getElementById('pName').value.trim();
+  if(!name){ showToast('Project name required!', true); return; }
+  const data = {
+    name, client: document.getElementById('pClient').value.trim(),
+    type: document.getElementById('pType').value,
+    status: document.getElementById('pStatus').value,
+    value: document.getElementById('pValue').value||0,
+    deadline: document.getElementById('pDeadline').value,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+  const docId = document.getElementById('pDocId').value;
+  try {
+    if(docId) await db.collection('projects').doc(docId).update(data);
+    else await db.collection('projects').add(data);
+    closeModal('projectModal');
+    showToast(docId ? 'Project updated!' : 'Project added!');
+  } catch(e){ showToast('Error: '+e.message, true); }
+}
+
+async function editProject(id){
+  const doc = await db.collection('projects').doc(id).get();
+  const p = doc.data();
+  document.getElementById('projectModalTitle').textContent = 'Edit Project';
+  document.getElementById('pName').value = p.name||'';
+  document.getElementById('pClient').value = p.client||'';
+  document.getElementById('pType').value = p.type||'Reels';
+  document.getElementById('pStatus').value = p.status||'Pending';
+  document.getElementById('pValue').value = p.value||'';
+  document.getElementById('pDeadline').value = p.deadline||'';
+  document.getElementById('pDocId').value = id;
+  document.getElementById('projectModal').classList.remove('hide');
+}
+
+async function deleteProject(id){
+  if(!confirm('Delete this project?')) return;
+  await db.collection('projects').doc(id).delete();
+  showToast('Project deleted!');
+}
+
+// ─── CLIENTS ───
+function loadClients(){
+  db.collection('clients').orderBy('createdAt','desc').onSnapshot(snap => {
+    document.getElementById('clientCount').textContent = snap.size;
+    renderClients(snap.docs);
+  });
+}
+
+function renderClients(docs){
+  const tbl = document.getElementById('clientTable');
+  if(!docs.length){
+    tbl.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:30px;font-family:\'Share Tech Mono\',monospace;font-size:11px;color:var(--text)">No clients yet — Add one!</td></tr>';
+    return;
+  }
+  tbl.innerHTML = docs.map(d => {
+    const c = d.data();
+    return `<tr>
+      <td style="color:var(--white);font-weight:600">${c.name||''}</td>
+      <td>${c.email||''}</td>
+      <td>${c.type||''}</td>
+      <td>${c.projects||0}</td>
+      <td style="color:var(--green)">₹${Number(c.value||0).toLocaleString()}</td>
+      <td>
+        <button class="tbl-action edit" onclick="editClient('${d.id}')">Edit</button>
+        <button class="tbl-action del" onclick="deleteClient('${d.id}')">Del</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+async function saveClient(){
+  const name = document.getElementById('cName').value.trim();
+  if(!name){ showToast('Client name required!', true); return; }
+  const data = {
+    name, email: document.getElementById('cEmail').value.trim(),
+    type: document.getElementById('cType').value,
+    value: document.getElementById('cValue').value||0,
+    projects: document.getElementById('cProjects').value||0,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+  const docId = document.getElementById('cDocId').value;
+  try {
+    if(docId) await db.collection('clients').doc(docId).update(data);
+    else await db.collection('clients').add(data);
+    closeModal('clientModal');
+    showToast(docId ? 'Client updated!' : 'Client added!');
+  } catch(e){ showToast('Error: '+e.message, true); }
+}
+
+async function editClient(id){
+  const doc = await db.collection('clients').doc(id).get();
+  const c = doc.data();
+  document.getElementById('clientModalTitle').textContent = 'Edit Client';
+  document.getElementById('cName').value = c.name||'';
+  document.getElementById('cEmail').value = c.email||'';
+  document.getElementById('cType').value = c.type||'Influencer';
+  document.getElementById('cValue').value = c.value||'';
+  document.getElementById('cProjects').value = c.projects||'';
+  document.getElementById('cDocId').value = id;
+  document.getElementById('clientModal').classList.remove('hide');
+}
+
+async function deleteClient(id){
+  if(!confirm('Delete this client?')) return;
+  await db.collection('clients').doc(id).delete();
+  showToast('Client deleted!');
+}
+
+// ─── MESSAGES ───
+function loadMessages(){
+  db.collection('messages').orderBy('createdAt','desc').onSnapshot(snap => {
+    document.getElementById('msgCount').textContent = snap.size;
+    const unread = snap.docs.filter(d => !d.data().read).length;
+    const badge = document.getElementById('unreadBadge');
+    if(unread > 0){ badge.style.display='inline'; badge.textContent=unread; }
+    else badge.style.display='none';
+    renderMessages(snap.docs);
+  });
+}
+
+function renderMessages(docs){
+  const list = document.getElementById('msgList');
+  if(!docs.length){
+    list.innerHTML = '<div class="msg-empty">No messages yet</div>';
+    return;
+  }
+  list.innerHTML = docs.map(d => {
+    const m = d.data();
+    const initials = (m.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+    const time = m.createdAt ? new Date(m.createdAt.seconds*1000).toLocaleString('en-IN',{dateStyle:'short',timeStyle:'short'}) : '';
+    return `<div class="msg-item ${m.read?'':'unread'}" onclick="markRead('${d.id}')">
+      <div class="msg-av">${initials}</div>
+      <div class="msg-meta">
+        <div class="msg-top"><div class="msg-name">${m.name||'Unknown'}</div><div class="msg-time">${time}</div></div>
+        <div class="msg-subj">${m.subject||m.projectType||'Inquiry'}</div>
+        <div class="msg-prev">${m.message||''}</div>
+      </div>
+      ${m.read?'':'<div class="unread-dot"></div>'}
+    </div>`;
+  }).join('');
+}
+
+async function markRead(id){
+  await db.collection('messages').doc(id).update({read:true});
+}
+
+async function clearMessages(){
+  if(!confirm('Delete all messages?')) return;
+  const snap = await db.collection('messages').get();
+  const batch = db.batch();
+  snap.docs.forEach(d => batch.delete(d.ref));
+  await batch.commit();
+  showToast('All messages cleared!');
+}
+
+// ─── SETTINGS ───
+async function loadSettings(){
+  try {
+    const doc = await db.collection('settings').doc('profile').get();
+    if(doc.exists){
+      const s = doc.data();
+      document.getElementById('sName').value = s.name||'Rishi Kushwaha';
+      document.getElementById('sEmail').value = s.email||'sahil39379@gmail.com';
+      document.getElementById('sWA').value = s.whatsapp||'+91 7800498828';
+      document.getElementById('sIG').value = s.instagram||'@mr.sahil__kumar0';
+    }
+  } catch(e){}
+}
+
+async function saveSettings(){
+  try {
+    await db.collection('settings').doc('profile').set({
+      name: document.getElementById('sName').value,
+      email: document.getElementById('sEmail').value,
+      whatsapp: document.getElementById('sWA').value,
+      instagram: document.getElementById('sIG').value,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    showToast('Settings saved!');
+  } catch(e){ showToast('Error saving!', true); }
+}
+</script>
+</body>
+</html>
