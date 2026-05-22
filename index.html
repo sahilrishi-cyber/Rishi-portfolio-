@@ -208,7 +208,7 @@ footer{position:relative;z-index:1;padding:28px 48px;display:flex;justify-conten
   .port-item.lg{grid-column:span 1;}
   .srv-grid{grid-template-columns:1fr;}
   .about-grid,.cont-inner{grid-template-columns:1fr;gap:40px;}
-  .about-vis{display:block;}
+  .about-vis{display:none;}
   .test-grid{grid-template-columns:1fr;}
   .stats{gap:28px;}
   nav{padding:14px 20px;}
@@ -384,7 +384,7 @@ footer{position:relative;z-index:1;padding:28px 48px;display:flex;justify-conten
 <div class="sec" id="about">
   <div class="about-grid">
     <div class="about-vis reveal">
-      <img src="photo.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;">
+      <div class="a-frame"><div class="a-frame-txt">RK</div><div class="cn cn-tl"></div><div class="cn cn-tr"></div><div class="cn cn-bl"></div><div class="cn cn-br"></div></div>
       <div class="a-accent"></div>
     </div>
     <div class="reveal">
@@ -439,6 +439,22 @@ footer{position:relative;z-index:1;padding:28px 48px;display:flex;justify-conten
     </div>
   </div>
 </div>
+
+<!-- THREE.JS CDN already loaded above -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyA7IF1sm3ov4WRdLBgABZwe83_MtC4EK0k",
+  authDomain: "rishi-portfolio-a3d07.firebaseapp.com",
+  projectId: "rishi-portfolio-a3d07",
+  storageBucket: "rishi-portfolio-a3d07.firebasestorage.app",
+  messagingSenderId: "504667511628",
+  appId: "1:504667511628:web:0855f21475d082ee81cde9"
+};
+firebase.initializeApp(firebaseConfig);
+const db2 = firebase.firestore();
+</script>
 
 <!-- FOOTER -->
 <footer>
@@ -621,15 +637,54 @@ const sObs=new IntersectionObserver(entries=>{
 sObs.observe(document.querySelector('.stats'));
 
 // ─── FORM ───
-document.getElementById('submitBtn').addEventListener('click',function(){
-  this.textContent='Message Sent ✓';
-  this.style.borderColor='var(--green)';
-  this.style.color='var(--green)';
+document.getElementById('submitBtn').addEventListener('click', async function(){
+  const name = document.querySelector('#contact input[type="text"]')?.value?.trim();
+  const email = document.querySelector('#contact input[type="email"]')?.value?.trim();
+  const project = document.querySelector('#contact select')?.value;
+  const message = document.querySelector('#contact textarea')?.value?.trim();
+
+  if(!name || !email || !message){
+    this.textContent = '⚠ Fill all fields!';
+    this.style.borderColor = 'var(--pink)';
+    this.style.color = 'var(--pink)';
+    setTimeout(()=>{
+      this.textContent = 'Send Message →';
+      this.style.borderColor = 'var(--cyan)';
+      this.style.color = 'var(--cyan)';
+    }, 2500);
+    return;
+  }
+
+  this.textContent = 'Sending...';
+  this.disabled = true;
+
+  try {
+    await db2.collection('messages').add({
+      name, email,
+      subject: project || 'General Inquiry',
+      message,
+      read: false,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    this.textContent = '✓ Message Sent!';
+    this.style.borderColor = 'var(--green)';
+    this.style.color = 'var(--green)';
+    // Clear form
+    document.querySelector('#contact input[type="text"]').value = '';
+    document.querySelector('#contact input[type="email"]').value = '';
+    document.querySelector('#contact textarea').value = '';
+  } catch(e) {
+    this.textContent = '⚠ Error! Try again';
+    this.style.borderColor = 'var(--pink)';
+    this.style.color = 'var(--pink)';
+  }
+
   setTimeout(()=>{
-    this.textContent='Send Message →';
-    this.style.borderColor='var(--cyan)';
-    this.style.color='var(--cyan)';
-  },3000);
+    this.textContent = 'Send Message →';
+    this.style.borderColor = 'var(--cyan)';
+    this.style.color = 'var(--cyan)';
+    this.disabled = false;
+  }, 3000);
 });
 </script>
 </body>
