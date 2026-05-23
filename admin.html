@@ -5,19 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Panel — Rishi.K</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <style>
 :root{--cyan:#00f5ff;--pink:#ff006e;--purple:#bf00ff;--green:#00ff88;--yellow:#fff200;--bg:#020408;--bg2:#060d12;--surface:#0a1520;--border:#0d2535;--text:#8ab4cc;--white:#e0f4ff;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;min-height:100vh;}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;}
 body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.02) 2px,rgba(0,0,0,0.02) 4px);pointer-events:none;z-index:9999;}
-
-/* LOGIN */
 #loginScreen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000;transition:opacity .6s;}
 #loginScreen.hide{opacity:0;pointer-events:none;}
-.login-box{background:var(--surface);border:1px solid rgba(0,245,255,.15);padding:50px 44px;width:380px;position:relative;overflow:hidden;}
+.login-box{background:var(--surface);border:1px solid rgba(0,245,255,.15);padding:50px 44px;width:360px;position:relative;}
 .login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),var(--pink),transparent);}
 .cn{position:absolute;width:16px;height:16px;}
 .tl{top:0;left:0;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);}
@@ -37,8 +34,6 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .l-err{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--pink);text-transform:uppercase;margin-top:12px;opacity:0;transition:opacity .3s;text-align:center;}
 .l-err.show{opacity:1;}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
-
-/* PANEL */
 #adminPanel{display:none;min-height:100vh;}
 #adminPanel.visible{display:flex;}
 .sidebar{width:240px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;overflow-y:auto;}
@@ -65,8 +60,6 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .content{padding:28px 32px;}
 .page{display:none;}
 .page.active{display:block;}
-
-/* CARDS */
 .cards-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
 .stat-card{background:var(--surface);border:1px solid var(--border);padding:22px 20px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;}
 .stat-card:hover{border-color:rgba(0,245,255,.2);transform:translateY(-3px);}
@@ -78,18 +71,14 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .sc-icon{font-size:26px;margin-bottom:12px;}
 .sc-val{font-family:'Orbitron',monospace;font-size:28px;font-weight:900;color:var(--white);line-height:1;margin-bottom:4px;}
 .sc-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text);text-transform:uppercase;}
-
-/* SECTION HEADER */
 .s-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
 .s-hdr-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;}
 .s-hdr-btn{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan);padding:6px 14px;border:1px solid rgba(0,245,255,.2);cursor:pointer;background:transparent;text-transform:uppercase;transition:all .3s;}
 .s-hdr-btn:hover{background:rgba(0,245,255,.07);border-color:var(--cyan);}
 .s-hdr-btn.pink{color:var(--pink);border-color:rgba(255,0,110,.2);}
 .s-hdr-btn.pink:hover{background:rgba(255,0,110,.07);border-color:var(--pink);}
-
-/* TABLE */
 .tbl-wrap{background:var(--surface);border:1px solid var(--border);overflow:hidden;margin-bottom:24px;overflow-x:auto;}
-table{width:100%;border-collapse:collapse;min-width:600px;}
+table{width:100%;border-collapse:collapse;min-width:500px;}
 thead{background:rgba(0,0,0,.3);}
 th{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--text);text-transform:uppercase;padding:12px 16px;text-align:left;border-bottom:1px solid var(--border);}
 td{padding:13px 16px;font-size:13px;border-bottom:1px solid rgba(13,37,53,.6);vertical-align:middle;}
@@ -104,11 +93,9 @@ tr:hover td{background:rgba(0,245,255,.02);}
 .tbl-action.edit:hover{background:rgba(0,245,255,.07);}
 .tbl-action.del{border-color:rgba(255,0,110,.3);color:var(--pink);}
 .tbl-action.del:hover{background:rgba(255,0,110,.07);}
-
-/* MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(2,4,8,.9);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;}
 .modal-bg.hide{display:none;}
-.modal{background:var(--surface);border:1px solid rgba(0,245,255,.2);padding:32px;width:100%;max-width:480px;position:relative;}
+.modal{background:var(--surface);border:1px solid rgba(0,245,255,.2);padding:32px;width:100%;max-width:480px;position:relative;max-height:90vh;overflow-y:auto;}
 .modal::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--pink));}
 .modal-title{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;}
 .fg{margin-bottom:16px;}
@@ -124,27 +111,37 @@ tr:hover td{background:rgba(0,245,255,.02);}
 .m-btn.save:hover{background:var(--cyan);color:#000;}
 .m-btn.cancel{border-color:rgba(255,255,255,.15);color:var(--text);}
 .m-btn.cancel:hover{border-color:var(--text);}
-
-/* MESSAGES */
 .msg-list{background:var(--surface);border:1px solid var(--border);}
-.msg-item{padding:16px 20px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s;display:flex;gap:14px;align-items:flex-start;}
+.msg-item{padding:18px 20px;border-bottom:1px solid var(--border);transition:background .2s;}
 .msg-item:last-child{border-bottom:none;}
-.msg-item:hover{background:rgba(0,245,255,.03);}
-.msg-item.unread{border-left:2px solid var(--cyan);}
-.msg-av{width:38px;height:38px;background:linear-gradient(135deg,var(--cyan),var(--purple));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:11px;font-weight:900;color:#000;flex-shrink:0;}
-.msg-meta{flex:1;}
-.msg-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
-.msg-name{font-size:14px;font-weight:700;color:var(--white);}
-.msg-time{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text);}
-.msg-subj{font-size:13px;color:var(--text);margin-bottom:3px;}
-.msg-prev{font-size:12px;color:rgba(138,180,204,.5);}
-.unread-dot{width:7px;height:7px;background:var(--cyan);border-radius:50%;flex-shrink:0;margin-top:5px;box-shadow:0 0 6px var(--cyan);}
-.msg-empty{padding:40px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--text);}
-
-/* SETTINGS */
+.msg-item:hover{background:rgba(0,245,255,.02);}
+.msg-item.unread{border-left:3px solid var(--cyan);}
+.msg-top-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.msg-av{width:40px;height:40px;background:linear-gradient(135deg,var(--cyan),var(--purple));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:12px;font-weight:900;color:#000;flex-shrink:0;}
+.msg-info{flex:1;}
+.msg-name{font-size:15px;font-weight:700;color:var(--white);}
+.msg-time{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text);letter-spacing:1px;}
+.msg-subj{font-size:12px;color:var(--cyan);font-family:'Share Tech Mono',monospace;letter-spacing:1px;margin-bottom:8px;}
+.msg-body{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:10px;padding:10px;background:rgba(0,245,255,.02);border-left:2px solid rgba(0,245,255,.2);}
+.msg-contacts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.msg-contact-chip{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;padding:5px 10px;border:1px solid var(--border);color:var(--text);display:flex;align-items:center;gap:5px;}
+.msg-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.msg-btn{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;padding:8px 14px;border:1px solid;background:transparent;cursor:pointer;text-transform:uppercase;transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;gap:5px;}
+.msg-btn.wa{border-color:rgba(0,255,136,.5);color:var(--green);background:rgba(0,255,136,.05);}
+.msg-btn.wa:hover{background:rgba(0,255,136,.15);}
+.msg-btn.thanks{border-color:rgba(0,245,255,.5);color:var(--cyan);background:rgba(0,245,255,.05);}
+.msg-btn.thanks:hover{background:rgba(0,245,255,.15);}
+.msg-btn.mail{border-color:rgba(191,0,255,.5);color:var(--purple);background:rgba(191,0,255,.05);}
+.msg-btn.mail:hover{background:rgba(191,0,255,.15);}
+.msg-btn.read{border-color:rgba(138,180,204,.3);color:var(--text);}
+.msg-btn.read:hover{background:rgba(138,180,204,.05);}
+.msg-btn.del{border-color:rgba(255,0,110,.3);color:var(--pink);}
+.msg-btn.del:hover{background:rgba(255,0,110,.08);}
+.unread-dot{display:inline-block;width:7px;height:7px;background:var(--cyan);border-radius:50%;box-shadow:0 0 6px var(--cyan);margin-left:6px;vertical-align:middle;}
+.msg-empty{padding:50px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--text);}
 .set-section{background:var(--surface);border:1px solid var(--border);padding:24px;margin-bottom:16px;}
 .set-title{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);}
-.set-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(13,37,53,.5);}
+.set-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(13,37,53,.5);flex-wrap:wrap;gap:10px;}
 .set-row:last-child{border-bottom:none;}
 .set-key{font-size:14px;color:var(--white);font-weight:600;}
 .set-desc{font-size:12px;color:var(--text);margin-top:2px;}
@@ -156,37 +153,21 @@ tr:hover td{background:rgba(0,245,255,.02);}
 .toggle.on{background:var(--cyan);}
 .toggle::after{content:'';position:absolute;width:16px;height:16px;background:#fff;border-radius:50%;top:3px;left:3px;transition:transform .3s;}
 .toggle.on::after{transform:translateX(20px);}
-
-/* LOADING */
-.loading{text-align:center;padding:40px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;}
-.loading::after{content:'...';animation:dots 1.5s infinite;}
-@keyframes dots{0%{content:''}33%{content:'.'}66%{content:'..'}100%{content:'...'}}
-
-/* TOAST */
-.toast{position:fixed;bottom:28px;right:28px;background:var(--surface);border:1px solid var(--green);border-left:3px solid var(--green);padding:14px 20px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--green);text-transform:uppercase;z-index:9000;transform:translateY(80px);opacity:0;transition:all .4s;}
+.loading{text-align:center;padding:40px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--cyan);}
+.toast{position:fixed;bottom:28px;right:28px;background:var(--surface);border:1px solid var(--green);border-left:3px solid var(--green);padding:14px 20px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--green);text-transform:uppercase;z-index:9000;transform:translateY(80px);opacity:0;transition:all .4s;max-width:300px;}
 .toast.show{transform:translateY(0);opacity:1;}
 .toast.error{border-color:var(--pink);border-left-color:var(--pink);color:var(--pink);}
-
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:rgba(0,245,255,.2);}
-
-@media(max-width:768px){
-  .sidebar{width:200px;}
-  .main{margin-left:200px;}
-  .cards-row{grid-template-columns:1fr 1fr;}
-  .content{padding:16px;}
-  .topbar{padding:12px 16px;}
-}
+@media(max-width:768px){.sidebar{width:190px;}.main{margin-left:190px;}.cards-row{grid-template-columns:1fr 1fr;}.content{padding:14px;}.topbar{padding:12px 16px;}}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
-    <span class="cn tl"></span><span class="cn tr"></span>
-    <span class="cn bl"></span><span class="cn br"></span>
+    <span class="cn tl"></span><span class="cn tr"></span><span class="cn bl"></span><span class="cn br"></span>
     <div class="login-logo">RISHI<span>.</span>K</div>
     <div class="login-sub">// Admin Portal — Restricted</div>
     <label class="l-label">Password</label>
@@ -196,19 +177,18 @@ tr:hover td{background:rgba(0,245,255,.02);}
   </div>
 </div>
 
-<!-- ADMIN PANEL -->
 <div id="adminPanel">
   <div class="sidebar">
     <div class="s-logo">
       <div class="s-logo-txt">RISHI<span>.</span>K</div>
-      <div class="s-badge">// Admin v2.0 — Firebase</div>
+      <div class="s-badge">// Admin v3.0 — Firebase</div>
     </div>
     <div class="s-nav">
       <div class="s-group">
         <div class="s-group-lbl">Main</div>
         <div class="s-item active" data-page="dashboard">⬡ Dashboard</div>
         <div class="s-item" data-page="portfolio">🎬 Portfolio</div>
-        <div class="s-item" data-page="messages">✉ Messages <span id="unreadBadge" style="display:none;margin-left:auto;background:var(--pink);color:#000;font-family:'Share Tech Mono',monospace;font-size:8px;padding:2px 6px;">0</span></div>
+        <div class="s-item" data-page="messages">✉ Messages <span id="unreadBadge" style="display:none;margin-left:auto;background:var(--pink);color:#000;font-family:'Share Tech Mono',monospace;font-size:8px;padding:2px 6px;border-radius:2px;">0</span></div>
         <div class="s-item" data-page="clients">👤 Clients</div>
       </div>
       <div class="s-group">
@@ -217,7 +197,7 @@ tr:hover td{background:rgba(0,245,255,.02);}
       </div>
     </div>
     <div class="s-bottom">
-      <div style="display:flex;align-items:center;gap:12px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
         <div class="s-av">RK</div>
         <div><div class="s-uname">Rishi Kushwaha</div><div class="s-urole">Super Admin</div></div>
       </div>
@@ -235,16 +215,23 @@ tr:hover td{background:rgba(0,245,255,.02);}
       <!-- DASHBOARD -->
       <div class="page active" id="page-dashboard">
         <div class="cards-row">
-          <div class="stat-card"><div class="sc-icon">🎬</div><div class="sc-val" id="projCount">-</div><div class="sc-lbl">Total Projects</div></div>
+          <div class="stat-card"><div class="sc-icon">🎬</div><div class="sc-val" id="projCount">-</div><div class="sc-lbl">Projects</div></div>
           <div class="stat-card"><div class="sc-icon">👤</div><div class="sc-val" id="clientCount">-</div><div class="sc-lbl">Clients</div></div>
           <div class="stat-card"><div class="sc-icon">✉</div><div class="sc-val" id="msgCount">-</div><div class="sc-lbl">Messages</div></div>
-          <div class="stat-card"><div class="sc-icon">⭐</div><div class="sc-val">4.9</div><div class="sc-lbl">Avg Rating</div></div>
+          <div class="stat-card"><div class="sc-icon">⭐</div><div class="sc-val">4.9</div><div class="sc-lbl">Rating</div></div>
+        </div>
+        <div class="s-hdr"><div class="s-hdr-title">Recent Messages</div><button class="s-hdr-btn" onclick="switchPage('messages')">View All →</button></div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Phone</th><th>Project</th><th>Quick Reply</th></tr></thead>
+            <tbody id="dashMessages"><tr><td colspan="4" class="loading">Loading...</td></tr></tbody>
+          </table>
         </div>
         <div class="s-hdr"><div class="s-hdr-title">Recent Projects</div><button class="s-hdr-btn" onclick="switchPage('portfolio')">Manage →</button></div>
         <div class="tbl-wrap">
           <table>
             <thead><tr><th>Project</th><th>Client</th><th>Type</th><th>Status</th></tr></thead>
-            <tbody id="dashProjects"><tr><td colspan="4" class="loading">Loading</td></tr></tbody>
+            <tbody id="dashProjects"><tr><td colspan="4" class="loading">Loading...</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -257,8 +244,8 @@ tr:hover td{background:rgba(0,245,255,.02);}
         </div>
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Project Name</th><th>Client</th><th>Type</th><th>Status</th><th>Value</th><th>Actions</th></tr></thead>
-            <tbody id="projectTable"><tr><td colspan="6" class="loading">Loading</td></tr></tbody>
+            <thead><tr><th>Project</th><th>Client</th><th>Type</th><th>Status</th><th>Value</th><th>Actions</th></tr></thead>
+            <tbody id="projectTable"><tr><td colspan="6" class="loading">Loading...</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -266,10 +253,10 @@ tr:hover td{background:rgba(0,245,255,.02);}
       <!-- MESSAGES -->
       <div class="page" id="page-messages">
         <div class="s-hdr">
-          <div class="s-hdr-title">Inbox</div>
-          <button class="s-hdr-btn pink" onclick="clearMessages()">Clear All</button>
+          <div class="s-hdr-title">📬 Inbox</div>
+          <button class="s-hdr-btn pink" onclick="clearAllMessages()">🗑 Clear All</button>
         </div>
-        <div class="msg-list" id="msgList"><div class="loading">Loading</div></div>
+        <div class="msg-list" id="msgList"><div class="loading">Loading...</div></div>
       </div>
 
       <!-- CLIENTS -->
@@ -280,8 +267,8 @@ tr:hover td{background:rgba(0,245,255,.02);}
         </div>
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Name</th><th>Email</th><th>Type</th><th>Projects</th><th>Value</th><th>Actions</th></tr></thead>
-            <tbody id="clientTable"><tr><td colspan="6" class="loading">Loading</td></tr></tbody>
+            <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Type</th><th>Value</th><th>Actions</th></tr></thead>
+            <tbody id="clientTable"><tr><td colspan="6" class="loading">Loading...</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -292,14 +279,20 @@ tr:hover td{background:rgba(0,245,255,.02);}
           <div class="set-title">Profile Settings</div>
           <div class="set-row"><div><div class="set-key">Display Name</div></div><input class="set-inp" id="sName" value="Rishi Kushwaha"></div>
           <div class="set-row"><div><div class="set-key">Email</div></div><input class="set-inp" id="sEmail" value="sahil39379@gmail.com"></div>
-          <div class="set-row"><div><div class="set-key">WhatsApp</div></div><input class="set-inp" id="sWA" value="+91 7800498828"></div>
+          <div class="set-row"><div><div class="set-key">WhatsApp No.</div><div class="set-desc">With country code e.g. 917800498828</div></div><input class="set-inp" id="sWA" value="917800498828"></div>
           <div class="set-row"><div><div class="set-key">Instagram</div></div><input class="set-inp" id="sIG" value="@mr.sahil__kumar0"></div>
           <div style="margin-top:16px"><button class="set-btn" onclick="saveSettings()">Save Changes</button></div>
         </div>
         <div class="set-section">
+          <div class="set-title">WhatsApp Templates</div>
+          <div class="set-row"><div><div class="set-key">Thanks Message</div><div class="set-desc">Sent when you click "Thanks" button</div></div></div>
+          <textarea id="thanksTemplate" style="width:100%;background:rgba(0,245,255,.02);border:1px solid var(--border);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:14px;padding:12px;outline:none;resize:none;height:100px;margin-top:8px;">Hi {name}! 👋 Thanks for your interest in my video editing services! I'm Rishi Kushwaha. I've received your inquiry about "{project}" and will get back to you very soon. Looking forward to working with you! 🎬✨</textarea>
+          <div style="margin-top:12px"><button class="set-btn" onclick="saveTemplate()">Save Template</button></div>
+        </div>
+        <div class="set-section">
           <div class="set-title">Notifications</div>
-          <div class="set-row"><div><div class="set-key">Email Notifications</div><div class="set-desc">New inquiry alerts</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="set-row"><div><div class="set-key">WhatsApp Alerts</div><div class="set-desc">Instant notifications</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="set-row"><div><div class="set-key">Email Notifications</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="set-row"><div><div class="set-key">WhatsApp Alerts</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
         </div>
       </div>
 
@@ -337,13 +330,16 @@ tr:hover td{background:rgba(0,245,255,.02);}
     <div class="modal-title" id="clientModalTitle">Add Client</div>
     <div class="form-row">
       <div class="fg"><label>Name</label><input id="cName" placeholder="Arjun Kapoor"></div>
-      <div class="fg"><label>Email</label><input id="cEmail" placeholder="client@email.com"></div>
+      <div class="fg"><label>Phone</label><input id="cPhone" placeholder="+91 98765 43210"></div>
     </div>
     <div class="form-row">
+      <div class="fg"><label>Email</label><input id="cEmail" placeholder="client@email.com"></div>
       <div class="fg"><label>Type</label><select id="cType"><option>Influencer</option><option>Brand Manager</option><option>Filmmaker</option><option>Agency</option><option>YouTuber</option><option>Studio</option></select></div>
-      <div class="fg"><label>Total Value (₹)</label><input id="cValue" placeholder="50000" type="number"></div>
     </div>
-    <div class="fg"><label>Projects Count</label><input id="cProjects" placeholder="5" type="number"></div>
+    <div class="form-row">
+      <div class="fg"><label>Total Value (₹)</label><input id="cValue" placeholder="50000" type="number"></div>
+      <div class="fg"><label>Projects Count</label><input id="cProjects" placeholder="5" type="number"></div>
+    </div>
     <input type="hidden" id="cDocId">
     <div class="modal-btns">
       <button class="m-btn cancel" onclick="closeModal('clientModal')">Cancel</button>
@@ -352,334 +348,268 @@ tr:hover td{background:rgba(0,245,255,.02);}
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── FIREBASE CONFIG ───
-const firebaseConfig = {
-  apiKey: "AIzaSyA7IF1sm3ov4WRdLBgABZwe83_MtC4EK0k",
-  authDomain: "rishi-portfolio-a3d07.firebaseapp.com",
-  projectId: "rishi-portfolio-a3d07",
-  storageBucket: "rishi-portfolio-a3d07.firebasestorage.app",
-  messagingSenderId: "504667511628",
-  appId: "1:504667511628:web:0855f21475d082ee81cde9",
-  measurementId: "G-TEX7DJXK1V"
-};
+const firebaseConfig={apiKey:"AIzaSyA7IF1sm3ov4WRdLBgABZwe83_MtC4EK0k",authDomain:"rishi-portfolio-a3d07.firebaseapp.com",projectId:"rishi-portfolio-a3d07",storageBucket:"rishi-portfolio-a3d07.firebasestorage.app",messagingSenderId:"504667511628",appId:"1:504667511628:web:0855f21475d082ee81cde9"};
 firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+const db=firebase.firestore();
+const PASS='@Sahilkumar7800';
+let myWA='917800498828';
+let thanksMsg='Hi {name}! 👋 Thanks for your interest in my video editing services! I\'m Rishi Kushwaha. I\'ve received your inquiry about "{project}" and will get back to you very soon. Looking forward to working with you! 🎬✨';
 
-const PASS = '@Sahilkumar7800';
-
-// ─── LOGIN ───
-document.getElementById('loginBtn').addEventListener('click', tryLogin);
-document.getElementById('pwInput').addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
-
+// LOGIN
+document.getElementById('loginBtn').addEventListener('click',tryLogin);
+document.getElementById('pwInput').addEventListener('keydown',e=>{if(e.key==='Enter')tryLogin();});
 function tryLogin(){
-  if(document.getElementById('pwInput').value === PASS){
+  if(document.getElementById('pwInput').value===PASS){
     document.getElementById('loginScreen').classList.add('hide');
-    document.getElementById('adminPanel').style.display = 'flex';
+    document.getElementById('adminPanel').style.display='flex';
     initPanel();
   } else {
     document.getElementById('loginErr').classList.add('show');
-    document.querySelector('.login-box').style.animation = 'shake .4s ease';
-    document.getElementById('pwInput').value = '';
-    setTimeout(()=>{
-      document.getElementById('loginErr').classList.remove('show');
-      document.querySelector('.login-box').style.animation = '';
-    }, 2000);
+    document.querySelector('.login-box').style.animation='shake .4s ease';
+    document.getElementById('pwInput').value='';
+    setTimeout(()=>{document.getElementById('loginErr').classList.remove('show');document.querySelector('.login-box').style.animation='';},2000);
   }
 }
-
-document.getElementById('logoutBtn').addEventListener('click', ()=>{
-  document.getElementById('adminPanel').style.display = 'none';
+document.getElementById('logoutBtn').addEventListener('click',()=>{
+  document.getElementById('adminPanel').style.display='none';
   document.getElementById('loginScreen').classList.remove('hide');
-  document.getElementById('pwInput').value = '';
+  document.getElementById('pwInput').value='';
 });
 
-// ─── NAV ───
-document.querySelectorAll('.s-item').forEach(item => {
-  item.addEventListener('click', () => switchPage(item.dataset.page));
+// NAV
+document.querySelectorAll('.s-item').forEach(item=>{
+  item.addEventListener('click',()=>switchPage(item.dataset.page));
 });
-
 function switchPage(name){
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.s-item').forEach(i => i.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.s-item').forEach(i=>i.classList.remove('active'));
   document.getElementById('page-'+name).classList.add('active');
   document.querySelector(`[data-page="${name}"]`).classList.add('active');
-  document.getElementById('pageTitle').textContent = name.charAt(0).toUpperCase()+name.slice(1);
+  document.getElementById('pageTitle').textContent=name.charAt(0).toUpperCase()+name.slice(1);
 }
 
-// ─── CLOCK ───
-function updateClock(){
-  const now = new Date();
-  let h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
-  const ap = h>=12?'PM':'AM'; h = h%12||12;
-  document.getElementById('clock').textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} ${ap}`;
-}
-setInterval(updateClock, 1000); updateClock();
+// CLOCK
+function updateClock(){const now=new Date();let h=now.getHours(),m=now.getMinutes(),s=now.getSeconds();const ap=h>=12?'PM':'AM';h=h%12||12;document.getElementById('clock').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} ${ap}`;}
+setInterval(updateClock,1000);updateClock();
 
-// ─── TOAST ───
-function showToast(msg, err=false){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (err?' error':'');
-  setTimeout(()=>t.classList.remove('show'), 3000);
-}
+// TOAST
+function showToast(msg,err=false){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(err?' error':'');setTimeout(()=>t.classList.remove('show'),3000);}
 
-// ─── INIT ───
-function initPanel(){
-  loadProjects();
-  loadClients();
-  loadMessages();
-  loadSettings();
+// INIT
+function initPanel(){loadProjects();loadClients();loadMessages();loadSettings();}
+
+// WHATSAPP HELPERS
+function buildWALink(phone,msg){
+  const num=phone.replace(/[^0-9]/g,'');
+  if(!num||num.length<10) return null;
+  return `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
+}
+function getThanksMsg(name,project){
+  return thanksMsg.replace('{name}',name||'there').replace('{project}',project||'video editing');
 }
 
-// ─── PROJECTS ───
+// PROJECTS
 function loadProjects(){
-  db.collection('projects').orderBy('createdAt','desc').onSnapshot(snap => {
-    document.getElementById('projCount').textContent = snap.size;
+  db.collection('projects').orderBy('createdAt','desc').onSnapshot(snap=>{
+    document.getElementById('projCount').textContent=snap.size;
     renderProjects(snap.docs);
   });
 }
-
 function renderProjects(docs){
-  const tbl = document.getElementById('projectTable');
-  const dash = document.getElementById('dashProjects');
+  const tbl=document.getElementById('projectTable');
+  const dash=document.getElementById('dashProjects');
+  const sb=s=>s==='Done'?'done':s==='In Progress'?'prog':'pend';
   if(!docs.length){
-    tbl.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:30px;font-family:\'Share Tech Mono\',monospace;font-size:11px;color:var(--text)">No projects yet — Add one!</td></tr>';
-    dash.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:20px;font-family:\'Share Tech Mono\',monospace;font-size:11px;color:var(--text)">No projects</td></tr>';
+    tbl.innerHTML='<tr><td colspan="6" class="msg-empty">No projects yet — Add one!</td></tr>';
+    dash.innerHTML='<tr><td colspan="4" class="msg-empty">No projects</td></tr>';
     return;
   }
-  const statusBadge = s => s==='Done'?'done':s==='In Progress'?'prog':'pend';
-  tbl.innerHTML = docs.map(d => {
-    const p = d.data();
-    return `<tr>
-      <td style="color:var(--white);font-weight:600">${p.name||''}</td>
-      <td>${p.client||''}</td>
-      <td>${p.type||''}</td>
-      <td><span class="badge ${statusBadge(p.status)}">${p.status||''}</span></td>
-      <td style="color:var(--green)">₹${Number(p.value||0).toLocaleString()}</td>
-      <td>
-        <button class="tbl-action edit" onclick="editProject('${d.id}')">Edit</button>
-        <button class="tbl-action del" onclick="deleteProject('${d.id}')">Del</button>
-      </td>
-    </tr>`;
-  }).join('');
-  dash.innerHTML = docs.slice(0,5).map(d => {
-    const p = d.data();
-    return `<tr>
-      <td style="color:var(--white);font-weight:600">${p.name||''}</td>
-      <td>${p.client||''}</td>
-      <td>${p.type||''}</td>
-      <td><span class="badge ${statusBadge(p.status)}">${p.status||''}</span></td>
-    </tr>`;
-  }).join('');
+  tbl.innerHTML=docs.map(d=>{const p=d.data();return `<tr><td style="color:var(--white);font-weight:600">${p.name||''}</td><td>${p.client||''}</td><td>${p.type||''}</td><td><span class="badge ${sb(p.status)}">${p.status||''}</span></td><td style="color:var(--green)">₹${Number(p.value||0).toLocaleString()}</td><td><button class="tbl-action edit" onclick="editProject('${d.id}')">Edit</button><button class="tbl-action del" onclick="deleteProject('${d.id}')">Del</button></td></tr>`;}).join('');
+  dash.innerHTML=docs.slice(0,4).map(d=>{const p=d.data();return `<tr><td style="color:var(--white);font-weight:600">${p.name||''}</td><td>${p.client||''}</td><td>${p.type||''}</td><td><span class="badge ${sb(p.status)}">${p.status||''}</span></td></tr>`;}).join('');
 }
-
-function openModal(type){ 
+function openModal(type){
   if(type==='project'){
-    document.getElementById('projectModalTitle').textContent = 'Add Project';
-    document.getElementById('pName').value='';
-    document.getElementById('pClient').value='';
-    document.getElementById('pValue').value='';
-    document.getElementById('pDeadline').value='';
-    document.getElementById('pDocId').value='';
+    document.getElementById('projectModalTitle').textContent='Add Project';
+    ['pName','pClient','pValue','pDeadline','pDocId'].forEach(id=>document.getElementById(id).value='');
     document.getElementById('projectModal').classList.remove('hide');
   } else {
-    document.getElementById('clientModalTitle').textContent = 'Add Client';
-    document.getElementById('cName').value='';
-    document.getElementById('cEmail').value='';
-    document.getElementById('cValue').value='';
-    document.getElementById('cProjects').value='';
-    document.getElementById('cDocId').value='';
+    document.getElementById('clientModalTitle').textContent='Add Client';
+    ['cName','cPhone','cEmail','cValue','cProjects','cDocId'].forEach(id=>document.getElementById(id).value='');
     document.getElementById('clientModal').classList.remove('hide');
   }
 }
-
-function closeModal(id){ document.getElementById(id).classList.add('hide'); }
-
+function closeModal(id){document.getElementById(id).classList.add('hide');}
 async function saveProject(){
-  const name = document.getElementById('pName').value.trim();
-  if(!name){ showToast('Project name required!', true); return; }
-  const data = {
-    name, client: document.getElementById('pClient').value.trim(),
-    type: document.getElementById('pType').value,
-    status: document.getElementById('pStatus').value,
-    value: document.getElementById('pValue').value||0,
-    deadline: document.getElementById('pDeadline').value,
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  };
-  const docId = document.getElementById('pDocId').value;
-  try {
-    if(docId) await db.collection('projects').doc(docId).update(data);
-    else await db.collection('projects').add(data);
-    closeModal('projectModal');
-    showToast(docId ? 'Project updated!' : 'Project added!');
-  } catch(e){ showToast('Error: '+e.message, true); }
+  const name=document.getElementById('pName').value.trim();
+  if(!name){showToast('Name required!',true);return;}
+  const data={name,client:document.getElementById('pClient').value.trim(),type:document.getElementById('pType').value,status:document.getElementById('pStatus').value,value:document.getElementById('pValue').value||0,deadline:document.getElementById('pDeadline').value,createdAt:firebase.firestore.FieldValue.serverTimestamp()};
+  const docId=document.getElementById('pDocId').value;
+  try{if(docId)await db.collection('projects').doc(docId).update(data);else await db.collection('projects').add(data);closeModal('projectModal');showToast(docId?'Project updated!':'Project added! ✓');}
+  catch(e){showToast('Error: '+e.message,true);}
 }
-
 async function editProject(id){
-  const doc = await db.collection('projects').doc(id).get();
-  const p = doc.data();
-  document.getElementById('projectModalTitle').textContent = 'Edit Project';
-  document.getElementById('pName').value = p.name||'';
-  document.getElementById('pClient').value = p.client||'';
-  document.getElementById('pType').value = p.type||'Reels';
-  document.getElementById('pStatus').value = p.status||'Pending';
-  document.getElementById('pValue').value = p.value||'';
-  document.getElementById('pDeadline').value = p.deadline||'';
-  document.getElementById('pDocId').value = id;
+  const doc=await db.collection('projects').doc(id).get();const p=doc.data();
+  document.getElementById('projectModalTitle').textContent='Edit Project';
+  document.getElementById('pName').value=p.name||'';document.getElementById('pClient').value=p.client||'';
+  document.getElementById('pType').value=p.type||'Reels';document.getElementById('pStatus').value=p.status||'Pending';
+  document.getElementById('pValue').value=p.value||'';document.getElementById('pDeadline').value=p.deadline||'';
+  document.getElementById('pDocId').value=id;
   document.getElementById('projectModal').classList.remove('hide');
 }
-
 async function deleteProject(id){
-  if(!confirm('Delete this project?')) return;
-  await db.collection('projects').doc(id).delete();
-  showToast('Project deleted!');
+  if(!confirm('Delete this project?'))return;
+  await db.collection('projects').doc(id).delete();showToast('Project deleted!');
 }
 
-// ─── CLIENTS ───
+// CLIENTS
 function loadClients(){
-  db.collection('clients').orderBy('createdAt','desc').onSnapshot(snap => {
-    document.getElementById('clientCount').textContent = snap.size;
+  db.collection('clients').orderBy('createdAt','desc').onSnapshot(snap=>{
+    document.getElementById('clientCount').textContent=snap.size;
     renderClients(snap.docs);
   });
 }
-
 function renderClients(docs){
-  const tbl = document.getElementById('clientTable');
-  if(!docs.length){
-    tbl.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:30px;font-family:\'Share Tech Mono\',monospace;font-size:11px;color:var(--text)">No clients yet — Add one!</td></tr>';
-    return;
-  }
-  tbl.innerHTML = docs.map(d => {
-    const c = d.data();
-    return `<tr>
-      <td style="color:var(--white);font-weight:600">${c.name||''}</td>
-      <td>${c.email||''}</td>
-      <td>${c.type||''}</td>
-      <td>${c.projects||0}</td>
-      <td style="color:var(--green)">₹${Number(c.value||0).toLocaleString()}</td>
-      <td>
-        <button class="tbl-action edit" onclick="editClient('${d.id}')">Edit</button>
-        <button class="tbl-action del" onclick="deleteClient('${d.id}')">Del</button>
-      </td>
-    </tr>`;
+  const tbl=document.getElementById('clientTable');
+  if(!docs.length){tbl.innerHTML='<tr><td colspan="6" class="msg-empty">No clients yet</td></tr>';return;}
+  tbl.innerHTML=docs.map(d=>{
+    const c=d.data();
+    const phone=c.phone||'';
+    const waNum=phone.replace(/[^0-9]/g,'');
+    const waLink=waNum?`<a href="https://wa.me/${waNum}" target="_blank" class="tbl-action edit" style="text-decoration:none">💬 WA</a>`:'';
+    return `<tr><td style="color:var(--white);font-weight:600">${c.name||''}</td><td>${phone||'—'}</td><td>${c.email||'—'}</td><td>${c.type||''}</td><td style="color:var(--green)">₹${Number(c.value||0).toLocaleString()}</td><td>${waLink}<button class="tbl-action edit" onclick="editClient('${d.id}')">Edit</button><button class="tbl-action del" onclick="deleteClient('${d.id}')">Del</button></td></tr>`;
   }).join('');
 }
-
 async function saveClient(){
-  const name = document.getElementById('cName').value.trim();
-  if(!name){ showToast('Client name required!', true); return; }
-  const data = {
-    name, email: document.getElementById('cEmail').value.trim(),
-    type: document.getElementById('cType').value,
-    value: document.getElementById('cValue').value||0,
-    projects: document.getElementById('cProjects').value||0,
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  };
-  const docId = document.getElementById('cDocId').value;
-  try {
-    if(docId) await db.collection('clients').doc(docId).update(data);
-    else await db.collection('clients').add(data);
-    closeModal('clientModal');
-    showToast(docId ? 'Client updated!' : 'Client added!');
-  } catch(e){ showToast('Error: '+e.message, true); }
+  const name=document.getElementById('cName').value.trim();
+  if(!name){showToast('Name required!',true);return;}
+  const data={name,phone:document.getElementById('cPhone').value.trim(),email:document.getElementById('cEmail').value.trim(),type:document.getElementById('cType').value,value:document.getElementById('cValue').value||0,projects:document.getElementById('cProjects').value||0,createdAt:firebase.firestore.FieldValue.serverTimestamp()};
+  const docId=document.getElementById('cDocId').value;
+  try{if(docId)await db.collection('clients').doc(docId).update(data);else await db.collection('clients').add(data);closeModal('clientModal');showToast(docId?'Client updated!':'Client added! ✓');}
+  catch(e){showToast('Error!',true);}
 }
-
 async function editClient(id){
-  const doc = await db.collection('clients').doc(id).get();
-  const c = doc.data();
-  document.getElementById('clientModalTitle').textContent = 'Edit Client';
-  document.getElementById('cName').value = c.name||'';
-  document.getElementById('cEmail').value = c.email||'';
-  document.getElementById('cType').value = c.type||'Influencer';
-  document.getElementById('cValue').value = c.value||'';
-  document.getElementById('cProjects').value = c.projects||'';
-  document.getElementById('cDocId').value = id;
+  const doc=await db.collection('clients').doc(id).get();const c=doc.data();
+  document.getElementById('clientModalTitle').textContent='Edit Client';
+  document.getElementById('cName').value=c.name||'';document.getElementById('cPhone').value=c.phone||'';
+  document.getElementById('cEmail').value=c.email||'';document.getElementById('cType').value=c.type||'Influencer';
+  document.getElementById('cValue').value=c.value||'';document.getElementById('cProjects').value=c.projects||'';
+  document.getElementById('cDocId').value=id;
   document.getElementById('clientModal').classList.remove('hide');
 }
-
 async function deleteClient(id){
-  if(!confirm('Delete this client?')) return;
-  await db.collection('clients').doc(id).delete();
-  showToast('Client deleted!');
+  if(!confirm('Delete?'))return;
+  await db.collection('clients').doc(id).delete();showToast('Deleted!');
 }
 
-// ─── MESSAGES ───
+// MESSAGES
 function loadMessages(){
-  db.collection('messages').orderBy('createdAt','desc').onSnapshot(snap => {
-    document.getElementById('msgCount').textContent = snap.size;
-    const unread = snap.docs.filter(d => !d.data().read).length;
-    const badge = document.getElementById('unreadBadge');
-    if(unread > 0){ badge.style.display='inline'; badge.textContent=unread; }
-    else badge.style.display='none';
+  db.collection('messages').orderBy('createdAt','desc').onSnapshot(snap=>{
+    document.getElementById('msgCount').textContent=snap.size;
+    const unread=snap.docs.filter(d=>!d.data().read).length;
+    const badge=document.getElementById('unreadBadge');
+    if(unread>0){badge.style.display='inline';badge.textContent=unread;}else{badge.style.display='none';}
     renderMessages(snap.docs);
+    renderDashMessages(snap.docs);
   });
 }
 
 function renderMessages(docs){
-  const list = document.getElementById('msgList');
-  if(!docs.length){
-    list.innerHTML = '<div class="msg-empty">No messages yet</div>';
-    return;
-  }
-  list.innerHTML = docs.map(d => {
-    const m = d.data();
-    const initials = (m.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-    const time = m.createdAt ? new Date(m.createdAt.seconds*1000).toLocaleString('en-IN',{dateStyle:'short',timeStyle:'short'}) : '';
-    return `<div class="msg-item ${m.read?'':'unread'}" onclick="markRead('${d.id}')">
-      <div class="msg-av">${initials}</div>
-      <div class="msg-meta">
-        <div class="msg-top"><div class="msg-name">${m.name||'Unknown'}</div><div class="msg-time">${time}</div></div>
-        <div class="msg-subj">${m.subject||m.projectType||'Inquiry'}</div>
-        <div class="msg-prev">${m.message||''}</div>
+  const list=document.getElementById('msgList');
+  if(!docs.length){list.innerHTML='<div class="msg-empty">📭 No messages yet<br><span style="font-size:10px;color:rgba(138,180,204,.4)">Share your portfolio to get inquiries!</span></div>';return;}
+  list.innerHTML=docs.map(d=>{
+    const m=d.data();
+    const initials=(m.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+    const time=m.createdAt?new Date(m.createdAt.seconds*1000).toLocaleString('en-IN',{dateStyle:'short',timeStyle:'short'}):'Just now';
+    const phone=m.phone&&m.phone!=='Not provided'?m.phone:'';
+    const waLink=phone?buildWALink(phone,`Hi ${m.name}! This is Rishi Kushwaha (Video Editor). Regarding your inquiry about "${m.subject||'video editing'}" — let's discuss!`):'';
+    const thanksLink=phone?buildWALink(phone,getThanksMsg(m.name,m.subject)):'';
+    const mailLink=m.email?`mailto:${m.email}?subject=Re: ${m.subject||'Your Inquiry'}&body=Hi ${m.name},%0D%0A%0D%0AThanks for contacting me! I'd love to work on your project.%0D%0A%0D%0ABest regards,%0D%0ARishi Kushwaha%0D%0AVideo Editor & Motion Designer`:'';
+
+    return `<div class="msg-item ${m.read?'':'unread'}">
+      <div class="msg-top-row">
+        <div class="msg-av">${initials}</div>
+        <div class="msg-info">
+          <div class="msg-name">${m.name||'Unknown'} ${m.read?'':'<span class="unread-dot"></span>'}</div>
+          <div class="msg-time">🕐 ${time}</div>
+        </div>
       </div>
-      ${m.read?'':'<div class="unread-dot"></div>'}
+      <div class="msg-subj">📋 ${m.subject||'General Inquiry'}</div>
+      <div class="msg-body">${m.message||'No message'}</div>
+      <div class="msg-contacts">
+        ${m.email?`<span class="msg-contact-chip">✉ ${m.email}</span>`:''}
+        ${phone?`<span class="msg-contact-chip">📱 ${phone}</span>`:''}
+      </div>
+      <div class="msg-actions">
+        ${waLink?`<a href="${waLink}" target="_blank" class="msg-btn wa">💬 WhatsApp Reply</a>`:''}
+        ${thanksLink?`<a href="${thanksLink}" target="_blank" class="msg-btn thanks">🙏 Send Thanks</a>`:''}
+        ${mailLink?`<a href="${mailLink}" class="msg-btn mail">✉ Email Reply</a>`:''}
+        ${!m.read?`<button class="msg-btn read" onclick="markRead('${d.id}')">✓ Mark Read</button>`:'<span style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:var(--green);padding:8px;">✓ Read</span>'}
+        <button class="msg-btn del" onclick="deleteMsg('${d.id}')">🗑 Delete</button>
+      </div>
     </div>`;
+  }).join('');
+}
+
+function renderDashMessages(docs){
+  const dash=document.getElementById('dashMessages');
+  if(!docs.length){dash.innerHTML='<tr><td colspan="4" class="msg-empty">No messages</td></tr>';return;}
+  dash.innerHTML=docs.slice(0,5).map(d=>{
+    const m=d.data();
+    const phone=m.phone&&m.phone!=='Not provided'?m.phone:'';
+    const thanksLink=phone?buildWALink(phone,getThanksMsg(m.name,m.subject)):'';
+    return `<tr>
+      <td style="color:var(--white);font-weight:600">${m.name||''} ${m.read?'':'<span class="unread-dot"></span>'}</td>
+      <td>${phone||'—'}</td>
+      <td>${m.subject||'—'}</td>
+      <td>${thanksLink?`<a href="${thanksLink}" target="_blank" class="tbl-action edit" style="text-decoration:none;font-size:8px;">🙏 Thanks WA</a>`:''}</td>
+    </tr>`;
   }).join('');
 }
 
 async function markRead(id){
   await db.collection('messages').doc(id).update({read:true});
+  showToast('Marked as read ✓');
+}
+async function deleteMsg(id){
+  if(!confirm('Delete this message?'))return;
+  await db.collection('messages').doc(id).delete();showToast('Message deleted!');
+}
+async function clearAllMessages(){
+  if(!confirm('Delete ALL messages? Cannot be undone!'))return;
+  const snap=await db.collection('messages').get();
+  const batch=db.batch();
+  snap.docs.forEach(d=>batch.delete(d.ref));
+  await batch.commit();showToast('All cleared!');
 }
 
-async function clearMessages(){
-  if(!confirm('Delete all messages?')) return;
-  const snap = await db.collection('messages').get();
-  const batch = db.batch();
-  snap.docs.forEach(d => batch.delete(d.ref));
-  await batch.commit();
-  showToast('All messages cleared!');
-}
-
-// ─── SETTINGS ───
+// SETTINGS
 async function loadSettings(){
-  try {
-    const doc = await db.collection('settings').doc('profile').get();
+  try{
+    const doc=await db.collection('settings').doc('profile').get();
     if(doc.exists){
-      const s = doc.data();
-      document.getElementById('sName').value = s.name||'Rishi Kushwaha';
-      document.getElementById('sEmail').value = s.email||'sahil39379@gmail.com';
-      document.getElementById('sWA').value = s.whatsapp||'+91 7800498828';
-      document.getElementById('sIG').value = s.instagram||'@mr.sahil__kumar0';
+      const s=doc.data();
+      document.getElementById('sName').value=s.name||'Rishi Kushwaha';
+      document.getElementById('sEmail').value=s.email||'sahil39379@gmail.com';
+      document.getElementById('sWA').value=s.whatsapp||'917800498828';
+      document.getElementById('sIG').value=s.instagram||'@mr.sahil__kumar0';
+      if(s.thanksMsg) document.getElementById('thanksTemplate').value=s.thanksMsg;
+      myWA=s.whatsapp||myWA;
+      thanksMsg=s.thanksMsg||thanksMsg;
     }
-  } catch(e){}
+  }catch(e){}
 }
-
 async function saveSettings(){
-  try {
-    await db.collection('settings').doc('profile').set({
-      name: document.getElementById('sName').value,
-      email: document.getElementById('sEmail').value,
-      whatsapp: document.getElementById('sWA').value,
-      instagram: document.getElementById('sIG').value,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    showToast('Settings saved!');
-  } catch(e){ showToast('Error saving!', true); }
+  try{
+    const data={name:document.getElementById('sName').value,email:document.getElementById('sEmail').value,whatsapp:document.getElementById('sWA').value,instagram:document.getElementById('sIG').value,thanksMsg:document.getElementById('thanksTemplate').value,updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
+    await db.collection('settings').doc('profile').set(data);
+    myWA=data.whatsapp; thanksMsg=data.thanksMsg;
+    showToast('Settings saved! ✓');
+  }catch(e){showToast('Error saving!',true);}
 }
+function saveTemplate(){saveSettings();}
 </script>
 </body>
 </html>
