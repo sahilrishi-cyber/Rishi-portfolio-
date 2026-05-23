@@ -526,28 +526,31 @@ function renderMessages(docs){
     const phone=m.phone&&m.phone!=='Not provided'?m.phone:'';
     const waLink=phone?buildWALink(phone,`Hi ${m.name}! This is Rishi Kushwaha (Video Editor). Regarding your inquiry about "${m.subject||'video editing'}" — let's discuss!`):'';
     const thanksLink=phone?buildWALink(phone,getThanksMsg(m.name,m.subject)):'';
-    const mailLink=m.email?`mailto:${m.email}?subject=Re: ${m.subject||'Your Inquiry'}&body=Hi ${m.name},%0D%0A%0D%0AThanks for contacting me! I'd love to work on your project.%0D%0A%0D%0ABest regards,%0D%0ARishi Kushwaha%0D%0AVideo Editor & Motion Designer`:'';
+    const mailLink=m.email?`mailto:${m.email}?subject=Re: ${m.subject||'Your Inquiry'}&body=Hi ${m.name},%0D%0A%0D%0AThanks for contacting me!%0D%0A%0D%0ABest,%0D%0ARishi Kushwaha`:'';
 
-    return `<div class="msg-item ${m.read?'':'unread'}">
-      <div class="msg-top-row">
+    return `<div class="msg-item ${m.read?'':'unread'}" style="cursor:pointer;">
+      <div class="msg-top-row" onclick="toggleMsg('detail-${d.id}','${d.id}')">
         <div class="msg-av">${initials}</div>
         <div class="msg-info">
           <div class="msg-name">${m.name||'Unknown'} ${m.read?'':'<span class="unread-dot"></span>'}</div>
-          <div class="msg-time">🕐 ${time}</div>
+          <div class="msg-time">🕐 ${time} &nbsp;|&nbsp; ${m.subject||'Inquiry'}</div>
         </div>
+        <div style="font-size:18px;color:var(--cyan);padding-left:8px;">▾</div>
       </div>
-      <div class="msg-subj">📋 ${m.subject||'General Inquiry'}</div>
-      <div class="msg-body">${m.message||'No message'}</div>
-      <div class="msg-contacts">
-        ${m.email?`<span class="msg-contact-chip">✉ ${m.email}</span>`:''}
-        ${phone?`<span class="msg-contact-chip">📱 ${phone}</span>`:''}
-      </div>
-      <div class="msg-actions">
-        ${waLink?`<a href="${waLink}" target="_blank" class="msg-btn wa">💬 WhatsApp Reply</a>`:''}
-        ${thanksLink?`<a href="${thanksLink}" target="_blank" class="msg-btn thanks">🙏 Send Thanks</a>`:''}
-        ${mailLink?`<a href="${mailLink}" class="msg-btn mail">✉ Email Reply</a>`:''}
-        ${!m.read?`<button class="msg-btn read" onclick="markRead('${d.id}')">✓ Mark Read</button>`:'<span style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:var(--green);padding:8px;">✓ Read</span>'}
-        <button class="msg-btn del" onclick="deleteMsg('${d.id}')">🗑 Delete</button>
+      <div id="detail-${d.id}" style="display:none;margin-top:12px;">
+        <div class="msg-subj">📋 ${m.subject||'General Inquiry'}</div>
+        <div class="msg-body" style="margin-top:8px;">${m.message||'No message'}</div>
+        <div class="msg-contacts" style="margin-top:10px;">
+          ${m.email?`<span class="msg-contact-chip">✉ ${m.email}</span>`:''}
+          ${phone?`<span class="msg-contact-chip">📱 ${phone}</span>`:''}
+        </div>
+        <div class="msg-actions" style="margin-top:10px;">
+          ${waLink?`<a href="${waLink}" target="_blank" class="msg-btn wa">💬 WA Reply</a>`:'<span style="font-size:10px;color:var(--text)">No phone</span>'}
+          ${thanksLink?`<a href="${thanksLink}" target="_blank" class="msg-btn thanks">🙏 Thanks</a>`:''}
+          ${mailLink?`<a href="${mailLink}" class="msg-btn mail">✉ Email</a>`:''}
+          ${!m.read?`<button class="msg-btn read" onclick="markRead('${d.id}')">✓ Read</button>`:''}
+          <button class="msg-btn del" onclick="deleteMsg('${d.id}')">🗑</button>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -569,6 +572,11 @@ function renderDashMessages(docs){
   }).join('');
 }
 
+function toggleMsg(detailId, msgId){
+  const el=document.getElementById(detailId);
+  if(el.style.display==='none'){el.style.display='block';markRead(msgId);}
+  else el.style.display='none';
+}
 async function markRead(id){
   await db.collection('messages').doc(id).update({read:true});
   showToast('Marked as read ✓');
