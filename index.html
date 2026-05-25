@@ -18,7 +18,13 @@
 <style>
 /* THEME VARIABLES */
 [data-theme="dark"]{--cyan:#00f5ff;--pink:#ff006e;--purple:#bf00ff;--green:#00ff88;--yellow:#fff200;--bg:#020408;--bg2:#060d12;--surface:#0a1520;--border:#0d2535;--text:#8ab4cc;--white:#e0f4ff;}
-[data-theme="light"]{--cyan:#0099bb;--pink:#cc0055;--purple:#8800cc;--green:#00aa55;--yellow:#ccaa00;--bg:#f0f8ff;--bg2:#e0f0ff;--surface:#ffffff;--border:#c0d8e8;--text:#445566;--white:#112233;}
+[data-theme="light"]{--cyan:#0077aa;--pink:#cc0055;--purple:#7700bb;--green:#007733;--yellow:#aa8800;--bg:#f5f9ff;--bg2:#eaf3ff;--surface:#ffffff;--border:#c0d8ee;--text:#334455;--white:#111827;}
+[data-theme="light"] body{color:#334455;}
+[data-theme="light"] .hero-name,[data-theme="light"] .sec-title,[data-theme="light"] .srv-title,[data-theme="light"] .about-txt h2,[data-theme="light"] .price-name,[data-theme="light"] .blog-title,[data-theme="light"] .faq-q,[data-theme="light"] .t-name,[data-theme="light"] .p-title{color:#111827!important;}
+[data-theme="light"] .hero-desc,[data-theme="light"] .srv-desc,[data-theme="light"] .a-bio,[data-theme="light"] .t-text,[data-theme="light"] .blog-desc,[data-theme="light"] .faq-a,[data-theme="light"] .price-list li{color:#445566!important;}
+[data-theme="light"] nav{background:linear-gradient(to bottom,rgba(245,249,255,.98),transparent);}
+[data-theme="light"] body::before{background:none;}
+[data-theme="light"] .f-copy,[data-theme="light"] .stat-l,[data-theme="light"] .sk-nm{color:#334455!important;}
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -512,15 +518,14 @@ function toggleTheme(){
   document.getElementById('themeToggle').textContent=isDark?'🌙':'☀️';
 }
 
-// PAGE TRANSITION
+// PAGE TRANSITION - only for internal hash links
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     const href=a.getAttribute('href');
-    if(href==='#') return;
+    if(!href||href==='#'||href==='#!'||!document.querySelector(href)) return;
     e.preventDefault();
-    const pt=document.getElementById('pageTransition');
-    pt.className='in';
-    setTimeout(()=>{document.querySelector(href)?.scrollIntoView({behavior:'instant'});pt.className='out';setTimeout(()=>pt.className='',400);},400);
+    const target=document.querySelector(href);
+    if(target) target.scrollIntoView({behavior:'smooth'});
   });
 });
 
@@ -599,7 +604,19 @@ document.getElementById('submitBtn').addEventListener('click',async function(){
   const phone=document.getElementById('fPhone').value.trim();
   const project=document.getElementById('fProject').value;
   const message=document.getElementById('fMessage').value.trim();
-  if(!name||!email||!message){this.textContent='⚠ Fill all fields!';this.style.borderColor='var(--pink)';this.style.color='var(--pink)';setTimeout(()=>{this.textContent='Send Message →';this.style.borderColor='var(--cyan)';this.style.color='var(--cyan)';},2500);return;}
+
+  // VALIDATION
+  const emailOK=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const phoneOK=!phone||/^[+]?[\d\s\-]{10,15}$/.test(phone);
+
+  const showErr=(msg)=>{this.textContent='⚠ '+msg;this.style.borderColor='var(--pink)';this.style.color='var(--pink)';setTimeout(()=>{this.textContent='Send Message →';this.style.borderColor='var(--cyan)';this.style.color='var(--cyan)';},3000);};
+
+  if(!name){showErr('Enter your name!');return;}
+  if(!email||!emailOK){showErr('Enter valid email!');return;}
+  if(!phoneOK){showErr('Enter valid phone!');return;}
+  if(!message||message.length<10){showErr('Message too short!');return;}
+  if(/[<>{}]/.test(name+message)){showErr('Invalid characters!');return;}
+
   this.textContent='Sending...';this.disabled=true;
   try{
     await db.collection('messages').add({name,email,phone:phone||'Not provided',subject:project||'General Inquiry',message,read:false,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
