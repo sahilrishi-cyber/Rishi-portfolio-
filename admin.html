@@ -12,8 +12,6 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;}
 body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.02) 2px,rgba(0,0,0,0.02) 4px);pointer-events:none;z-index:9999;}
-
-/* LOGIN */
 #loginScreen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000;transition:opacity .6s;}
 #loginScreen.hide{opacity:0;pointer-events:none;}
 .login-box{background:var(--surface);border:1px solid rgba(0,245,255,.15);padding:50px 44px;width:360px;position:relative;}
@@ -35,15 +33,13 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .l-btn:hover::before{transform:scaleX(1);}
 .l-err{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--pink);text-transform:uppercase;margin-top:12px;opacity:0;transition:opacity .3s;text-align:center;}
 .l-err.show{opacity:1;}
-
-/* PANEL */
 #adminPanel{display:none;min-height:100vh;}
 #adminPanel.visible{display:flex;}
 .sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;overflow-y:auto;}
 .s-logo{padding:20px;border-bottom:1px solid var(--border);}
-.s-logo-txt{font-family:'Orbitron',monospace;font-size:14px;font-weight:900;color:var(--cyan);letter-spacing:3px;text-shadow:0 0 15px var(--cyan);}
+.s-logo-txt{font-family:'Orbitron',monospace;font-size:14px;font-weight:900;color:var(--cyan);letter-spacing:3px;}
 .s-logo-txt span{color:var(--pink);}
-.s-badge{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--text);margin-top:4px;}
+.s-badge{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--text);margin-top:3px;}
 .s-nav{flex:1;padding:16px 0;}
 .s-group{margin-bottom:20px;}
 .s-group-lbl{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:3px;color:rgba(138,180,204,.4);text-transform:uppercase;padding:0 16px;margin-bottom:6px;}
@@ -51,22 +47,18 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .s-item:hover{background:rgba(0,245,255,.04);color:var(--white);border-left-color:rgba(0,245,255,.3);}
 .s-item.active{background:rgba(0,245,255,.07);color:var(--cyan);border-left-color:var(--cyan);}
 .s-bottom{padding:16px;border-top:1px solid var(--border);}
-.s-av{width:32px;height:32px;background:linear-gradient(135deg,var(--cyan),var(--pink));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:10px;font-weight:900;color:#000;flex-shrink:0;}
-.s-uname{font-size:12px;font-weight:700;color:var(--white);}
-.s-urole{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--cyan);}
-.s-logout{margin-top:10px;width:100%;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;padding:8px;background:transparent;border:1px solid rgba(255,0,110,.3);color:var(--pink);text-transform:uppercase;cursor:pointer;transition:all .3s;}
+.s-logout{width:100%;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;padding:9px;background:transparent;border:1px solid rgba(255,0,110,.3);color:var(--pink);text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:10px;}
 .s-logout:hover{background:rgba(255,0,110,.08);}
 .main{margin-left:220px;flex:1;min-height:100vh;}
 .topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
-.tb-title{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;}
+.tb-title{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;}
 .tb-right{display:flex;align-items:center;gap:12px;}
-.tb-time{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text);}
-.tb-live{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--green);padding:4px 10px;border:1px solid rgba(0,255,136,.3);text-transform:uppercase;}
+.tb-time{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text);}
+.tb-preview{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;padding:7px 14px;border:1px solid rgba(0,245,255,.3);color:var(--cyan);text-decoration:none;text-transform:uppercase;transition:all .3s;}
+.tb-preview:hover{background:rgba(0,245,255,.07);}
 .content{padding:24px 28px;}
 .page{display:none;}
 .page.active{display:block;}
-
-/* CARDS */
 .cards-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
 .stat-card{background:var(--surface);border:1px solid var(--border);padding:18px;position:relative;overflow:hidden;transition:all .3s;}
 .stat-card:hover{border-color:rgba(0,245,255,.2);transform:translateY(-2px);}
@@ -76,20 +68,14 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .stat-card:nth-child(3)::before{background:var(--green);}
 .stat-card:nth-child(4)::before{background:var(--yellow);}
 .sc-icon{font-size:22px;margin-bottom:8px;}
-.sc-val{font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--white);line-height:1;margin-bottom:4px;}
+.sc-val{font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--white);line-height:1;margin-bottom:3px;}
 .sc-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text);text-transform:uppercase;}
-
-/* SECTION HDR */
 .s-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
 .s-hdr-title{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;}
 .s-hdr-btn{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);padding:6px 12px;border:1px solid rgba(0,245,255,.2);cursor:pointer;background:transparent;text-transform:uppercase;transition:all .3s;}
 .s-hdr-btn:hover{background:rgba(0,245,255,.07);border-color:var(--cyan);}
 .s-hdr-btn.pink{color:var(--pink);border-color:rgba(255,0,110,.2);}
-.s-hdr-btn.pink:hover{background:rgba(255,0,110,.07);}
-.s-hdr-btn.green{color:var(--green);border-color:rgba(0,255,136,.2);}
-.s-hdr-btn.green:hover{background:rgba(0,255,136,.07);}
-
-/* TABLE */
+.s-hdr-btn.pink:hover{background:rgba(255,0,110,.07);border-color:var(--pink);}
 .tbl-wrap{background:var(--surface);border:1px solid var(--border);overflow:hidden;margin-bottom:20px;overflow-x:auto;}
 table{width:100%;border-collapse:collapse;min-width:400px;}
 thead{background:rgba(0,0,0,.3);}
@@ -97,20 +83,18 @@ th{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;colo
 td{padding:11px 14px;font-size:12px;border-bottom:1px solid rgba(13,37,53,.6);vertical-align:middle;}
 tr:last-child td{border-bottom:none;}
 tr:hover td{background:rgba(0,245,255,.02);}
-.badge{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:1px;padding:2px 7px;text-transform:uppercase;}
+.badge{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:1px;padding:3px 7px;text-transform:uppercase;}
 .badge.done{background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.3);color:var(--green);}
 .badge.prog{background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.3);color:var(--cyan);}
 .badge.pend{background:rgba(255,0,110,.1);border:1px solid rgba(255,0,110,.3);color:var(--pink);}
-.tbl-action{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:1px;padding:3px 7px;border:1px solid;background:transparent;cursor:pointer;text-transform:uppercase;transition:all .3s;margin-right:3px;}
+.tbl-action{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:1px;padding:4px 8px;border:1px solid;background:transparent;cursor:pointer;text-transform:uppercase;transition:all .3s;margin-right:4px;}
 .tbl-action.edit{border-color:rgba(0,245,255,.3);color:var(--cyan);}
 .tbl-action.edit:hover{background:rgba(0,245,255,.07);}
 .tbl-action.del{border-color:rgba(255,0,110,.3);color:var(--pink);}
 .tbl-action.del:hover{background:rgba(255,0,110,.07);}
-
-/* MODAL */
-.modal-bg{position:fixed;inset:0;background:rgba(2,4,8,.92);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px;}
+.modal-bg{position:fixed;inset:0;background:rgba(2,4,8,.92);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;}
 .modal-bg.hide{display:none;}
-.modal{background:var(--surface);border:1px solid rgba(0,245,255,.2);padding:28px;width:100%;max-width:520px;position:relative;max-height:92vh;overflow-y:auto;}
+.modal{background:var(--surface);border:1px solid rgba(0,245,255,.2);padding:28px;width:100%;max-width:520px;position:relative;max-height:90vh;overflow-y:auto;}
 .modal::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--pink));}
 .modal-title{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
 .fg{margin-bottom:14px;}
@@ -119,73 +103,59 @@ tr:hover td{background:rgba(0,245,255,.02);}
 .fg textarea{resize:vertical;min-height:80px;}
 .fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--cyan);}
 .fg select option{background:var(--bg2);}
-.fg input[type="range"]{padding:6px 0;accent-color:var(--cyan);}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .modal-btns{display:flex;gap:10px;margin-top:18px;}
 .m-btn{flex:1;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:2px;padding:11px;border:2px solid;background:transparent;cursor:pointer;text-transform:uppercase;transition:all .3s;}
 .m-btn.save{border-color:var(--cyan);color:var(--cyan);}
 .m-btn.save:hover{background:var(--cyan);color:#000;}
 .m-btn.cancel{border-color:rgba(255,255,255,.15);color:var(--text);}
-
-/* MESSAGES */
-.msg-list{background:var(--surface);border:1px solid var(--border);}
-.msg-item{padding:16px 18px;border-bottom:1px solid var(--border);transition:background .2s;}
+.m-btn.cancel:hover{border-color:var(--text);}
+.cms-section{background:var(--surface);border:1px solid var(--border);padding:22px;margin-bottom:16px;}
+.cms-title{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.cms-save{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;padding:9px 18px;border:1px solid var(--cyan);background:transparent;color:var(--cyan);cursor:pointer;text-transform:uppercase;transition:all .3s;margin-top:14px;}
+.cms-save:hover{background:rgba(0,245,255,.08);}
+.skill-editor{display:flex;flex-direction:column;gap:10px;}
+.skill-row-edit{display:grid;grid-template-columns:1fr 80px auto;gap:8px;align-items:center;}
+.skill-row-edit input{background:rgba(0,245,255,.02);border:1px solid var(--border);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:13px;padding:8px 10px;outline:none;transition:border-color .3s;}
+.skill-row-edit input:focus{border-color:var(--cyan);}
+.skill-del{font-family:'Share Tech Mono',monospace;font-size:8px;padding:6px 10px;border:1px solid rgba(255,0,110,.3);color:var(--pink);background:transparent;cursor:pointer;}
+.add-skill-btn{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;padding:8px 14px;border:1px solid rgba(0,245,255,.2);color:var(--cyan);background:transparent;cursor:pointer;text-transform:uppercase;transition:all .3s;margin-top:8px;}
+.add-skill-btn:hover{background:rgba(0,245,255,.07);}
+.msg-item{padding:16px;border-bottom:1px solid var(--border);transition:background .2s;}
 .msg-item:last-child{border-bottom:none;}
 .msg-item:hover{background:rgba(0,245,255,.02);}
 .msg-item.unread{border-left:3px solid var(--cyan);}
 .msg-top-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;}
-.msg-av{width:36px;height:36px;background:linear-gradient(135deg,var(--cyan),var(--purple));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:10px;font-weight:900;color:#000;flex-shrink:0;}
+.msg-av{width:34px;height:34px;background:linear-gradient(135deg,var(--cyan),var(--purple));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:10px;font-weight:900;color:#000;flex-shrink:0;}
 .msg-info{flex:1;}
 .msg-name{font-size:13px;font-weight:700;color:var(--white);}
-.msg-time{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text);letter-spacing:1px;}
+.msg-time{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text);}
 .msg-detail{display:none;margin-top:10px;}
-.msg-subj{font-size:11px;color:var(--cyan);font-family:'Share Tech Mono',monospace;letter-spacing:1px;margin-bottom:6px;}
-.msg-body{font-size:12px;color:var(--text);line-height:1.6;margin-bottom:8px;padding:8px;background:rgba(0,245,255,.02);border-left:2px solid rgba(0,245,255,.2);}
+.msg-detail.show{display:block;}
+.msg-body{font-size:12px;color:var(--text);line-height:1.6;margin-bottom:10px;padding:10px;background:rgba(0,245,255,.02);border-left:2px solid rgba(0,245,255,.2);}
 .msg-contacts{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
 .msg-chip{font-family:'Share Tech Mono',monospace;font-size:8px;padding:4px 8px;border:1px solid var(--border);color:var(--text);}
 .msg-actions{display:flex;gap:6px;flex-wrap:wrap;}
 .msg-btn{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;padding:6px 12px;border:1px solid;background:transparent;cursor:pointer;text-transform:uppercase;transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;gap:4px;}
-.msg-btn.wa{border-color:rgba(0,255,136,.4);color:var(--green);}
+.msg-btn.wa{border-color:rgba(0,255,136,.5);color:var(--green);}
 .msg-btn.wa:hover{background:rgba(0,255,136,.1);}
-.msg-btn.thanks{border-color:rgba(0,245,255,.4);color:var(--cyan);}
+.msg-btn.thanks{border-color:rgba(0,245,255,.5);color:var(--cyan);}
 .msg-btn.thanks:hover{background:rgba(0,245,255,.1);}
-.msg-btn.mail{border-color:rgba(191,0,255,.4);color:var(--purple);}
+.msg-btn.mail{border-color:rgba(191,0,255,.5);color:var(--purple);}
 .msg-btn.mail:hover{background:rgba(191,0,255,.1);}
 .msg-btn.read{border-color:rgba(138,180,204,.3);color:var(--text);}
 .msg-btn.del{border-color:rgba(255,0,110,.3);color:var(--pink);}
 .msg-btn.del:hover{background:rgba(255,0,110,.08);}
-.unread-dot{display:inline-block;width:6px;height:6px;background:var(--cyan);border-radius:50%;box-shadow:0 0 6px var(--cyan);margin-left:5px;vertical-align:middle;}
-.msg-empty{padding:40px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text);}
-
-/* CMS GRID */
-.cms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:20px;}
-.cms-card{background:var(--surface);border:1px solid var(--border);padding:20px;transition:all .3s;cursor:pointer;}
-.cms-card:hover{border-color:rgba(0,245,255,.3);transform:translateY(-2px);}
-.cms-card-icon{font-size:28px;margin-bottom:10px;}
-.cms-card-title{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--white);letter-spacing:1px;margin-bottom:4px;}
-.cms-card-desc{font-size:12px;color:var(--text);}
-.cms-card-count{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--cyan);margin-top:8px;}
-
-/* SETTINGS */
-.set-section{background:var(--surface);border:1px solid var(--border);padding:20px;margin-bottom:14px;}
-.set-title{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--white);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);}
-.set-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(13,37,53,.5);flex-wrap:wrap;gap:8px;}
-.set-row:last-child{border-bottom:none;}
-.set-key{font-size:13px;color:var(--white);font-weight:600;}
-.set-desc{font-size:11px;color:var(--text);margin-top:2px;}
-.set-inp{background:rgba(0,245,255,.02);border:1px solid var(--border);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:13px;padding:7px 10px;outline:none;width:200px;transition:border-color .3s;}
-.set-inp:focus{border-color:var(--cyan);}
-.set-btn{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;padding:8px 16px;border:1px solid var(--cyan);background:transparent;color:var(--cyan);cursor:pointer;text-transform:uppercase;transition:all .3s;}
-.set-btn:hover{background:rgba(0,245,255,.08);}
-
-.loading{text-align:center;padding:32px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--cyan);}
+.unread-dot{display:inline-block;width:7px;height:7px;background:var(--cyan);border-radius:50%;box-shadow:0 0 6px var(--cyan);margin-left:6px;vertical-align:middle;}
+.msg-empty{padding:40px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text);}
+.loading{text-align:center;padding:30px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan);}
 .toast{position:fixed;bottom:24px;right:24px;background:var(--surface);border:1px solid var(--green);border-left:3px solid var(--green);padding:12px 18px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--green);text-transform:uppercase;z-index:9000;transform:translateY(80px);opacity:0;transition:all .4s;max-width:280px;}
 .toast.show{transform:translateY(0);opacity:1;}
 .toast.error{border-color:var(--pink);border-left-color:var(--pink);color:var(--pink);}
-::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:rgba(0,245,255,.2);}
-@media(max-width:768px){.sidebar{width:180px;}.main{margin-left:180px;}.cards-row{grid-template-columns:1fr 1fr;}.content{padding:14px;}.cms-grid{grid-template-columns:1fr;}}
+@media(max-width:768px){.sidebar{width:180px;}.main{margin-left:180px;}.cards-row{grid-template-columns:1fr 1fr;}.content{padding:14px;}.topbar{padding:12px 16px;}}
 </style>
 </head>
 <body>
@@ -206,33 +176,34 @@ tr:hover td{background:rgba(0,245,255,.02);}
   <div class="sidebar">
     <div class="s-logo">
       <div class="s-logo-txt">RISHI<span>.</span>K</div>
-      <div class="s-badge">// CMS v4.0 — Firebase Live</div>
+      <div class="s-badge">// CMS v4.0 — Firebase</div>
     </div>
     <div class="s-nav">
       <div class="s-group">
-        <div class="s-group-lbl">Overview</div>
-        <div class="s-item active" data-page="dashboard">⬡ Dashboard</div>
-        <div class="s-item" data-page="messages">✉ Messages <span id="unreadBadge" style="display:none;margin-left:auto;background:var(--pink);color:#000;font-family:'Share Tech Mono',monospace;font-size:7px;padding:2px 5px;">0</span></div>
+        <div class="s-group-lbl">Dashboard</div>
+        <div class="s-item active" data-page="dashboard">⬡ Overview</div>
       </div>
       <div class="s-group">
-        <div class="s-group-lbl">Website CMS</div>
+        <div class="s-group-lbl">Site Content</div>
+        <div class="s-item" data-page="hero">🏠 Hero Section</div>
         <div class="s-item" data-page="portfolio">🎬 Portfolio</div>
         <div class="s-item" data-page="pricing">💰 Pricing</div>
-        <div class="s-item" data-page="blog">📝 Blog</div>
+        <div class="s-item" data-page="about">👤 About Me</div>
         <div class="s-item" data-page="testimonials">⭐ Testimonials</div>
-        <div class="s-item" data-page="about">👤 About & Skills</div>
+        <div class="s-item" data-page="blog">📝 Blog Posts</div>
         <div class="s-item" data-page="stats">📊 Stats</div>
       </div>
       <div class="s-group">
-        <div class="s-group-lbl">System</div>
-        <div class="s-item" data-page="clients">🤝 Clients</div>
+        <div class="s-group-lbl">Business</div>
+        <div class="s-item" data-page="messages">✉ Messages <span id="unreadBadge" style="display:none;margin-left:auto;background:var(--pink);color:#000;font-family:'Share Tech Mono',monospace;font-size:7px;padding:2px 5px;">0</span></div>
+        <div class="s-item" data-page="clients">👥 Clients</div>
         <div class="s-item" data-page="settings">⚙ Settings</div>
       </div>
     </div>
     <div class="s-bottom">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
-        <div class="s-av">RK</div>
-        <div><div class="s-uname">Rishi Kushwaha</div><div class="s-urole">Super Admin</div></div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;background:linear-gradient(135deg,var(--cyan),var(--pink));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:10px;font-weight:900;color:#000;">RK</div>
+        <div><div style="font-size:12px;font-weight:700;color:var(--white);">Rishi Kushwaha</div><div style="font-family:'Share Tech Mono',monospace;font-size:7px;color:var(--cyan);">SUPER ADMIN</div></div>
       </div>
       <button class="s-logout" id="logoutBtn">⏻ Logout</button>
     </div>
@@ -240,10 +211,10 @@ tr:hover td{background:rgba(0,245,255,.02);}
 
   <div class="main">
     <div class="topbar">
-      <div class="tb-title" id="pageTitle">Dashboard</div>
+      <div class="tb-title" id="pageTitle">Overview</div>
       <div class="tb-right">
-        <div class="tb-live">🟢 Live CMS</div>
         <div class="tb-time" id="clock"></div>
+        <a href="https://sahilrishi-cyber.github.io/Rishi-portfolio-" target="_blank" class="tb-preview">🔗 View Site</a>
       </div>
     </div>
     <div class="content">
@@ -253,8 +224,565 @@ tr:hover td{background:rgba(0,245,255,.02);}
         <div class="cards-row">
           <div class="stat-card"><div class="sc-icon">🎬</div><div class="sc-val" id="dProjCount">-</div><div class="sc-lbl">Portfolio Items</div></div>
           <div class="stat-card"><div class="sc-icon">✉</div><div class="sc-val" id="dMsgCount">-</div><div class="sc-lbl">Messages</div></div>
+          <div class="stat-card"><div class="sc-icon">👥</div><div class="sc-val" id="dClientCount">-</div><div class="sc-lbl">Clients</div></div>
           <div class="stat-card"><div class="sc-icon">📝</div><div class="sc-val" id="dBlogCount">-</div><div class="sc-lbl">Blog Posts</div></div>
-          <div class="stat-card"><div class="sc-icon">⭐</div><div class="sc-val" id="dTestCount">-</div><div class="sc-lbl">Testimonials</div></div>
         </div>
-        <div class="s-hdr"><div class="s-hdr-title">Quick CMS Access</div></div>
-        <div class=
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div><div class="s-hdr"><div class="s-hdr-title">Quick Actions</div></div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <button class="s-hdr-btn" style="text-align:left;padding:12px 16px;" onclick="switchPage('portfolio')">🎬 Add Portfolio Item</button>
+              <button class="s-hdr-btn" style="text-align:left;padding:12px 16px;" onclick="switchPage('blog')">📝 Write Blog Post</button>
+              <button class="s-hdr-btn" style="text-align:left;padding:12px 16px;" onclick="switchPage('pricing')">💰 Update Pricing</button>
+              <button class="s-hdr-btn" style="text-align:left;padding:12px 16px;" onclick="switchPage('messages')">✉ Check Messages</button>
+            </div>
+          </div>
+          <div><div class="s-hdr"><div class="s-hdr-title">Recent Messages</div></div>
+            <div class="tbl-wrap"><table><thead><tr><th>Name</th><th>Subject</th><th>Reply</th></tr></thead><tbody id="dashMsgs"><tr><td colspan="3" class="loading">Loading...</td></tr></tbody></table></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO SECTION -->
+      <div class="page" id="page-hero">
+        <div class="cms-section">
+          <div class="cms-title">🏠 Hero Section</div>
+          <div class="fg"><label>Main Title (Line 1)</label><input id="heroTitle1" placeholder="RISHI"></div>
+          <div class="fg"><label>Main Title (Line 2)</label><input id="heroTitle2" placeholder="KUSHWAHA"></div>
+          <div class="fg"><label>Subtitle Tagline</label><input id="heroSub" placeholder="Frames That Hit Different"></div>
+          <div class="fg"><label>Description</label><textarea id="heroDesc" placeholder="I don't just edit videos..."></textarea></div>
+          <button class="cms-save" onclick="saveHero()">💾 Save Hero Section</button>
+        </div>
+      </div>
+
+      <!-- PORTFOLIO -->
+      <div class="page" id="page-portfolio">
+        <div class="s-hdr"><div class="s-hdr-title">🎬 Portfolio Manager</div><button class="s-hdr-btn" onclick="openModal('portfolio')">+ Add Video</button></div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Title</th><th>Type</th><th>YouTube ID</th><th>Actions</th></tr></thead>
+            <tbody id="portfolioTable"><tr><td colspan="4" class="loading">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PRICING -->
+      <div class="page" id="page-pricing">
+        <div class="s-hdr"><div class="s-hdr-title">💰 Pricing Packages</div><button class="s-hdr-btn" onclick="openModal('pricing')">+ Add Package</button></div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Package</th><th>Price</th><th>Period</th><th>Popular</th><th>Actions</th></tr></thead>
+            <tbody id="pricingTable"><tr><td colspan="5" class="loading">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="page" id="page-about">
+        <div class="cms-section">
+          <div class="cms-title">👤 About Me</div>
+          <div class="fg"><label>Your Name</label><input id="aboutName" placeholder="Rishi Kushwaha"></div>
+          <div class="fg"><label>Bio (supports HTML bold with &lt;strong&gt;)</label><textarea id="aboutBio" style="min-height:120px;" placeholder="I'm Rishi Kushwaha..."></textarea></div>
+          <button class="cms-save" onclick="saveAbout()">💾 Save About</button>
+        </div>
+        <div class="cms-section">
+          <div class="cms-title">🎯 Skills</div>
+          <div class="skill-editor" id="skillEditor"></div>
+          <button class="add-skill-btn" onclick="addSkillRow()">+ Add Skill</button>
+          <button class="cms-save" onclick="saveSkills()">💾 Save Skills</button>
+        </div>
+      </div>
+
+      <!-- TESTIMONIALS -->
+      <div class="page" id="page-testimonials">
+        <div class="s-hdr"><div class="s-hdr-title">⭐ Testimonials</div><button class="s-hdr-btn" onclick="openModal('testimonial')">+ Add Review</button></div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Role</th><th>Rating</th><th>Review</th><th>Actions</th></tr></thead>
+            <tbody id="testimonialsTable"><tr><td colspan="5" class="loading">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- BLOG -->
+      <div class="page" id="page-blog">
+        <div class="s-hdr"><div class="s-hdr-title">📝 Blog Posts</div><button class="s-hdr-btn" onclick="openModal('blog')">+ New Post</button></div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="blogTable"><tr><td colspan="4" class="loading">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="page" id="page-stats">
+        <div class="cms-section">
+          <div class="cms-title">📊 Site Statistics</div>
+          <div class="form-row">
+            <div class="fg"><label>Projects Done</label><input id="statProjects" type="number" placeholder="150"></div>
+            <div class="fg"><label>Happy Clients</label><input id="statClients" type="number" placeholder="80"></div>
+          </div>
+          <div class="form-row">
+            <div class="fg"><label>Views Generated (M)</label><input id="statViews" type="number" placeholder="50"></div>
+            <div class="fg"><label>Years Experience</label><input id="statYears" type="number" placeholder="3"></div>
+          </div>
+          <button class="cms-save" onclick="saveStats()">💾 Save Stats</button>
+        </div>
+      </div>
+
+      <!-- MESSAGES -->
+      <div class="page" id="page-messages">
+        <div class="s-hdr"><div class="s-hdr-title">📬 Inbox</div><button class="s-hdr-btn pink" onclick="clearAllMessages()">🗑 Clear All</button></div>
+        <div style="background:var(--surface);border:1px solid var(--border);" id="msgList"><div class="loading">Loading...</div></div>
+      </div>
+
+      <!-- CLIENTS -->
+      <div class="page" id="page-clients">
+        <div class="s-hdr"><div class="s-hdr-title">👥 Client Directory</div><button class="s-hdr-btn" onclick="openModal('client')">+ Add Client</button></div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Phone</th><th>Type</th><th>Value</th><th>Actions</th></tr></thead>
+            <tbody id="clientTable"><tr><td colspan="5" class="loading">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="page" id="page-settings">
+        <div class="cms-section">
+          <div class="cms-title">⚙ Profile & Contact</div>
+          <div class="form-row">
+            <div class="fg"><label>Display Name</label><input id="sName" value="Rishi Kushwaha"></div>
+            <div class="fg"><label>Email</label><input id="sEmail" value="sahil39379@gmail.com"></div>
+          </div>
+          <div class="form-row">
+            <div class="fg"><label>WhatsApp (with country code)</label><input id="sWA" value="917800498828"></div>
+            <div class="fg"><label>Instagram</label><input id="sIG" value="@mr.sahil__kumar0"></div>
+          </div>
+          <button class="cms-save" onclick="saveSettings()">💾 Save Settings</button>
+        </div>
+        <div class="cms-section">
+          <div class="cms-title">🙏 WhatsApp Thanks Template</div>
+          <textarea id="thanksTemplate" style="width:100%;background:rgba(0,245,255,.02);border:1px solid var(--border);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:14px;padding:12px;outline:none;min-height:100px;">Hi {name}! 👋 Thanks for your interest in my video editing services! I'm Rishi Kushwaha. I've received your inquiry about "{project}" and will get back to you soon! 🎬✨</textarea>
+          <button class="cms-save" onclick="saveSettings()">💾 Save Template</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-bg hide" id="portfolioModal">
+  <div class="modal">
+    <div class="modal-title" id="portfolioModalTitle">Add Portfolio Item</div>
+    <div class="fg"><label>Title</label><input id="ptTitle" placeholder="Brand Reel — Fashion"></div>
+    <div class="form-row">
+      <div class="fg"><label>Type</label><select id="ptType"><option>Reels</option><option>YouTube</option><option>Cinematic</option><option>Motion</option><option>Brand</option><option>Event</option></select></div>
+      <div class="fg"><label>Tag Color</label><select id="ptColor"><option value="pink">Pink</option><option value="cyan">Cyan</option><option value="green">Green</option><option value="purple">Purple</option><option value="yellow">Yellow</option></select></div>
+    </div>
+    <div class="fg"><label>YouTube Video ID (e.g. dQw4w9WgXcQ)</label><input id="ptYTID" placeholder="Paste YouTube video ID here"></div>
+    <div class="fg"><label>Description</label><input id="ptDesc" placeholder="Short description"></div>
+    <div class="fg"><label>Label (shown on thumbnail)</label><input id="ptLabel" placeholder="Brand Reel — Fashion Client"></div>
+    <input type="hidden" id="ptDocId">
+    <div class="modal-btns">
+      <button class="m-btn cancel" onclick="closeModal('portfolioModal')">Cancel</button>
+      <button class="m-btn save" onclick="savePortfolio()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg hide" id="pricingModal">
+  <div class="modal">
+    <div class="modal-title" id="pricingModalTitle">Add Package</div>
+    <div class="form-row">
+      <div class="fg"><label>Package Name</label><input id="pkName" placeholder="PRO"></div>
+      <div class="fg"><label>Price</label><input id="pkPrice" placeholder="7,999" type="text"></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Period</label><input id="pkPeriod" placeholder="/video or /month"></div>
+      <div class="fg"><label>Most Popular?</label><select id="pkPopular"><option value="false">No</option><option value="true">Yes</option></select></div>
+    </div>
+    <div class="fg"><label>Features (one per line)</label><textarea id="pkFeatures" placeholder="YouTube Long Form&#10;Pro Color Grading&#10;Motion Graphics&#10;Unlimited Revisions"></textarea></div>
+    <input type="hidden" id="pkDocId">
+    <div class="modal-btns">
+      <button class="m-btn cancel" onclick="closeModal('pricingModal')">Cancel</button>
+      <button class="m-btn save" onclick="savePricing()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg hide" id="testimonialModal">
+  <div class="modal">
+    <div class="modal-title" id="testimonialModalTitle">Add Testimonial</div>
+    <div class="form-row">
+      <div class="fg"><label>Client Name</label><input id="tmName" placeholder="Arjun Kapoor"></div>
+      <div class="fg"><label>Role</label><input id="tmRole" placeholder="Fashion Influencer"></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Initials (2 letters)</label><input id="tmInitials" placeholder="AK" maxlength="2"></div>
+      <div class="fg"><label>Rating (1-5)</label><select id="tmRating"><option>5</option><option>4</option><option>3</option></select></div>
+    </div>
+    <div class="fg"><label>Review Text</label><textarea id="tmText" placeholder="My reel went from 2K to 200K views..."></textarea></div>
+    <input type="hidden" id="tmDocId">
+    <div class="modal-btns">
+      <button class="m-btn cancel" onclick="closeModal('testimonialModal')">Cancel</button>
+      <button class="m-btn save" onclick="saveTestimonial()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg hide" id="blogModal">
+  <div class="modal">
+    <div class="modal-title" id="blogModalTitle">New Blog Post</div>
+    <div class="fg"><label>Title</label><input id="blTitle" placeholder="5 Cuts That Make Your Reel Go Viral"></div>
+    <div class="form-row">
+      <div class="fg"><label>Category</label><select id="blCat"><option>Editing</option><option>Color</option><option>Motion</option><option>Business</option><option>Tips</option></select></div>
+      <div class="fg"><label>Emoji Icon</label><input id="blEmoji" placeholder="🎬" maxlength="2"></div>
+    </div>
+    <div class="fg"><label>Short Description</label><textarea id="blDesc" placeholder="The J-cut, L-cut, match cut..."></textarea></div>
+    <div class="fg"><label>Full Content</label><textarea id="blContent" style="min-height:150px;" placeholder="Write your full blog post here..."></textarea></div>
+    <input type="hidden" id="blDocId">
+    <div class="modal-btns">
+      <button class="m-btn cancel" onclick="closeModal('blogModal')">Cancel</button>
+      <button class="m-btn save" onclick="saveBlog()">Publish</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg hide" id="clientModal">
+  <div class="modal">
+    <div class="modal-title" id="clientModalTitle">Add Client</div>
+    <div class="form-row">
+      <div class="fg"><label>Name</label><input id="cName" placeholder="Arjun Kapoor"></div>
+      <div class="fg"><label>Phone</label><input id="cPhone" placeholder="+91 98765 43210"></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Email</label><input id="cEmail" placeholder="client@email.com"></div>
+      <div class="fg"><label>Type</label><select id="cType"><option>Influencer</option><option>Brand Manager</option><option>Filmmaker</option><option>Agency</option><option>YouTuber</option><option>Studio</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Total Value (₹)</label><input id="cValue" type="number" placeholder="50000"></div>
+      <div class="fg"><label>Projects Count</label><input id="cProjects" type="number" placeholder="5"></div>
+    </div>
+    <input type="hidden" id="cDocId">
+    <div class="modal-btns">
+      <button class="m-btn cancel" onclick="closeModal('clientModal')">Cancel</button>
+      <button class="m-btn save" onclick="saveClient()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const firebaseConfig={apiKey:"AIzaSyA7IF1sm3ov4WRdLBgABZwe83_MtC4EK0k",authDomain:"rishi-portfolio-a3d07.firebaseapp.com",projectId:"rishi-portfolio-a3d07",storageBucket:"rishi-portfolio-a3d07.firebasestorage.app",messagingSenderId:"504667511628",appId:"1:504667511628:web:0855f21475d082ee81cde9"};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
+const PASS='@Sahilkumar7800';
+let myWA='917800498828';
+let thanksMsg='Hi {name}! Thanks for your interest! I\'m Rishi Kushwaha. I\'ve received your inquiry about "{project}" and will get back to you soon! 🎬';
+
+// LOGIN
+document.getElementById('loginBtn').addEventListener('click',tryLogin);
+document.getElementById('pwInput').addEventListener('keydown',e=>{if(e.key==='Enter')tryLogin();});
+function tryLogin(){
+  if(document.getElementById('pwInput').value===PASS){
+    document.getElementById('loginScreen').classList.add('hide');
+    document.getElementById('adminPanel').style.display='flex';
+    initPanel();
+  } else {
+    document.getElementById('loginErr').classList.add('show');
+    document.getElementById('pwInput').value='';
+    setTimeout(()=>document.getElementById('loginErr').classList.remove('show'),2000);
+  }
+}
+document.getElementById('logoutBtn').addEventListener('click',()=>{document.getElementById('adminPanel').style.display='none';document.getElementById('loginScreen').classList.remove('hide');document.getElementById('pwInput').value='';});
+
+// NAV
+document.querySelectorAll('.s-item').forEach(item=>{item.addEventListener('click',()=>switchPage(item.dataset.page));});
+function switchPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.s-item').forEach(i=>i.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.querySelector(`[data-page="${name}"]`).classList.add('active');
+  document.getElementById('pageTitle').textContent=name.charAt(0).toUpperCase()+name.slice(1).replace('-',' ');
+}
+
+// CLOCK
+function updateClock(){const n=new Date();let h=n.getHours(),m=n.getMinutes(),s=n.getSeconds();const a=h>=12?'PM':'AM';h=h%12||12;document.getElementById('clock').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} ${a}`;}
+setInterval(updateClock,1000);updateClock();
+
+// TOAST
+function showToast(msg,err=false){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(err?' error':'');setTimeout(()=>t.classList.remove('show'),3000);}
+
+// MODAL
+function openModal(type){
+  const modals={portfolio:'portfolioModal',pricing:'pricingModal',testimonial:'testimonialModal',blog:'blogModal',client:'clientModal'};
+  const titles={portfolio:'Add Portfolio Item',pricing:'Add Package',testimonial:'Add Testimonial',blog:'New Blog Post',client:'Add Client'};
+  const ids={portfolio:['ptTitle','ptYTID','ptDesc','ptLabel','ptDocId'],pricing:['pkName','pkPrice','pkPeriod','pkFeatures','pkDocId'],testimonial:['tmName','tmRole','tmInitials','tmText','tmDocId'],blog:['blTitle','blEmoji','blDesc','blContent','blDocId'],client:['cName','cPhone','cEmail','cValue','cProjects','cDocId']};
+  document.getElementById(modals[type]).classList.remove('hide');
+  document.getElementById(type+'ModalTitle').textContent=titles[type];
+  ids[type].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+}
+function closeModal(id){document.getElementById(id).classList.add('hide');}
+
+// INIT
+function initPanel(){
+  loadDashboard();loadPortfolio();loadPricing();loadAbout();loadSkills();
+  loadTestimonials();loadBlog();loadStats();loadMessages();loadClients();loadSettings();
+}
+
+// DASHBOARD
+function loadDashboard(){
+  db.collection('portfolio').onSnapshot(s=>document.getElementById('dProjCount').textContent=s.size);
+  db.collection('messages').onSnapshot(s=>document.getElementById('dMsgCount').textContent=s.size);
+  db.collection('clients').onSnapshot(s=>document.getElementById('dClientCount').textContent=s.size);
+  db.collection('blog').onSnapshot(s=>document.getElementById('dBlogCount').textContent=s.size);
+  db.collection('messages').orderBy('createdAt','desc').limit(4).onSnapshot(snap=>{
+    const dash=document.getElementById('dashMsgs');
+    if(!snap.size){dash.innerHTML='<tr><td colspan="3" class="msg-empty">No messages</td></tr>';return;}
+    dash.innerHTML=snap.docs.map(d=>{
+      const m=d.data();const ph=(m.phone&&m.phone!='Not provided')?m.phone:'';
+      const waNum=ph.replace(/[^0-9]/g,'');
+      const waMsg=encodeURIComponent(`Hi ${m.name}! I'm Rishi Kushwaha (Video Editor). Thanks for reaching out!`);
+      return `<tr><td style="color:var(--white);font-weight:600">${m.name||''} ${m.read?'':'<span class="unread-dot"></span>'}</td><td>${m.subject||'—'}</td><td>${waNum?`<a href="https://wa.me/${waNum}?text=${waMsg}" target="_blank" class="tbl-action edit" style="text-decoration:none">💬</a>`:''}</td></tr>`;
+    }).join('');
+  });
+}
+
+// HERO
+async function loadHero(){
+  try{const doc=await db.collection('sitedata').doc('hero').get();if(doc.exists){const d=doc.data();document.getElementById('heroTitle1').value=d.title1||'RISHI';document.getElementById('heroTitle2').value=d.title2||'KUSHWAHA';document.getElementById('heroSub').value=d.subtitle||'Frames That Hit Different';document.getElementById('heroDesc').value=d.desc||'';}}catch(e){}
+}
+async function saveHero(){
+  try{await db.collection('sitedata').doc('hero').set({title1:document.getElementById('heroTitle1').value,title2:document.getElementById('heroTitle2').value,subtitle:document.getElementById('heroSub').value,desc:document.getElementById('heroDesc').value,updatedAt:firebase.firestore.FieldValue.serverTimestamp()});showToast('Hero saved! ✓');}
+  catch(e){showToast('Error!',true);}
+}
+
+// PORTFOLIO
+function loadPortfolio(){
+  db.collection('portfolio').orderBy('order','asc').onSnapshot(snap=>{
+    const tbl=document.getElementById('portfolioTable');
+    if(!snap.size){tbl.innerHTML='<tr><td colspan="4" class="msg-empty">No items — Add your first video!</td></tr>';return;}
+    tbl.innerHTML=snap.docs.map(d=>{const p=d.data();return `<tr><td style="color:var(--white);font-weight:600">${p.title||''}</td><td>${p.type||''}</td><td style="font-family:'Share Tech Mono',monospace;font-size:10px;">${p.ytId||'—'}</td><td><button class="tbl-action edit" onclick="editPortfolio('${d.id}')">Edit</button><button class="tbl-action del" onclick="delDoc('portfolio','${d.id}')">Del</button></td></tr>`;}).join('');
+  });
+}
+async function savePortfolio(){
+  const title=document.getElementById('ptTitle').value.trim();
+  if(!title){showToast('Title required!',true);return;}
+  const data={title,type:document.getElementById('ptType').value,color:document.getElementById('ptColor').value,ytId:document.getElementById('ptYTID').value.trim(),desc:document.getElementById('ptDesc').value.trim(),label:document.getElementById('ptLabel').value.trim(),order:Date.now(),updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
+  const docId=document.getElementById('ptDocId').value;
+  try{if(docId)await db.collection('portfolio').doc(docId).update(data);else await db.collection('portfolio').add(data);closeModal('portfolioModal');showToast(docId?'Updated!':'Video added! ✓');}
+  catch(e){showToast('Error!',true);}
+}
+async function editPortfolio(id){
+  const doc=await db.collection('portfolio').doc(id).get();const p=doc.data();
+  document.getElementById('portfolioModalTitle').textContent='Edit Portfolio Item';
+  document.getElementById('ptTitle').value=p.title||'';document.getElementById('ptType').value=p.type||'Reels';
+  document.getElementById('ptColor').value=p.color||'pink';document.getElementById('ptYTID').value=p.ytId||'';
+  document.getElementById('ptDesc').value=p.desc||'';document.getElementById('ptLabel').value=p.label||'';
+  document.getElementById('ptDocId').value=id;
+  document.getElementById('portfolioModal').classList.remove('hide');
+}
+
+// PRICING
+function loadPricing(){
+  db.collection('pricing').orderBy('order','asc').onSnapshot(snap=>{
+    const tbl=document.getElementById('pricingTable');
+    if(!snap.size){tbl.innerHTML='<tr><td colspan="5" class="msg-empty">No packages yet</td></tr>';return;}
+    tbl.innerHTML=snap.docs.map(d=>{const p=d.data();return `<tr><td style="color:var(--white);font-weight:600">${p.name||''}</td><td style="color:var(--green)">₹${p.price||''}</td><td>${p.period||''}</td><td>${p.popular=='true'||p.popular===true?'<span class="badge done">Yes</span>':'—'}</td><td><button class="tbl-action edit" onclick="editPricing('${d.id}')">Edit</button><button class="tbl-action del" onclick="delDoc('pricing','${d.id}')">Del</button></td></tr>`;}).join('');
+  });
+}
+async function savePricing(){
+  const name=document.getElementById('pkName').value.trim();
+  if(!name){showToast('Name required!',true);return;}
+  const features=document.getElementById('pkFeatures').value.split('\n').filter(f=>f.trim());
+  const data={name,price:document.getElementById('pkPrice').value,period:document.getElementById('pkPeriod').value,popular:document.getElementById('pkPopular').value,features,order:Date.now(),updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
+  const docId=document.getElementById('pkDocId').value;
+  try{if(docId)await db.collection('pricing').doc(docId).update(data);else await db.collection('pricing').add(data);closeModal('pricingModal');showToast(docId?'Updated!':'Package added! ✓');}
+  catch(e){showToast('Error!',true);}
+}
+async function editPricing(id){
+  const doc=await db.collection('pricing').doc(id).get();const p=doc.data();
+  document.getElementById('pricingModalTitle').textContent='Edit Package';
+  document.getElementById('pkName').value=p.name||'';document.getElementById('pkPrice').value=p.price||'';
+  document.getElementById('pkPeriod').value=p.period||'';document.getElementById('pkPopular').value=p.popular||'false';
+  document.getElementById('pkFeatures').value=(p.features||[]).join('\n');
+  document.getElementById('pkDocId').value=id;
+  document.getElementById('pricingModal').classList.remove('hide');
+}
+
+// ABOUT
+async function loadAbout(){
+  try{const doc=await db.collection('sitedata').doc('about').get();if(doc.exists){const d=doc.data();document.getElementById('aboutName').value=d.name||'Rishi Kushwaha';document.getElementById('aboutBio').value=d.bio||'';}}catch(e){}
+}
+async function saveAbout(){
+  try{await db.collection('sitedata').doc('about').set({name:document.getElementById('aboutName').value,bio:document.getElementById('aboutBio').value,updatedAt:firebase.firestore.FieldValue.serverTimestamp()});showToast('About saved! ✓');}
+  catch(e){showToast('Error!',true);}
+}
+
+// SKILLS
+let skills=[];
+async function loadSkills(){
+  try{const doc=await db.collection('sitedata').doc('skills').get();skills=doc.exists?(doc.data().list||defaultSkills()):defaultSkills();renderSkills();}catch(e){skills=defaultSkills();renderSkills();}
+}
+function defaultSkills(){return [{name:'Premiere Pro',pct:98},{name:'After Effects',pct:92},{name:'DaVinci Resolve',pct:88},{name:'Color Grading',pct:95},{name:'Motion Graphics',pct:85}];}
+function renderSkills(){
+  document.getElementById('skillEditor').innerHTML=skills.map((s,i)=>`
+    <div class="skill-row-edit">
+      <input value="${s.name}" onchange="skills[${i}].name=this.value" placeholder="Skill name">
+      <input value="${s.pct}" type="number" min="1" max="100" onchange="skills[${i}].pct=parseInt(this.value)" placeholder="%">
+      <button class="skill-del" onclick="skills.splice(${i},1);renderSkills()">✕</button>
+    </div>`).join('');
+}
+function addSkillRow(){skills.push({name:'',pct:80});renderSkills();}
+async function saveSkills(){
+  try{await db.collection('sitedata').doc('skills').set({list:skills,updatedAt:firebase.firestore.FieldValue.serverTimestamp()});showToast('Skills saved! ✓');}
+  catch(e){showToast('Error!',true);}
+}
+
+// TESTIMONIALS
+function loadTestimonials(){
+  db.collection('testimonials').orderBy('createdAt','desc').onSnapshot(snap=>{
+    const tbl=document.getElementById('testimonialsTable');
+    if(!snap.size){tbl.innerHTML='<tr><td colspan="5" class="msg-empty">No testimonials yet</td></tr>';return;}
+    tbl.innerHTML=snap.docs.map(d=>{const t=d.data();return `<tr><td style="color:var(--white);font-weight:600">${t.name||''}</td><td>${t.role||''}</td><td style="color:var(--yellow)">${'★'.repeat(parseInt(t.rating)||5)}</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${t.text||''}</td><td><button class="tbl-action edit" onclick="editTestimonial('${d.id}')">Edit</button><button class="tbl-action del" onclick="delDoc('testimonials','${d.id}')">Del</button></td></tr>`;}).join('');
+  });
+}
+async function saveTestimonial(){
+  const name=document.getElementById('tmName').value.trim();
+  if(!name){showToast('Name required!',true);return;}
+  const data={name,role:document.getElementById('tmRole').value.trim(),initials:document.getElementById('tmInitials').value.trim().toUpperCase(),rating:document.getElementById('tmRating').value,text:document.getElementById('tmText').value.trim(),createdAt:firebase.firestore.FieldValue.serverTimestamp()};
+  const docId=document.getElementById('tmDocId').value;
+  try{if(docId)await db.collection('testimonials').doc(docId).update(data);else await db.collection('testimonials').add(data);closeModal('testimonialModal');showToast(docId?'Updated!':'Review added! ✓');}
+  catch(e){showToast('Error!',true);}
+}
+async function editTestimonial(id){
+  const doc=await db.collection('testimonials').doc(id).get();const t=doc.data();
+  document.getElementById('testimonialModalTitle').textContent='Edit Testimonial';
+  document.getElementById('tmName').value=t.name||'';document.getElementById('tmRole').value=t.role||'';
+  document.getElementById('tmInitials').value=t.initials||'';document.getElementById('tmRating').value=t.rating||'5';
+  document.getElementById('tmText').value=t.text||'';document.getElementById('tmDocId').value=id;
+  document.getElementById('testimonialModal').classList.remove('hide');
+}
+
+// BLOG
+function loadBlog(){
+  db.collection('blog').orderBy('createdAt','desc').onSnapshot(snap=>{
+    const tbl=document.getElementById('blogTable');
+    if(!snap.size){tbl.innerHTML='<tr><td colspan="4" class="msg-empty">No blog posts yet</td></tr>';return;}
+    tbl.innerHTML=snap.docs.map(d=>{const b=d.data();const dt=b.createdAt?new Date(b.createdAt.seconds*1000).toLocaleDateString('en-IN'):'—';return `<tr><td style="color:var(--white);font-weight:600">${b.emoji||''} ${b.title||''}</td><td><span class="badge prog">${b.category||''}</span></td><td>${dt}</td><td><button class="tbl-action edit" onclick="editBlog('${d.id}')">Edit</button><button class="tbl-action del" onclick="delDoc('blog','${d.id}')">Del</button></td></tr>`;}).join('');
+  });
+}
+async function saveBlog(){
+  const title=document.getElementById('blTitle').value.trim();
+  if(!title){showToast('Title required!',true);return;}
+  const data={title,category:document.getElementById('blCat').value,emoji:document.getElementById('blEmoji').value.trim()||'🎬',desc:document.getElementById('blDesc').value.trim(),content:document.getElementById('blContent').value.trim(),createdAt:firebase.firestore.FieldValue.serverTimestamp()};
+  const docId=document.getElementById('blDocId').value;
+  try{if(docId)await db.collection('blog').doc(docId).update(data);else await db.collection('blog').add(data);closeModal('blogModal');showToast(docId?'Updated!':'Post published! ✓');}
+  catch(e){showToast('Error!',true);}
+}
+async function editBlog(id){
+  const doc=await db.collection('blog').doc(id).get();const b=doc.data();
+  document.getElementById('blogModalTitle').textContent='Edit Blog Post';
+  document.getElementById('blTitle').value=b.title||'';document.getElementById('blCat').value=b.category||'Editing';
+  document.getElementById('blEmoji').value=b.emoji||'🎬';document.getElementById('blDesc').value=b.desc||'';
+  document.getElementById('blContent').value=b.content||'';document.getElementById('blDocId').value=id;
+  document.getElementById('blogModal').classList.remove('hide');
+}
+
+// STATS
+async function loadStats(){
+  try{const doc=await db.collection('sitedata').doc('stats').get();if(doc.exists){const d=doc.data();document.getElementById('statProjects').value=d.projects||150;document.getElementById('statClients').value=d.clients||80;document.getElementById('statViews').value=d.views||50;document.getElementById('statYears').value=d.years||3;}}catch(e){}
+}
+async function saveStats(){
+  try{await db.collection('sitedata').doc('stats').set({projects:parseInt(document.getElementById('statProjects').value)||150,clients:parseInt(document.getElementById('statClients').value)||80,views:parseInt(document.getElementById('statViews').value)||50,years:parseInt(document.getElementById('statYears').value)||3,updatedAt:firebase.firestore.FieldValue.serverTimestamp()});showToast('Stats saved! ✓');}
+  catch(e){showToast('Error!',true);}
+}
+
+// MESSAGES
+function loadMessages(){
+  db.collection('messages').orderBy('createdAt','desc').onSnapshot(snap=>{
+    const unread=snap.docs.filter(d=>!d.data().read).length;
+    const badge=document.getElementById('unreadBadge');
+    if(unread>0){badge.style.display='inline';badge.textContent=unread;}else badge.style.display='none';
+    const list=document.getElementById('msgList');
+    if(!snap.size){list.innerHTML='<div class="msg-empty">📭 No messages yet</div>';return;}
+    list.innerHTML=snap.docs.map(d=>{
+      const m=d.data();
+      const init=(m.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+      const time=m.createdAt?new Date(m.createdAt.seconds*1000).toLocaleString('en-IN',{dateStyle:'short',timeStyle:'short'}):'';
+      const ph=m.phone&&m.phone!='Not provided'?m.phone:'';
+      const waNum=ph.replace(/[^0-9]/g,'');
+      const tMsg=thanksMsg.replace('{name}',m.name||'').replace('{project}',m.subject||'video editing');
+      const waLink=waNum?`https://wa.me/${waNum}?text=${encodeURIComponent(`Hi ${m.name}! I'm Rishi Kushwaha (Video Editor). Regarding "${m.subject||'your inquiry'}" — let's discuss!`)}`:'';
+      const thanksLink=waNum?`https://wa.me/${waNum}?text=${encodeURIComponent(tMsg)}`:'';
+      return `<div class="msg-item ${m.read?'':'unread'}">
+        <div class="msg-top-row" onclick="toggleMsg('md-${d.id}','${d.id}')">
+          <div class="msg-av">${init}</div>
+          <div class="msg-info"><div class="msg-name">${m.name||''} ${m.read?'':'<span class="unread-dot"></span>'}</div><div class="msg-time">🕐 ${time} | ${m.subject||'Inquiry'}</div></div>
+          <div style="color:var(--cyan);padding-left:8px;font-size:16px;">▾</div>
+        </div>
+        <div id="md-${d.id}" class="msg-detail">
+          <div class="msg-body">${m.message||''}</div>
+          <div class="msg-contacts">${m.email?`<span class="msg-chip">✉ ${m.email}</span>`:''} ${ph?`<span class="msg-chip">📱 ${ph}</span>`:''}</div>
+          <div class="msg-actions">
+            ${waLink?`<a href="${waLink}" target="_blank" class="msg-btn wa">💬 WA Reply</a>`:''}
+            ${thanksLink?`<a href="${thanksLink}" target="_blank" class="msg-btn thanks">🙏 Thanks</a>`:''}
+            ${m.email?`<a href="mailto:${m.email}" class="msg-btn mail">✉ Email</a>`:''}
+            ${!m.read?`<button class="msg-btn read" onclick="markRead('${d.id}')">✓ Read</button>`:''}
+            <button class="msg-btn del" onclick="delMsg('${d.id}')">🗑 Del</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  });
+}
+function toggleMsg(id,msgId){const el=document.getElementById(id);el.classList.toggle('show');if(el.classList.contains('show'))markRead(msgId);}
+async function markRead(id){try{await db.collection('messages').doc(id).update({read:true});}catch(e){}}
+async function delMsg(id){if(!confirm('Delete?'))return;await db.collection('messages').doc(id).delete();showToast('Deleted!');}
+async function clearAllMessages(){if(!confirm('Delete ALL messages?'))return;const s=await db.collection('messages').get();const b=db.batch();s.docs.forEach(d=>b.delete(d.ref));await b.commit();showToast('Cleared!');}
+
+// CLIENTS
+function loadClients(){
+  db.collection('clients').orderBy('createdAt','desc').onSnapshot(snap=>{
+    const tbl=document.getElementById('clientTable');
+    if(!snap.size){tbl.innerHTML='<tr><td colspan="5" class="msg-empty">No clients</td></tr>';return;}
+    tbl.innerHTML=snap.docs.map(d=>{const c=d.data();const wn=(c.phone||'').replace(/[^0-9]/g,'');return `<tr><td style="color:var(--white);font-weight:600">${c.name||''}</td><td>${c.phone||'—'}</td><td>${c.type||''}</td><td style="color:var(--green)">₹${Number(c.value||0).toLocaleString()}</td><td>${wn?`<a href="https://wa.me/${wn}" target="_blank" class="tbl-action edit" style="text-decoration:none">💬</a>`:''}<button class="tbl-action edit" onclick="editClient('${d.id}')">Edit</button><button class="tbl-action del" onclick="delDoc('clients','${d.id}')">Del</button></td></tr>`;}).join('');
+  });
+}
+async function saveClient(){
+  const name=document.getElementById('cName').value.trim();if(!name){showToast('Name required!',true);return;}
+  const data={name,phone:document.getElementById('cPhone').value.trim(),email:document.getElementById('cEmail').value.trim(),type:document.getElementById('cType').value,value:document.getElementById('cValue').value||0,projects:document.getElementById('cProjects').value||0,createdAt:firebase.firestore.FieldValue.serverTimestamp()};
+  const docId=document.getElementById('cDocId').value;
+  try{if(docId)await db.collection('clients').doc(docId).update(data);else await db.collection('clients').add(data);closeModal('clientModal');showToast(docId?'Updated!':'Client added! ✓');}
+  catch(e){showToast('Error!',true);}
+}
+async function editClient(id){
+  const doc=await db.collection('clients').doc(id).get();const c=doc.data();
+  document.getElementById('clientModalTitle').textContent='Edit Client';
+  document.getElementById('cName').value=c.name||'';document.getElementById('cPhone').value=c.phone||'';
+  document.getElementById('cEmail').value=c.email||'';document.getElementById('cType').value=c.type||'Influencer';
+  document.getElementById('cValue').value=c.value||'';document.getElementById('cProjects').value=c.projects||'';
+  document.getElementById('cDocId').value=id;
+  document.getElementById('clientModal').classList.remove('hide');
+}
+
+// SETTINGS
+async function loadSettings(){
+  try{const doc=await db.collection('settings').doc('profile').get();if(doc.exists){const s=doc.data();document.getElementById('sName').value=s.name||'Rishi Kushwaha';document.getElementById('sEmail').value=s.email||'sahil39379@gmail.com';document.getElementById('sWA').value=s.whatsapp||'917800498828';document.getElementById('sIG').value=s.instagram||'@mr.sahil__kumar0';if(s.thanksMsg){document.getElementById('thanksTemplate').value=s.thanksMsg;thanksMsg=s.thanksMsg;}myWA=s.whatsapp||myWA;}}catch(e){}
+}
+async function saveSettings(){
+  try{const data={name:document.getElementById('sName').value,email:document.getElementById('sEmail').value,whatsapp:document.getElementById('sWA').value,instagram:document.getElementById('sIG').value,thanksMsg:document.getElementById('thanksTemplate').value,updatedAt:firebase.firestore.FieldValue.serverTimestamp()};await db.collection('settings').doc('profile').set(data);myWA=data.whatsapp;thanksMsg=data.thanksMsg;showToast('Settings saved! ✓');}
+  catch(e){showToast('Error!',true);}
+}
+
+// GENERIC DELETE
+async function delDoc(col,id){if(!confirm('Delete this item?'))return;await db.collection(col).doc(id).delete();showToast('Deleted!');}
+
+// LOAD HERO ON PAGE SWITCH
+document.querySelector('[data-page="hero"]').addEventListener('click',loadHero);
+</script>
+</body>
+</html>
