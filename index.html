@@ -4,25 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rishi Kushwaha — Video Editor & Motion Designer</title>
-<meta name="description" content="Rishi Kushwaha — Professional Video Editor & Motion Designer. Reels, YouTube, Cinematic Films, Motion Graphics.">
-<meta name="keywords" content="video editor, motion designer, reels, youtube, cinematic, color grading, after effects, premiere pro, rishi kushwaha">
+<meta name="description" content="Rishi Kushwaha — Professional Video Editor & Motion Designer. Reels, YouTube, Cinematic Films, Motion Graphics. Frames That Hit Different.">
+<meta name="keywords" content="video editor, motion designer, reels editor, youtube editor, cinematic, color grading, after effects, premiere pro, rishi kushwaha">
 <meta name="author" content="Rishi Kushwaha">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="Rishi Kushwaha — Video Editor">
-<meta property="og:description" content="Frames That Hit Different.">
+<meta property="og:description" content="Frames That Hit Different. Professional video editing & motion design.">
 <meta property="og:image" content="photo.jpg">
 <meta property="og:url" content="https://sahilrishi-cyber.github.io/Rishi-portfolio-">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <style>
+/* THEME VARIABLES */
 [data-theme="dark"]{--cyan:#00f5ff;--pink:#ff006e;--purple:#bf00ff;--green:#00ff88;--yellow:#fff200;--bg:#020408;--bg2:#060d12;--surface:#0a1520;--border:#0d2535;--text:#8ab4cc;--white:#e0f4ff;}
 [data-theme="light"]{--cyan:#0077aa;--pink:#cc0055;--purple:#7700bb;--green:#007733;--yellow:#aa8800;--bg:#f5f9ff;--bg2:#eaf3ff;--surface:#ffffff;--border:#c0d8ee;--text:#334455;--white:#111827;}
-[data-theme="light"] .hero-name,[data-theme="light"] .sec-title,[data-theme="light"] .srv-title,[data-theme="light"] .p-title,[data-theme="light"] .about-txt h2,[data-theme="light"] .price-name,[data-theme="light"] .blog-title,[data-theme="light"] .faq-q,[data-theme="light"] .t-name,[data-theme="light"] .cont-info h2{color:#111827!important;}
-[data-theme="light"] .hero-desc,[data-theme="light"] .srv-desc,[data-theme="light"] .a-bio,[data-theme="light"] .t-text,[data-theme="light"] .blog-desc,[data-theme="light"] .faq-a,[data-theme="light"] .price-list li,[data-theme="light"] .cont-info p{color:#445566!important;}
+[data-theme="light"] body{color:#334455;}
+[data-theme="light"] .hero-name,[data-theme="light"] .sec-title,[data-theme="light"] .srv-title,[data-theme="light"] .about-txt h2,[data-theme="light"] .price-name,[data-theme="light"] .blog-title,[data-theme="light"] .faq-q,[data-theme="light"] .t-name,[data-theme="light"] .p-title{color:#111827!important;}
+[data-theme="light"] .hero-desc,[data-theme="light"] .srv-desc,[data-theme="light"] .a-bio,[data-theme="light"] .t-text,[data-theme="light"] .blog-desc,[data-theme="light"] .faq-a,[data-theme="light"] .price-list li{color:#445566!important;}
 [data-theme="light"] nav{background:linear-gradient(to bottom,rgba(245,249,255,.98),transparent);}
 [data-theme="light"] body::before{background:none;}
+[data-theme="light"] .f-copy,[data-theme="light"] .stat-l,[data-theme="light"] .sk-nm{color:#334455!important;}
+
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;cursor:none;transition:background .4s,color .4s;}
@@ -38,28 +41,40 @@ body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;ov
 .loader-pct{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);margin-top:12px;letter-spacing:2px;}
 @keyframes logoPulse{0%,100%{text-shadow:0 0 30px var(--cyan)}50%{text-shadow:0 0 60px var(--cyan),0 0 100px rgba(0,245,255,.4)}}
 
+/* PAGE TRANSITION */
+#pageTransition{position:fixed;inset:0;background:var(--cyan);z-index:99998;transform:scaleY(0);transform-origin:bottom;pointer-events:none;}
+#pageTransition.in{animation:transIn .4s ease forwards;}
+#pageTransition.out{animation:transOut .4s ease forwards;}
+@keyframes transIn{from{transform:scaleY(0);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
+@keyframes transOut{from{transform:scaleY(1);transform-origin:top}to{transform:scaleY(0);transform-origin:top}}
+
+/* SCROLL PROGRESS */
 #scrollBar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--pink));width:0%;z-index:9998;box-shadow:0 0 8px var(--cyan);}
+
+/* BACK TO TOP */
 #backTop{position:fixed;bottom:90px;right:24px;width:44px;height:44px;background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.3);color:var(--cyan);font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:900;opacity:0;transform:translateY(20px);transition:all .3s;backdrop-filter:blur(8px);}
 #backTop.show{opacity:1;transform:translateY(0);}
 #backTop:hover{background:rgba(0,245,255,.2);box-shadow:0 0 20px rgba(0,245,255,.3);}
+
+/* DARK/LIGHT TOGGLE */
 #themeToggle{position:fixed;bottom:30px;right:24px;width:44px;height:44px;background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.3);color:var(--cyan);font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:900;transition:all .3s;backdrop-filter:blur(8px);}
-#themeToggle:hover{background:rgba(0,245,255,.2);}
+#themeToggle:hover{background:rgba(0,245,255,.2);box-shadow:0 0 20px rgba(0,245,255,.3);}
+
+/* WA CHAT BUTTON */
 #waChat{position:fixed;bottom:30px;left:24px;display:flex;align-items:center;gap:10px;background:#25D366;border:none;border-radius:50px;padding:12px 20px;color:#fff;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;cursor:pointer;z-index:900;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:all .3s;text-decoration:none;}
 #waChat:hover{transform:scale(1.05);box-shadow:0 6px 30px rgba(37,211,102,.6);}
+#waChat span{font-size:20px;}
+
+/* CURSOR */
 #cur{position:fixed;width:10px;height:10px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);box-shadow:0 0 15px var(--cyan);mix-blend-mode:screen;transition:width .2s,height .2s,background .2s;}
-#cur2{position:fixed;width:32px;height:32px;border:1px solid rgba(0,245,255,0.35);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);}
+#cur2{position:fixed;width:32px;height:32px;border:1px solid rgba(0,245,255,0.35);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:transform .14s ease;}
 .trail{position:fixed;width:6px;height:6px;border-radius:50%;pointer-events:none;z-index:99990;transform:translate(-50%,-50%);mix-blend-mode:screen;}
+
 body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.025) 2px,rgba(0,0,0,0.025) 4px);pointer-events:none;z-index:9999;}
 #scene3d{position:fixed;inset:0;z-index:0;pointer-events:none;}
 #particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
 .particle{position:absolute;border-radius:50%;pointer-events:none;animation:particleFloat linear infinite;}
 @keyframes particleFloat{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:1;}90%{opacity:.5;}100%{transform:translateY(-100px) scale(1);opacity:0;}}
-
-.vid-modal{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:10000;display:none;align-items:center;justify-content:center;padding:20px;}
-.vid-modal.show{display:flex;}
-.vid-wrap{position:relative;width:100%;max-width:800px;aspect-ratio:16/9;}
-.vid-wrap iframe{width:100%;height:100%;border:none;}
-.vid-close{position:absolute;top:-44px;right:0;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;font-family:'Orbitron',monospace;}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 48px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(2,4,8,.95),transparent);backdrop-filter:blur(12px);}
 .logo{font-family:'Orbitron',monospace;font-size:17px;font-weight:900;color:var(--cyan);letter-spacing:3px;text-shadow:0 0 20px var(--cyan);text-decoration:none;}
@@ -73,6 +88,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 48px;display:f
 .nav-hire::before{content:'';position:absolute;inset:0;background:var(--pink);transform:scaleX(0);transform-origin:left;transition:transform .3s;z-index:-1;}
 .nav-hire:hover{color:#000;}
 .nav-hire:hover::before{transform:scaleX(1);}
+
 #hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;padding:100px 48px 60px;overflow:hidden;}
 .hero-wrap{text-align:center;position:relative;z-index:2;}
 .hero-tag{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:6px;color:var(--pink);text-transform:uppercase;margin-bottom:24px;opacity:0;animation:fadeUp .8s .2s forwards;}
@@ -81,8 +97,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 48px;display:f
 .glitch::before,.glitch::after{content:attr(data-text);position:absolute;inset:0;font-family:'Orbitron',monospace;font-weight:900;}
 .glitch::before{color:var(--cyan);animation:g1 4s infinite;clip-path:polygon(0 25%,100% 25%,100% 45%,0 45%);transform:translate(-2px,0);}
 .glitch::after{color:var(--pink);animation:g2 4s infinite;clip-path:polygon(0 65%,100% 65%,100% 80%,0 80%);transform:translate(2px,0);}
-@keyframes g1{0%,88%,100%{opacity:0}89%{opacity:.9;transform:translate(-4px,-1px)}91%{opacity:0}93%{opacity:.7}}
-@keyframes g2{0%,82%,100%{opacity:0}83%{opacity:.8;transform:translate(4px,1px)}85%{opacity:0}87%{opacity:.6}}
+@keyframes g1{0%,88%,100%{opacity:0}89%{opacity:.9;transform:translate(-4px,-1px)}91%{opacity:0}93%{opacity:.7;transform:translate(-2px,0)}}
+@keyframes g2{0%,82%,100%{opacity:0}83%{opacity:.8;transform:translate(4px,1px)}85%{opacity:0}87%{opacity:.6;transform:translate(2px,0)}}
 .hero-sub{font-family:'Orbitron',monospace;font-size:clamp(12px,1.8vw,20px);font-weight:400;letter-spacing:8px;color:var(--cyan);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp .8s .6s forwards;text-shadow:0 0 15px var(--cyan);}
 .hero-desc{font-size:16px;color:var(--text);max-width:500px;margin:0 auto 40px;line-height:1.9;opacity:0;animation:fadeUp .8s .8s forwards;}
 .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .8s 1s forwards;}
@@ -107,12 +123,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 48px;display:f
 .sec{position:relative;z-index:1;padding:100px 48px;max-width:1200px;margin:0 auto;}
 .sec-hdr{text-align:center;margin-bottom:60px;}
 .sec-tag{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:5px;color:var(--pink);text-transform:uppercase;margin-bottom:12px;display:block;}
-.sec-title{font-family:'Orbitron',monospace;font-size:clamp(26px,3.5vw,44px);font-weight:900;color:var(--white);letter-spacing:2px;text-transform:uppercase;display:inline-block;}
+.sec-title{font-family:'Orbitron',monospace;font-size:clamp(26px,3.5vw,44px);font-weight:900;color:var(--white);letter-spacing:2px;text-transform:uppercase;display:inline-block;position:relative;}
 .sec-title::after{content:'';display:block;width:60px;height:2px;background:linear-gradient(90deg,var(--cyan),var(--pink));margin:14px auto 0;box-shadow:0 0 10px var(--cyan);}
 .port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
-.port-item{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surface);cursor:pointer;}
+.port-item{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surface);}
 .port-item.lg{grid-column:span 2;}
-.port-thumb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform .6s;position:relative;}
+.port-thumb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.25,.46,.45,.94);position:relative;}
 .port-item:hover .port-thumb{transform:scale(1.06);}
 .port-overlay{position:absolute;inset:0;background:rgba(2,4,8,.87);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity .4s;backdrop-filter:blur(4px);padding:20px;text-align:center;}
 .port-item:hover .port-overlay{opacity:1;}
@@ -124,6 +140,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 48px;display:f
 .port-item:hover .play-ic{background:rgba(0,245,255,.1);box-shadow:0 0 20px var(--cyan);}
 .p-lbl{position:absolute;bottom:0;left:0;right:0;padding:10px 14px;background:linear-gradient(to top,rgba(2,4,8,.9),transparent);font-size:13px;font-weight:600;color:var(--white);letter-spacing:1px;transition:opacity .4s;}
 .port-item:hover .p-lbl{opacity:0;}
+
+/* VIDEO MODAL */
+.vid-modal{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:10000;display:none;align-items:center;justify-content:center;padding:20px;}
+.vid-modal.show{display:flex;}
+.vid-wrap{position:relative;width:100%;max-width:800px;aspect-ratio:16/9;}
+.vid-wrap iframe{width:100%;height:100%;border:none;}
+.vid-close{position:absolute;top:-44px;right:0;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;font-family:'Orbitron',monospace;}
+
 .srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.07);}
 .srv-card{background:var(--bg2);padding:34px 26px;position:relative;overflow:hidden;transition:background .3s;}
 .srv-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);transform:scaleX(0);transition:transform .4s;}
@@ -135,15 +159,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 48px;display:f
 .srv-desc{font-size:13px;color:var(--text);line-height:1.7;}
 .srv-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px;}
 .stag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;padding:3px 7px;background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.13);color:var(--cyan);text-transform:uppercase;}
-/* LOGOS */
+
+/* CLIENT LOGOS */
 .logos-wrap{overflow:hidden;padding:20px 0;position:relative;}
 .logos-wrap::before,.logos-wrap::after{content:'';position:absolute;top:0;width:100px;height:100%;z-index:2;}
 .logos-wrap::before{left:0;background:linear-gradient(to right,var(--bg2),transparent);}
 .logos-wrap::after{right:0;background:linear-gradient(to left,var(--bg2),transparent);}
 .logos-track{display:flex;gap:40px;animation:logoScroll 20s linear infinite;width:max-content;}
 .logo-item{background:var(--surface);border:1px solid var(--border);padding:16px 28px;font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--text);letter-spacing:2px;white-space:nowrap;transition:all .3s;}
-.logo-item:hover{border-color:var(--cyan);color:var(--cyan);}
+.logo-item:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 15px rgba(0,245,255,.1);}
 @keyframes logoScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:center;}
 .about-vis{position:relative;aspect-ratio:3/4;}
 .a-frame{position:absolute;inset:0;border:1px solid rgba(0,245,255,.18);background:var(--surface);overflow:hidden;display:flex;align-items:center;justify-content:center;}
@@ -173,8 +200,183 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 48px;display:f
 .t-stars{color:var(--yellow);font-size:13px;letter-spacing:3px;margin-bottom:12px;}
 .t-text{font-size:13px;color:var(--text);line-height:1.8;margin-bottom:18px;font-style:italic;}
 .t-author{display:flex;align-items:center;gap:11px;}
-.t-av{width:34px;height:34px;background:linear-gradient(135deg,var(--cyan),var(--pink));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:11px;font-weight:900;col
-<!-- ABOUT — Loaded from Firebase -->
+.t-av{width:34px;height:34px;background:linear-gradient(135deg,var(--cyan),var(--pink));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:11px;font-weight:900;color:#000;flex-shrink:0;}
+.t-name{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:var(--white);}
+.t-role{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;}
+
+/* PRICING */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.price-card{background:var(--surface);border:1px solid var(--border);padding:32px 24px;position:relative;overflow:hidden;transition:all .3s;text-align:center;}
+.price-card:hover{border-color:rgba(0,245,255,.3);transform:translateY(-6px);}
+.price-card.popular{border-color:var(--cyan);box-shadow:0 0 30px rgba(0,245,255,.1);}
+.price-card.popular::before{content:'MOST POPULAR';position:absolute;top:0;left:0;right:0;background:var(--cyan);color:#000;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:3px;padding:6px;text-align:center;}
+.price-name{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:var(--white);letter-spacing:2px;margin:8px 0;}
+.price-amt{font-family:'Orbitron',monospace;font-size:36px;font-weight:900;color:var(--cyan);text-shadow:0 0 20px var(--cyan);margin:16px 0;}
+.price-amt span{font-size:16px;color:var(--text);}
+.price-list{list-style:none;margin:16px 0 24px;text-align:left;}
+.price-list li{font-size:13px;color:var(--text);padding:6px 0;border-bottom:1px solid rgba(13,37,53,.5);display:flex;align-items:center;gap:8px;}
+.price-list li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;}
+.price-btn{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:2px;padding:12px 24px;background:transparent;border:2px solid var(--cyan);color:var(--cyan);text-transform:uppercase;cursor:pointer;transition:all .3s;width:100%;text-decoration:none;display:block;}
+.price-btn:hover,.price-card.popular .price-btn{background:var(--cyan);color:#000;}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:12px;}
+.faq-item{background:var(--surface);border:1px solid var(--border);overflow:hidden;transition:border-color .3s;}
+.faq-item:hover{border-color:rgba(0,245,255,.2);}
+.faq-q{padding:18px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:15px;font-weight:600;color:var(--white);}
+.faq-q span{font-family:'Orbitron',monospace;font-size:18px;color:var(--cyan);transition:transform .3s;flex-shrink:0;}
+.faq-item.open .faq-q span{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;font-size:14px;color:var(--text);line-height:1.8;}
+.faq-item.open .faq-a{max-height:200px;}
+.faq-a-inner{padding:0 20px 18px;}
+
+/* BLOG */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.blog-card{background:var(--surface);border:1px solid var(--border);overflow:hidden;transition:all .3s;cursor:pointer;}
+.blog-card:hover{border-color:rgba(0,245,255,.3);transform:translateY(-4px);}
+.blog-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden;}
+.blog-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent,rgba(2,4,8,.6));}
+.blog-tag{position:absolute;top:12px;left:12px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;padding:4px 8px;text-transform:uppercase;z-index:1;}
+.blog-body{padding:18px;}
+.blog-date{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text);margin-bottom:8px;}
+.blog-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--white);letter-spacing:1px;margin-bottom:8px;line-height:1.4;}
+.blog-desc{font-size:12px;color:var(--text);line-height:1.6;}
+.blog-read{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;margin-top:12px;display:inline-block;}
+
+#contact{position:relative;z-index:1;background:var(--surface);border-top:1px solid rgba(0,245,255,.07);border-bottom:1px solid rgba(0,245,255,.07);padding:100px 48px;}
+.cont-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.cont-info h2{font-family:'Orbitron',monospace;font-size:40px;font-weight:900;color:var(--white);text-transform:uppercase;letter-spacing:2px;line-height:1.1;margin-bottom:18px;}
+.cont-info h2 em{color:var(--cyan);font-style:normal;text-shadow:0 0 20px var(--cyan);}
+.cont-info p{font-size:15px;color:var(--text);line-height:1.8;margin-bottom:32px;}
+.cont-links{display:flex;flex-direction:column;gap:14px;}
+.c-link{display:flex;align-items:center;gap:14px;text-decoration:none;padding:13px 18px;border:1px solid var(--border);transition:all .3s;color:var(--text);font-size:14px;}
+.c-link:hover{border-color:var(--cyan);background:rgba(0,245,255,.03);color:var(--cyan);transform:translateX(8px);}
+.c-icon{font-size:17px;width:22px;text-align:center;}
+.c-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;}
+.cont-form{display:flex;flex-direction:column;gap:14px;}
+.fg{position:relative;}
+.fg label{display:block;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--text);text-transform:uppercase;margin-bottom:7px;}
+.fg input,.fg textarea,.fg select{width:100%;background:rgba(0,245,255,.02);border:1px solid var(--border);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:15px;padding:13px 15px;outline:none;transition:border-color .3s;appearance:none;resize:none;}
+.fg textarea{height:110px;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--cyan);box-shadow:0 0 0 1px rgba(0,245,255,.08);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.btn-sub{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:3px;padding:15px 30px;background:transparent;border:2px solid var(--cyan);color:var(--cyan);text-transform:uppercase;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;width:100%;}
+.btn-sub::before{content:'';position:absolute;inset:0;background:var(--cyan);transform:scaleX(0);transform-origin:left;transition:transform .3s;z-index:-1;}
+.btn-sub:hover{color:#000;}
+.btn-sub:hover::before{transform:scaleX(1);}
+footer{position:relative;z-index:1;padding:28px 48px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);}
+.f-logo{font-family:'Orbitron',monospace;font-size:14px;font-weight:900;color:var(--cyan);letter-spacing:3px;text-shadow:0 0 10px var(--cyan);}
+.f-copy{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text);}
+.f-social{display:flex;gap:16px;}
+.f-social a{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text);text-decoration:none;text-transform:uppercase;transition:color .3s;}
+.f-social a:hover{color:var(--cyan);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.on{opacity:1;transform:translateY(0);}
+@media(max-width:860px){
+  .port-grid{grid-template-columns:1fr 1fr;}.port-item.lg{grid-column:span 1;}
+  .srv-grid{grid-template-columns:1fr;}.about-grid,.cont-inner{grid-template-columns:1fr;gap:40px;}
+  .about-vis{display:block;}.test-grid,.blog-grid,.price-grid{grid-template-columns:1fr;}
+  .stats{gap:28px;}nav{padding:14px 20px;}nav ul{display:none;}
+  .sec{padding:60px 20px;}#contact{padding:60px 20px;}
+}
+</style>
+</head>
+<body>
+
+<div id="loader"><div class="loader-logo">RISHI<span>.</span>K</div><div class="loader-sub">// Loading Experience</div><div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div><div class="loader-pct" id="loaderPct">0%</div></div>
+<div id="pageTransition"></div>
+<div id="scrollBar"></div>
+<div id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<div id="themeToggle" onclick="toggleTheme()" title="Toggle Dark/Light">🌙</div>
+<a id="waChat" href="https://wa.me/917800498828?text=Hi Rishi! I visited your portfolio and I'm interested in your video editing services. Can we discuss?" target="_blank"><span>💬</span> Chat on WhatsApp</a>
+<div class="vid-modal" id="vidModal"><div class="vid-wrap"><iframe id="vidFrame" src="" allowfullscreen></iframe></div><button class="vid-close" onclick="closeVid()">✕</button></div>
+<div id="particles"></div>
+<canvas id="scene3d"></canvas>
+<div id="cur"></div><div id="cur2"></div>
+
+<nav>
+  <a href="#hero" class="logo">RISHI<span>.</span>K</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-hire">Hire Me</a>
+</nav>
+
+<section id="hero">
+  <div class="float-el" style="top:15%;left:5%;animation:floatA 6s ease-in-out infinite;"><svg width="80" height="80" viewBox="0 0 80 80"><polygon points="40,4 76,62 4,62" stroke="rgba(0,245,255,0.18)" stroke-width="1" fill="rgba(0,245,255,0.03)"/></svg></div>
+  <div class="float-el" style="top:20%;right:6%;animation:floatB 7s ease-in-out infinite;"><svg width="70" height="70" viewBox="0 0 70 70"><rect x="5" y="5" width="60" height="60" stroke="rgba(255,0,110,0.2)" stroke-width="1" fill="rgba(255,0,110,0.03)" transform="rotate(20 35 35)"/></svg></div>
+  <div class="hero-wrap">
+    <p class="hero-tag">// Video Editor & Motion Designer</p>
+    <h1 class="hero-name"><span class="glitch" data-text="RISHI">RISHI</span><br><span class="glitch" data-text="KUSHWAHA" style="color:var(--cyan);text-shadow:0 0 40px var(--cyan)">KUSHWAHA</span></h1>
+    <p class="hero-sub">Frames That Hit Different</p>
+    <p class="hero-desc">I don't just edit videos — I craft experiences that make viewers stop scrolling, feel something, and remember your brand forever.</p>
+    <div class="hero-btns"><a href="#work" class="btn-p">View My Work</a><a href="#contact" class="btn-s">Let's Talk</a></div>
+  </div>
+  <div class="scroll-ind"><span>Scroll</span><div class="scroll-ln"></div></div>
+</section>
+
+<div class="ticker-wrap"><div class="ticker"><span class="t-item"><span>▸</span>Reels & Short Form</span><span class="t-item"><span>▸</span>YouTube Videos</span><span class="t-item"><span>▸</span>Cinematic Films</span><span class="t-item"><span>▸</span>Motion Graphics</span><span class="t-item"><span>▸</span>Brand Content</span><span class="t-item"><span>▸</span>Color Grading</span><span class="t-item"><span>▸</span>After Effects</span><span class="t-item"><span>▸</span>Premiere Pro</span><span class="t-item"><span>▸</span>Reels & Short Form</span><span class="t-item"><span>▸</span>YouTube Videos</span><span class="t-item"><span>▸</span>Cinematic Films</span><span class="t-item"><span>▸</span>Motion Graphics</span><span class="t-item"><span>▸</span>Brand Content</span><span class="t-item"><span>▸</span>Color Grading</span><span class="t-item"><span>▸</span>After Effects</span><span class="t-item"><span>▸</span>Premiere Pro</span></div></div>
+
+<div class="stats reveal">
+  <div style="text-align:center"><div class="stat-n"><span id="s1">0</span><em>+</em></div><div class="stat-l">Projects Done</div></div>
+  <div style="text-align:center"><div class="stat-n"><span id="s2">0</span><em>+</em></div><div class="stat-l">Happy Clients</div></div>
+  <div style="text-align:center"><div class="stat-n"><span id="s3">0</span>M<em>+</em></div><div class="stat-l">Views Generated</div></div>
+  <div style="text-align:center"><div class="stat-n"><span id="s4">0</span><em>+</em></div><div class="stat-l">Years Experience</div></div>
+</div>
+
+<div class="sec" id="work">
+  <div class="sec-hdr reveal"><span class="sec-tag">// Selected Work</span><h2 class="sec-title">My Projects</h2></div>
+  <div class="port-grid reveal">
+    <div class="port-item lg" onclick="openVid('dQw4w9WgXcQ')"><div class="port-thumb" style="background:linear-gradient(135deg,#0a0020,#1a0035)"><svg width="70" height="70" viewBox="0 0 80 80" style="opacity:.35"><circle cx="40" cy="40" r="36" stroke="#ff006e" stroke-width="1" fill="none"/><polygon points="32,24 60,40 32,56" fill="#ff006e"/></svg></div><div class="port-overlay"><div class="play-ic"></div><span class="p-tag" style="color:var(--pink);border-color:var(--pink)">Reels</span><div class="p-title">Brand Reel — Fashion</div><div class="p-desc">Click to watch ▶</div></div><div class="p-lbl">Brand Reel — Fashion Client</div></div>
+    <div class="port-item" onclick="openVid('dQw4w9WgXcQ')"><div class="port-thumb" style="background:linear-gradient(135deg,#0d1a00,#1a3000)"><svg width="55" height="55" viewBox="0 0 80 80" style="opacity:.35"><rect x="2" y="2" width="76" height="76" rx="4" stroke="#00ff88" stroke-width="1" fill="none"/><polygon points="30,22 60,40 30,58" fill="#00ff88"/></svg></div><div class="port-overlay"><div class="play-ic" style="border-color:var(--green)"></div><span class="p-tag" style="color:var(--green);border-color:var(--green)">YouTube</span><div class="p-title">Podcast Edit</div><div class="p-desc">Click to watch ▶</div></div><div class="p-lbl">YouTube Podcast</div></div>
+    <div class="port-item"><div class="port-thumb" style="background:linear-gradient(135deg,#1a0000,#300010)"><svg width="55" height="55" viewBox="0 0 80 80" style="opacity:.35"><circle cx="40" cy="40" r="36" stroke="#00f5ff" stroke-width="1" fill="none" stroke-dasharray="6 4"/></svg></div><div class="port-overlay"><div class="play-ic"></div><span class="p-tag" style="color:var(--cyan);border-color:var(--cyan)">Cinematic</span><div class="p-title">Short Film</div></div><div class="p-lbl">Short Film</div></div>
+    <div class="port-item"><div class="port-thumb" style="background:linear-gradient(135deg,#00101a,#001a30)"><svg width="55" height="55" viewBox="0 0 80 80" style="opacity:.4"><rect x="8" y="8" width="26" height="26" stroke="#bf00ff" stroke-width="1" fill="none" transform="rotate(15 21 21)"/></svg></div><div class="port-overlay"><div class="play-ic" style="border-color:var(--purple)"></div><span class="p-tag" style="color:var(--purple);border-color:var(--purple)">Motion</span><div class="p-title">Motion Graphics</div></div><div class="p-lbl">Motion Graphics</div></div>
+    <div class="port-item lg"><div class="port-thumb" style="background:linear-gradient(135deg,#1a1000,#2a1800)"><svg width="65" height="65" viewBox="0 0 80 80" style="opacity:.35"><polygon points="40,5 75,25 75,55 40,75 5,55 5,25" stroke="#fff200" stroke-width="1" fill="none"/></svg></div><div class="port-overlay"><div class="play-ic" style="border-color:var(--yellow)"></div><span class="p-tag" style="color:var(--yellow);border-color:var(--yellow)">Brand</span><div class="p-title">Brand Campaign</div></div><div class="p-lbl">Brand Campaign</div></div>
+    <div class="port-item"><div class="port-thumb" style="background:linear-gradient(135deg,#1a0020,#0a0015)"><svg width="55" height="55" viewBox="0 0 80 80" style="opacity:.35"><circle cx="40" cy="40" r="30" stroke="#ff006e" stroke-width="1" fill="none"/><circle cx="40" cy="40" r="5" fill="#ff006e"/></svg></div><div class="port-overlay"><div class="play-ic"></div><span class="p-tag" style="color:var(--pink);border-color:var(--pink)">Event</span><div class="p-title">Event Highlights</div></div><div class="p-lbl">Event Highlights</div></div>
+  </div>
+  <p style="text-align:center;margin-top:16px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text);">// Replace video IDs with your real YouTube video IDs</p>
+</div>
+
+<div style="position:relative;z-index:1;background:var(--bg2);padding:60px 48px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="sec-hdr reveal"><span class="sec-tag">// Trusted By</span><h2 class="sec-title">Clients</h2></div>
+    <div class="logos-wrap reveal">
+      <div class="logos-track">
+        <div class="logo-item">ARJUN KAPOOR</div><div class="logo-item">DIGITAL EDGE</div><div class="logo-item">TECHTALK INDIA</div><div class="logo-item">SNEHA RAO</div><div class="logo-item">CREATIVEX</div><div class="logo-item">RAHUL FILMS</div><div class="logo-item">BRAND STUDIO</div><div class="logo-item">STYLE HOUSE</div>
+        <div class="logo-item">ARJUN KAPOOR</div><div class="logo-item">DIGITAL EDGE</div><div class="logo-item">TECHTALK INDIA</div><div class="logo-item">SNEHA RAO</div><div class="logo-item">CREATIVEX</div><div class="logo-item">RAHUL FILMS</div><div class="logo-item">BRAND STUDIO</div><div class="logo-item">STYLE HOUSE</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position:relative;z-index:1;background:var(--bg2);padding:100px 48px;" id="services">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="sec-hdr reveal"><span class="sec-tag">// What I Do</span><h2 class="sec-title">Services</h2></div>
+    <div class="srv-grid reveal">
+      <div class="srv-card"><span class="srv-n">01</span><span class="srv-icon" style="color:var(--pink)">📱</span><div class="srv-title">Reels & Short Form</div><div class="srv-desc">Viral-ready reels for Instagram, YouTube Shorts & TikTok.</div><div class="srv-tags"><span class="stag">Instagram</span><span class="stag">YT Shorts</span><span class="stag">TikTok</span></div></div>
+      <div class="srv-card"><span class="srv-n">02</span><span class="srv-icon" style="color:var(--green)">🎬</span><div class="srv-title">YouTube Videos</div><div class="srv-desc">Long-form editing with pacing, music sync & captions.</div><div class="srv-tags"><span class="stag">Podcasts</span><span class="stag">Vlogs</span><span class="stag">Tutorials</span></div></div>
+      <div class="srv-card"><span class="srv-n">03</span><span class="srv-icon" style="color:var(--cyan)">🎞️</span><div class="srv-title">Cinematic Films</div><div class="srv-desc">Short films, wedding films & brand docs with color grading.</div><div class="srv-tags"><span class="stag">Color Grade</span><span class="stag">Sound</span><span class="stag">VFX</span></div></div>
+      <div class="srv-card"><span class="srv-n">04</span><span class="srv-icon" style="color:var(--purple)">✨</span><div class="srv-title">Motion Graphics</div><div class="srv-desc">Custom animated intros, lower thirds & title cards.</div><div class="srv-tags"><span class="stag">After Effects</span><span class="stag">Animations</span></div></div>
+      <div class="srv-card"><span class="srv-n">05</span><span class="srv-icon" style="color:var(--yellow)">🎨</span><div class="srv-title">Color Grading</div><div class="srv-desc">Professional LUT creation & color correction.</div><div class="srv-tags"><span class="stag">DaVinci</span><span class="stag">LUTs</span><span class="stag">HDR</span></div></div>
+      <div class="srv-card"><span class="srv-n">06</span><span class="srv-icon" style="color:var(--pink)">📦</span><div class="srv-title">Brand Content</div><div class="srv-desc">Monthly content packages — consistent look, quick turnaround.</div><div class="srv-tags"><span class="stag">Monthly</span><span class="stag">Branding</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="pricing">
+  <div class="sec-hdr reveal"><span class="sec-tag">// Investment</span><h2 class="sec-title">Pricing</h2></div>
+  <div class="price-grid reveal">
+    <div class="price-card"><div class="price-name">STARTER</div><div class="price-amt">₹2,999<span>/video</span></div><ul class="price-list"><li>1 Short Form Reel</li><li>Basic Color Grade</li><li>Music Sync</li><li>2 Revisions</li><li>3 Day Delivery</li></ul><a href="#contact" class="price-btn">Get Started</a></div>
+    <div class="price-card popular"><div class="price-name">PRO</div><div class="price-amt">₹7,999<span>/video</span></div><ul class="price-list"><li>YouTube Long Form</li><li>Pro Color Grading</li><li>Motion Graphics</li><li>Sound Design</li><li>Unlimited Revisions</li><li>5 Day Delivery</li></ul><a href="#contact" class="price-btn">Get Started</a></div>
+    <div class="price-card"><div class="price-name">BRAND</div><div class="price-amt">₹19,999<span>/mo</span></div><ul class="price-list"><li>8 Videos/Month</li><li>Cinematic Grade</li><li>Custom Intro/Outro</li><li>Priority Support</li><li>Dedicated Editor</li><li>Same Day Revisions</li></ul><a href="#contact" class="price-btn">Get Started</a></div>
+  </div>
+</div>
 <div class="sec" id="about">
   <div class="about-grid">
     <div class="about-vis reveal">
@@ -187,39 +389,60 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 48px;display:f
     <div class="reveal">
       <p class="a-sub">// The Person Behind The Edit</p>
       <h2 class="about-txt">About <em>Me</em></h2>
-      <div id="aboutContent">
-        <p class="a-bio" style="margin-top:6px;">I'm <strong>Rishi Kushwaha</strong> — a <strong>Video Editor & Motion Designer</strong> who lives and breathes visual storytelling.<br><br>I believe every frame matters. My clients don't just get an edited video — they get a <strong>weapon for their brand.</strong></p>
-        <div class="skill-list" id="skillList">
-          <div class="sk-row"><div class="sk-info"><span class="sk-nm">Premiere Pro</span><span class="sk-pc">98%</span></div><div class="sk-bar"><div class="sk-fill" style="width:98%"></div></div></div>
-          <div class="sk-row"><div class="sk-info"><span class="sk-nm">After Effects</span><span class="sk-pc">92%</span></div><div class="sk-bar"><div class="sk-fill" style="width:92%"></div></div></div>
-          <div class="sk-row"><div class="sk-info"><span class="sk-nm">DaVinci Resolve</span><span class="sk-pc">88%</span></div><div class="sk-bar"><div class="sk-fill" style="width:88%"></div></div></div>
-          <div class="sk-row"><div class="sk-info"><span class="sk-nm">Color Grading</span><span class="sk-pc">95%</span></div><div class="sk-bar"><div class="sk-fill" style="width:95%"></div></div></div>
-          <div class="sk-row"><div class="sk-info"><span class="sk-nm">Motion Graphics</span><span class="sk-pc">85%</span></div><div class="sk-bar"><div class="sk-fill" style="width:85%"></div></div></div>
-        </div>
+      <p class="a-bio" style="margin-top:6px;">I'm <strong>Rishi Kushwaha</strong> — a <strong>Video Editor & Motion Designer</strong> who lives and breathes visual storytelling.<br><br>I believe every frame matters — the cut, the color, the sound. My clients don't just get an edited video — they get a <strong>weapon for their brand.</strong></p>
+      <div class="skill-list">
+        <div class="sk-row"><div class="sk-info"><span class="sk-nm">Premiere Pro</span><span class="sk-pc">98%</span></div><div class="sk-bar"><div class="sk-fill" style="width:98%"></div></div></div>
+        <div class="sk-row"><div class="sk-info"><span class="sk-nm">After Effects</span><span class="sk-pc">92%</span></div><div class="sk-bar"><div class="sk-fill" style="width:92%"></div></div></div>
+        <div class="sk-row"><div class="sk-info"><span class="sk-nm">DaVinci Resolve</span><span class="sk-pc">88%</span></div><div class="sk-bar"><div class="sk-fill" style="width:88%"></div></div></div>
+        <div class="sk-row"><div class="sk-info"><span class="sk-nm">Color Grading</span><span class="sk-pc">95%</span></div><div class="sk-bar"><div class="sk-fill" style="width:95%"></div></div></div>
+        <div class="sk-row"><div class="sk-info"><span class="sk-nm">Motion Graphics</span><span class="sk-pc">85%</span></div><div class="sk-bar"><div class="sk-fill" style="width:85%"></div></div></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- TESTIMONIALS — Loaded from Firebase -->
 <div style="position:relative;z-index:1;background:var(--bg2);padding:80px 48px;">
   <div style="max-width:1200px;margin:0 auto;">
     <div class="sec-hdr reveal"><span class="sec-tag">// Client Love</span><h2 class="sec-title">Testimonials</h2></div>
-    <div class="test-grid reveal" id="testimonialsGrid">
-      <div class="test-card"><div class="t-stars">★★★★★</div><div class="t-text">"My reel went from 2K to 200K views in one week."</div><div class="t-author"><div class="t-av">AK</div><div><div class="t-name">Arjun Kapoor</div><div class="t-role">Fashion Influencer</div></div></div></div>
-      <div class="test-card"><div class="t-stars">★★★★★</div><div class="t-text">"Delivered faster than promised. Hollywood-level quality."</div><div class="t-author"><div class="t-av">SR</div><div><div class="t-name">Sneha Rao</div><div class="t-role">Brand Manager</div></div></div></div>
-      <div class="test-card"><div class="t-stars">★★★★★</div><div class="t-text">"None understood my vision like Rishi. Color grade was perfect."</div><div class="t-author"><div class="t-av">RV</div><div><div class="t-name">Rahul Verma</div><div class="t-role">Wedding Filmmaker</div></div></div></div>
+    <div class="test-grid reveal">
+      <div class="test-card"><div class="t-stars">★★★★★</div><div class="t-text">"My reel went from 2K to 200K views in one week. Every cut hit perfectly."</div><div class="t-author"><div class="t-av">AK</div><div><div class="t-name">Arjun Kapoor</div><div class="t-role">Fashion Influencer</div></div></div></div>
+      <div class="test-card"><div class="t-stars">★★★★★</div><div class="t-text">"Delivered faster than promised. Our brand content now looks Hollywood-level."</div><div class="t-author"><div class="t-av">SR</div><div><div class="t-name">Sneha Rao</div><div class="t-role">Brand Manager</div></div></div></div>
+      <div class="test-card"><div class="t-stars">★★★★★</div><div class="t-text">"None understood my vision like Rishi. The color grade made my client cry."</div><div class="t-author"><div class="t-av">RV</div><div><div class="t-name">Rahul Verma</div><div class="t-role">Wedding Filmmaker</div></div></div></div>
     </div>
   </div>
 </div>
 
-<!-- BLOG — Loaded from Firebase -->
+<!-- BLOG -->
 <div class="sec" id="blog">
   <div class="sec-hdr reveal"><span class="sec-tag">// Knowledge Hub</span><h2 class="sec-title">Blog & Tips</h2></div>
-  <div class="blog-grid reveal" id="blogGrid">
-    <div class="blog-card"><div class="blog-thumb" style="background:linear-gradient(135deg,#0a0020,#1a0035)">🎬<span class="blog-tag" style="background:rgba(255,0,110,.2);border:1px solid var(--pink);color:var(--pink)">Editing</span></div><div class="blog-body"><div class="blog-date">// May 2026</div><div class="blog-title">5 Cuts That Make Your Reel Go Viral</div><div class="blog-desc">The J-cut, L-cut, match cut — secret techniques behind every viral reel.</div><span class="blog-read">Read More →</span></div></div>
-    <div class="blog-card"><div class="blog-thumb" style="background:linear-gradient(135deg,#001a10,#003020)">🎨<span class="blog-tag" style="background:rgba(0,255,136,.2);border:1px solid var(--green);color:var(--green)">Color</span></div><div class="blog-body"><div class="blog-date">// April 2026</div><div class="blog-title">Color Grading for Beginners</div><div class="blog-desc">DaVinci vs Premiere — which one for color grading? Breaking it down.</div><span class="blog-read">Read More →</span></div></div>
-    <div class="blog-card"><div class="blog-thumb" style="background:linear-gradient(135deg,#001020,#002040)">✨<span class="blog-tag" style="background:rgba(0,245,255,.2);border:1px solid var(--cyan);color:var(--cyan)">Motion</span></div><div class="blog-body"><div class="blog-date">// March 2026</div><div class="blog-title">After Effects Expressions That Save Hours</div><div class="blog-desc">5 expressions that automate your workflow and save hours every project.</div><span class="blog-read">Read More →</span></div></div>
+  <div class="blog-grid reveal">
+    <div class="blog-card">
+      <div class="blog-thumb" style="background:linear-gradient(135deg,#0a0020,#1a0035)">🎬<span class="blog-tag" style="background:rgba(255,0,110,.2);border:1px solid var(--pink);color:var(--pink)">Editing</span></div>
+      <div class="blog-body">
+        <div class="blog-date">// May 2026</div>
+        <div class="blog-title">5 Cuts That Make Your Reel Go Viral</div>
+        <div class="blog-desc">The J-cut, L-cut, match cut — these editing techniques are the secret behind every viral reel you've ever seen.</div>
+        <span class="blog-read">Read More →</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-thumb" style="background:linear-gradient(135deg,#001a10,#003020)">🎨<span class="blog-tag" style="background:rgba(0,255,136,.2);border:1px solid var(--green);color:var(--green)">Color</span></div>
+      <div class="blog-body">
+        <div class="blog-date">// April 2026</div>
+        <div class="blog-title">Color Grading for Beginners — Where to Start</div>
+        <div class="blog-desc">DaVinci Resolve vs Premiere Pro — which one should you use for color grading? Breaking it down simply.</div>
+        <span class="blog-read">Read More →</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-thumb" style="background:linear-gradient(135deg,#001020,#002040)">✨<span class="blog-tag" style="background:rgba(0,245,255,.2);border:1px solid var(--cyan);color:var(--cyan)">Motion</span></div>
+      <div class="blog-body">
+        <div class="blog-date">// March 2026</div>
+        <div class="blog-title">After Effects Expressions That Save Hours</div>
+        <div class="blog-desc">These 5 After Effects expressions will automate your workflow and save you hours every single project.</div>
+        <span class="blog-read">Read More →</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -228,16 +451,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 48px;display:f
   <div style="max-width:800px;margin:0 auto;">
     <div class="sec-hdr reveal"><span class="sec-tag">// Common Questions</span><h2 class="sec-title">FAQ</h2></div>
     <div class="faq-list reveal">
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does it take to edit a video? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">Reels take 1-2 days, YouTube videos 3-5 days, Cinematic films 5-7 days. Rush delivery available.</div></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What software do you use? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">Adobe Premiere Pro, After Effects, DaVinci Resolve for color grading, and Audition for audio.</div></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How many revisions do I get? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">Starter: 2 revisions. Pro: unlimited revisions. I work until you're 100% satisfied.</div></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What format will I receive my video in? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">MP4 (H.264) by default, optimized for your platform. ProRes or MOV on request.</div></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you edit raw footage too? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">Yes! Share via Google Drive or WeTransfer — I handle everything from cut to delivery.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does it take to edit a video? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">Reels take 1-2 days, YouTube videos 3-5 days, and Cinematic films 5-7 days. Rush delivery available on request.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What software do you use? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">Adobe Premiere Pro for editing, After Effects for motion graphics, DaVinci Resolve for color grading, and Audition for audio cleanup.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How many revisions do I get? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">Starter pack includes 2 revisions, Pro includes unlimited revisions. I work until you're 100% satisfied.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What format will I receive my video in? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">MP4 (H.264) by default, optimized for your platform. ProRes or MOV available on request.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you provide raw footage editing too? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">Yes! Share your raw footage via Google Drive or WeTransfer and I'll handle everything from cut to delivery.</div></div></div>
     </div>
   </div>
 </div>
 
-<!-- CONTACT -->
 <div id="contact">
   <div class="cont-inner">
     <div class="reveal">
@@ -275,21 +497,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 48px;display:f
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script>
 // FIREBASE
 const firebaseConfig={apiKey:"AIzaSyA7IF1sm3ov4WRdLBgABZwe83_MtC4EK0k",authDomain:"rishi-portfolio-a3d07.firebaseapp.com",projectId:"rishi-portfolio-a3d07",storageBucket:"rishi-portfolio-a3d07.firebasestorage.app",messagingSenderId:"504667511628",appId:"1:504667511628:web:0855f21475d082ee81cde9"};
 firebase.initializeApp(firebaseConfig);
 const db=firebase.firestore();
 
-// COLOR MAP
-const colorMap={pink:'var(--pink)',green:'var(--green)',cyan:'var(--cyan)',purple:'var(--purple)',yellow:'var(--yellow)'};
-
 // LOADER
 let prog=0;
 const fill=document.getElementById('loaderFill'),pct=document.getElementById('loaderPct');
 const loaderInt=setInterval(()=>{prog+=Math.random()*12;if(prog>=100){prog=100;clearInterval(loaderInt);setTimeout(()=>document.getElementById('loader').classList.add('hide'),400);}fill.style.width=prog+'%';pct.textContent=Math.floor(prog)+'%';},80);
 
-// THEME
+// THEME TOGGLE
 function toggleTheme(){
   const html=document.documentElement;
   const isDark=html.getAttribute('data-theme')==='dark';
@@ -297,19 +518,26 @@ function toggleTheme(){
   document.getElementById('themeToggle').textContent=isDark?'🌙':'☀️';
 }
 
-// VIDEO
-function openVid(id){
-  if(!id){alert('Video coming soon!');return;}
-  document.getElementById('vidFrame').src=`https://www.youtube.com/embed/${id}?autoplay=1`;
-  document.getElementById('vidModal').classList.add('show');
-}
+// PAGE TRANSITION - only for internal hash links
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const href=a.getAttribute('href');
+    if(!href||href==='#'||href==='#!'||!document.querySelector(href)) return;
+    e.preventDefault();
+    const target=document.querySelector(href);
+    if(target) target.scrollIntoView({behavior:'smooth'});
+  });
+});
+
+// VIDEO MODAL
+function openVid(id){document.getElementById('vidFrame').src=`https://www.youtube.com/embed/${id}?autoplay=1`;document.getElementById('vidModal').classList.add('show');}
 function closeVid(){document.getElementById('vidModal').classList.remove('show');document.getElementById('vidFrame').src='';}
 
 // PARTICLES
 (function(){
   const c=document.getElementById('particles');
   const cols=['rgba(0,245,255,','rgba(255,0,110,','rgba(191,0,255,','rgba(0,255,136,'];
-  for(let i=0;i<25;i++){const p=document.createElement('div');p.className='particle';const sz=Math.random()*4+2,col=cols[Math.floor(Math.random()*4)];p.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;background:${col}${Math.random()*.6+.2});animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;c.appendChild(p);}
+  for(let i=0;i<25;i++){const p=document.createElement('div');p.className='particle';const sz=Math.random()*4+2,col=cols[Math.floor(Math.random()*4)];p.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;background:${col}${Math.random()*.6+.2});animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;box-shadow:0 0 ${sz*3}px ${col}.8)`;c.appendChild(p);}
 })();
 
 // SCROLL
@@ -319,7 +547,7 @@ window.addEventListener('scroll',()=>{
   const bt=document.getElementById('backTop');sc>300?bt.classList.add('show'):bt.classList.remove('show');
 });
 
-// 3D
+// 3D SCENE
 (function(){
   const canvas=document.getElementById('scene3d');
   const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
@@ -340,114 +568,63 @@ window.addEventListener('scroll',()=>{
   let t=0;(function a(){requestAnimationFrame(a);t+=.008;objs.forEach(o=>{o.mesh.rotation.x+=o.rx;o.mesh.rotation.y+=o.ry;});grid.position.y=-3.5+Math.sin(t)*.15;camera.position.x+=(mx-camera.position.x)*.04;camera.position.y+=(-my-camera.position.y)*.04;camera.lookAt(0,0,0);renderer.render(scene,camera);})();
 })();
 
-// CURSOR
+// CURSOR + TRAIL
 const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
 let mx2=0,my2=0,rx2=0,ry2=0;
 const trails=[];
 for(let i=0;i<8;i++){const t=document.createElement('div');t.className='trail';t.style.cssText=`background:${['#00f5ff','#ff006e','#bf00ff','#00ff88'][i%4]};opacity:${1-i*.1};width:${8-i}px;height:${8-i}px;`;document.body.appendChild(t);trails.push({el:t,x:0,y:0});}
 document.addEventListener('mousemove',e=>{mx2=e.clientX;my2=e.clientY;});
 (function animC(){cur.style.left=mx2+'px';cur.style.top=my2+'px';rx2+=(mx2-rx2)*.12;ry2+=(my2-ry2)*.12;cur2.style.left=rx2+'px';cur2.style.top=ry2+'px';let px=mx2,py=my2;trails.forEach(t=>{t.x+=(px-t.x)*.3;t.y+=(py-t.y)*.3;t.el.style.left=t.x+'px';t.el.style.top=t.y+'px';px=t.x;py=t.y;});requestAnimationFrame(animC);})();
+document.querySelectorAll('a,button,.port-item,.srv-card,.price-card,.blog-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';cur.style.background='var(--pink)';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';cur.style.background='var(--cyan)';});
+});
 
 // FLOAT CSS
 const s=document.createElement('style');
 s.textContent='@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}';
 document.head.appendChild(s);
 
-// REVEAL
+// SCROLL REVEAL
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on');});},{threshold:.08});
 document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+// COUNTER
+function count(el,target){let v=0;const step=target/60;const t=setInterval(()=>{v+=step;if(v>=target){el.textContent=target;clearInterval(t);}else el.textContent=Math.floor(v);},30);}
+const sObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){count(document.getElementById('s1'),150);count(document.getElementById('s2'),80);count(document.getElementById('s3'),50);count(document.getElementById('s4'),3);sObs.disconnect();}});},{threshold:.5});
+sObs.observe(document.querySelector('.stats'));
 
 // FAQ
 function toggleFaq(el){const item=el.parentElement;document.querySelectorAll('.faq-item').forEach(f=>{if(f!==item)f.classList.remove('open');});item.classList.toggle('open');}
 
-// ── LOAD FROM FIREBASE ──
+// CONTACT FORM
+document.getElementById('submitBtn').addEventListener('click',async function(){
+  const name=document.getElementById('fName').value.trim();
+  const email=document.getElementById('fEmail').value.trim();
+  const phone=document.getElementById('fPhone').value.trim();
+  const project=document.getElementById('fProject').value;
+  const message=document.getElementById('fMessage').value.trim();
 
-// STATS
-db.collection('sitedata').doc('stats').get().then(doc=>{
-  if(doc.exists){
-    const s=doc.data();
-    document.getElementById('s1').textContent=s.projects||150;
-    document.getElementById('s2').textContent=s.clients||80;
-    document.getElementById('s3').textContent=s.views||50;
-    document.getElementById('s4').textContent=s.years||3;
-  }
-}).catch(()=>{});
+  // VALIDATION
+  const emailOK=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const phoneOK=!phone||/^[+]?[\d\s\-]{10,15}$/.test(phone);
 
-// PORTFOLIO
-db.collection('portfolio').orderBy('order','asc').get().then(snap=>{
-  const grid=document.getElementById('portfolioGrid');
-  if(snap.empty){
-    grid.innerHTML='<div style="grid-column:span 3;text-align:center;padding:60px;font-family:\'Share Tech Mono\',monospace;font-size:11px;color:var(--text);">No portfolio items yet — Add them in Admin Panel!</div>';
-    return;
-  }
-  const bgMap={pink:'linear-gradient(135deg,#0a0020,#1a0035)',green:'linear-gradient(135deg,#0d1a00,#1a3000)',cyan:'linear-gradient(135deg,#1a0000,#300010)',purple:'linear-gradient(135deg,#00101a,#001a30)',yellow:'linear-gradient(135deg,#1a1000,#2a1800)'};
-  grid.innerHTML=snap.docs.map(d=>{
-    const p=d.data();
-    const color=colorMap[p.color||'cyan'];
-    const bg=bgMap[p.color||'cyan']||bgMap.cyan;
-    const isLg=p.size==='large';
-    return `<div class="port-item${isLg?' lg':''}" onclick="openVid('${p.videoId||''}')">
-      <div class="port-thumb" style="background:${bg}">
-        <svg width="55" height="55" viewBox="0 0 80 80" style="opacity:.35"><circle cx="40" cy="40" r="36" stroke="${color}" stroke-width="1" fill="none"/><polygon points="32,24 60,40 32,56" fill="${color}"/></svg>
-      </div>
-      <div class="port-overlay">
-        <div class="play-ic" style="border-color:${color}"></div>
-        <span class="p-tag" style="color:${color};border-color:${color}">${p.type||'Video'}</span>
-        <div class="p-title">${p.title||''}</div>
-        <div class="p-desc">${p.desc||'Click to watch ▶'}</div>
-      </div>
-      <div class="p-lbl">${p.title||''}</div>
-    </div>`;
-  }).join('');
-}).catch(()=>{
-  document.getElementById('portfolioGrid').innerHTML='<div style="grid-column:span 3;text-align:center;padding:40px;color:var(--text);">Add portfolio items from Admin Panel!</div>';
+  const showErr=(msg)=>{this.textContent='⚠ '+msg;this.style.borderColor='var(--pink)';this.style.color='var(--pink)';setTimeout(()=>{this.textContent='Send Message →';this.style.borderColor='var(--cyan)';this.style.color='var(--cyan)';},3000);};
+
+  if(!name){showErr('Enter your name!');return;}
+  if(!email||!emailOK){showErr('Enter valid email!');return;}
+  if(!phoneOK){showErr('Enter valid phone!');return;}
+  if(!message||message.length<10){showErr('Message too short!');return;}
+  if(/[<>{}]/.test(name+message)){showErr('Invalid characters!');return;}
+
+  this.textContent='Sending...';this.disabled=true;
+  try{
+    await db.collection('messages').add({name,email,phone:phone||'Not provided',subject:project||'General Inquiry',message,read:false,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+    this.textContent='✓ Message Sent!';this.style.borderColor='var(--green)';this.style.color='var(--green)';
+    document.getElementById('fName').value='';document.getElementById('fEmail').value='';document.getElementById('fPhone').value='';document.getElementById('fMessage').value='';
+  }catch(e){this.textContent='⚠ Error! Try again';this.style.borderColor='var(--pink)';this.style.color='var(--pink)';}
+  setTimeout(()=>{this.textContent='Send Message →';this.style.borderColor='var(--cyan)';this.style.color='var(--cyan)';this.disabled=false;},3000);
 });
-
-// PRICING
-db.collection('pricing').orderBy('order','asc').get().then(snap=>{
-  const grid=document.getElementById('pricingGrid');
-  if(snap.empty){
-    // Default pricing
-    grid.innerHTML=`
-      <div class="price-card"><div class="price-name">STARTER</div><div class="price-amt">₹2,999<span>/video</span></div><ul class="price-list"><li>1 Short Form Reel</li><li>Basic Color Grade</li><li>Music Sync</li><li>2 Revisions</li><li>3 Day Delivery</li></ul><a href="#contact" class="price-btn">Get Started</a></div>
-      <div class="price-card popular"><div class="price-name">PRO</div><div class="price-amt">₹7,999<span>/video</span></div><ul class="price-list"><li>YouTube Long Form</li><li>Pro Color Grading</li><li>Motion Graphics</li><li>Unlimited Revisions</li><li>5 Day Delivery</li></ul><a href="#contact" class="price-btn">Get Started</a></div>
-      <div class="price-card"><div class="price-name">BRAND</div><div class="price-amt">₹19,999<span>/mo</span></div><ul class="price-list"><li>8 Videos/Month</li><li>Cinematic Grade</li><li>Priority Support</li><li>Dedicated Editor</li><li>Same Day Revisions</li></ul><a href="#contact" class="price-btn">Get Started</a></div>`;
-    return;
-  }
-  grid.innerHTML=snap.docs.map(d=>{
-    const p=d.data();
-    const isPopular=p.popular==='true'||p.popular===true;
-    const features=(p.features||[]).map(f=>`<li>${f}</li>`).join('');
-    return `<div class="price-card${isPopular?' popular':''}">
-      <div class="price-name">${p.name||''}</div>
-      <div class="price-amt">₹${Number(p.price||0).toLocaleString()}<span>${p.period||''}</span></div>
-      <ul class="price-list">${features}</ul>
-      <a href="#contact" class="price-btn">${p.btnText||'Get Started'}</a>
-    </div>`;
-  }).join('');
-}).catch(()=>{});
-
-// TESTIMONIALS
-db.collection('testimonials').get().then(snap=>{
-  if(snap.empty) return;
-  const grid=document.getElementById('testimonialsGrid');
-  grid.innerHTML=snap.docs.map(d=>{
-    const t=d.data();
-    const stars='★'.repeat(parseInt(t.stars)||5);
-    const initials=(t.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-    return `<div class="test-card">
-      <div class="t-stars">${stars}</div>
-      <div class="t-text">"${t.text||''}"</div>
-      <div class="t-author">
-        <div class="t-av">${initials}</div>
-        <div><div class="t-name">${t.name||''}</div><div class="t-role">${t.role||''}</div></div>
-      </div>
-    </div>`;
-  }).join('');
-}).catch(()=>{});
-
-// BLOG
-db.collection('blog').orderBy('createdAt','desc').get().then(snap=>{
-  if(snap.empty) return;
-  const grid=document.getElementById('blogGrid');
-  const catColors={Editing:'
+</script>
+</body>
+</html>
