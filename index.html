@@ -174,3 +174,280 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 48px;display:f
 .t-text{font-size:13px;color:var(--text);line-height:1.8;margin-bottom:18px;font-style:italic;}
 .t-author{display:flex;align-items:center;gap:11px;}
 .t-av{width:34px;height:34px;background:linear-gradient(135deg,var(--cyan),var(--pink));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:11px;font-weight:900;col
+<!-- ABOUT — Loaded from Firebase -->
+<div class="sec" id="about">
+  <div class="about-grid">
+    <div class="about-vis reveal">
+      <div class="a-frame">
+        <img src="photo.jpg" style="width:100%;height:100%;object-fit:cover;position:absolute;">
+        <div class="cn cn-tl"></div><div class="cn cn-tr"></div><div class="cn cn-bl"></div><div class="cn cn-br"></div>
+      </div>
+      <div class="a-accent"></div>
+    </div>
+    <div class="reveal">
+      <p class="a-sub">// The Person Behind The Edit</p>
+      <h2 class="about-txt">About <em>Me</em></h2>
+      <div id="aboutContent">
+        <p class="a-bio" style="margin-top:6px;">I'm <strong>Rishi Kushwaha</strong> — a <strong>Video Editor & Motion Designer</strong> who lives and breathes visual storytelling.<br><br>I believe every frame matters. My clients don't just get an edited video — they get a <strong>weapon for their brand.</strong></p>
+        <div class="skill-list" id="skillList">
+          <div class="sk-row"><div class="sk-info"><span class="sk-nm">Premiere Pro</span><span class="sk-pc">98%</span></div><div class="sk-bar"><div class="sk-fill" style="width:98%"></div></div></div>
+          <div class="sk-row"><div class="sk-info"><span class="sk-nm">After Effects</span><span class="sk-pc">92%</span></div><div class="sk-bar"><div class="sk-fill" style="width:92%"></div></div></div>
+          <div class="sk-row"><div class="sk-info"><span class="sk-nm">DaVinci Resolve</span><span class="sk-pc">88%</span></div><div class="sk-bar"><div class="sk-fill" style="width:88%"></div></div></div>
+          <div class="sk-row"><div class="sk-info"><span class="sk-nm">Color Grading</span><span class="sk-pc">95%</span></div><div class="sk-bar"><div class="sk-fill" style="width:95%"></div></div></div>
+          <div class="sk-row"><div class="sk-info"><span class="sk-nm">Motion Graphics</span><span class="sk-pc">85%</span></div><div class="sk-bar"><div class="sk-fill" style="width:85%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS — Loaded from Firebase -->
+<div style="position:relative;z-index:1;background:var(--bg2);padding:80px 48px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="sec-hdr reveal"><span class="sec-tag">// Client Love</span><h2 class="sec-title">Testimonials</h2></div>
+    <div class="test-grid reveal" id="testimonialsGrid">
+      <div class="test-card"><div class="t-stars">★★★★★</div><div class="t-text">"My reel went from 2K to 200K views in one week."</div><div class="t-author"><div class="t-av">AK</div><div><div class="t-name">Arjun Kapoor</div><div class="t-role">Fashion Influencer</div></div></div></div>
+      <div class="test-card"><div class="t-stars">★★★★★</div><div class="t-text">"Delivered faster than promised. Hollywood-level quality."</div><div class="t-author"><div class="t-av">SR</div><div><div class="t-name">Sneha Rao</div><div class="t-role">Brand Manager</div></div></div></div>
+      <div class="test-card"><div class="t-stars">★★★★★</div><div class="t-text">"None understood my vision like Rishi. Color grade was perfect."</div><div class="t-author"><div class="t-av">RV</div><div><div class="t-name">Rahul Verma</div><div class="t-role">Wedding Filmmaker</div></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOG — Loaded from Firebase -->
+<div class="sec" id="blog">
+  <div class="sec-hdr reveal"><span class="sec-tag">// Knowledge Hub</span><h2 class="sec-title">Blog & Tips</h2></div>
+  <div class="blog-grid reveal" id="blogGrid">
+    <div class="blog-card"><div class="blog-thumb" style="background:linear-gradient(135deg,#0a0020,#1a0035)">🎬<span class="blog-tag" style="background:rgba(255,0,110,.2);border:1px solid var(--pink);color:var(--pink)">Editing</span></div><div class="blog-body"><div class="blog-date">// May 2026</div><div class="blog-title">5 Cuts That Make Your Reel Go Viral</div><div class="blog-desc">The J-cut, L-cut, match cut — secret techniques behind every viral reel.</div><span class="blog-read">Read More →</span></div></div>
+    <div class="blog-card"><div class="blog-thumb" style="background:linear-gradient(135deg,#001a10,#003020)">🎨<span class="blog-tag" style="background:rgba(0,255,136,.2);border:1px solid var(--green);color:var(--green)">Color</span></div><div class="blog-body"><div class="blog-date">// April 2026</div><div class="blog-title">Color Grading for Beginners</div><div class="blog-desc">DaVinci vs Premiere — which one for color grading? Breaking it down.</div><span class="blog-read">Read More →</span></div></div>
+    <div class="blog-card"><div class="blog-thumb" style="background:linear-gradient(135deg,#001020,#002040)">✨<span class="blog-tag" style="background:rgba(0,245,255,.2);border:1px solid var(--cyan);color:var(--cyan)">Motion</span></div><div class="blog-body"><div class="blog-date">// March 2026</div><div class="blog-title">After Effects Expressions That Save Hours</div><div class="blog-desc">5 expressions that automate your workflow and save hours every project.</div><span class="blog-read">Read More →</span></div></div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div style="position:relative;z-index:1;background:var(--bg2);padding:80px 48px;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div class="sec-hdr reveal"><span class="sec-tag">// Common Questions</span><h2 class="sec-title">FAQ</h2></div>
+    <div class="faq-list reveal">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does it take to edit a video? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">Reels take 1-2 days, YouTube videos 3-5 days, Cinematic films 5-7 days. Rush delivery available.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What software do you use? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">Adobe Premiere Pro, After Effects, DaVinci Resolve for color grading, and Audition for audio.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How many revisions do I get? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">Starter: 2 revisions. Pro: unlimited revisions. I work until you're 100% satisfied.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What format will I receive my video in? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">MP4 (H.264) by default, optimized for your platform. ProRes or MOV on request.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you edit raw footage too? <span>+</span></div><div class="faq-a"><div class="faq-a-inner">Yes! Share via Google Drive or WeTransfer — I handle everything from cut to delivery.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact">
+  <div class="cont-inner">
+    <div class="reveal">
+      <h2 class="cont-info">Let's<br><em>Create</em><br>Together.</h2>
+      <p class="cont-info" style="margin-top:16px;">Got a project? I reply within 24 hours and deliver on time — every time.</p>
+      <div class="cont-links">
+        <a href="mailto:sahil39379@gmail.com" class="c-link"><span class="c-icon">✉</span><div><div class="c-lbl">Email</div><div style="font-size:13px;margin-top:2px;">sahil39379@gmail.com</div></div></a>
+        <a href="https://instagram.com/mr.sahil__kumar0" target="_blank" class="c-link"><span class="c-icon">📸</span><div><div class="c-lbl">Instagram</div><div style="font-size:13px;margin-top:2px;">@mr.sahil__kumar0</div></div></a>
+        <a href="https://wa.me/917800498828" target="_blank" class="c-link"><span class="c-icon">💬</span><div><div class="c-lbl">WhatsApp</div><div style="font-size:13px;margin-top:2px;">+91 7800498828</div></div></a>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="cont-form">
+        <div class="form-row">
+          <div class="fg"><label>Your Name</label><input id="fName" type="text" placeholder="John Doe"></div>
+          <div class="fg"><label>Email</label><input id="fEmail" type="email" placeholder="john@email.com"></div>
+        </div>
+        <div class="fg"><label>Phone Number</label><input id="fPhone" type="tel" placeholder="+91 98765 43210"></div>
+        <div class="fg"><label>Project Type</label><select id="fProject"><option value="" disabled selected>Select a service</option><option>Reels / Short Form</option><option>YouTube Video</option><option>Cinematic Film</option><option>Motion Graphics</option><option>Brand Content</option><option>Other</option></select></div>
+        <div class="fg"><label>Tell Me About Your Project</label><textarea id="fMessage" placeholder="Describe your vision, deadline, budget..."></textarea></div>
+        <button class="btn-sub" id="submitBtn">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">RISHI.K</div>
+  <div class="f-copy">© 2026 Rishi Kushwaha — All Rights Reserved</div>
+  <div class="f-social">
+    <a href="https://instagram.com/mr.sahil__kumar0" target="_blank">IG</a>
+    <a href="https://wa.me/917800498828" target="_blank">WA</a>
+    <a href="mailto:sahil39379@gmail.com">MAIL</a>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// FIREBASE
+const firebaseConfig={apiKey:"AIzaSyA7IF1sm3ov4WRdLBgABZwe83_MtC4EK0k",authDomain:"rishi-portfolio-a3d07.firebaseapp.com",projectId:"rishi-portfolio-a3d07",storageBucket:"rishi-portfolio-a3d07.firebasestorage.app",messagingSenderId:"504667511628",appId:"1:504667511628:web:0855f21475d082ee81cde9"};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
+
+// COLOR MAP
+const colorMap={pink:'var(--pink)',green:'var(--green)',cyan:'var(--cyan)',purple:'var(--purple)',yellow:'var(--yellow)'};
+
+// LOADER
+let prog=0;
+const fill=document.getElementById('loaderFill'),pct=document.getElementById('loaderPct');
+const loaderInt=setInterval(()=>{prog+=Math.random()*12;if(prog>=100){prog=100;clearInterval(loaderInt);setTimeout(()=>document.getElementById('loader').classList.add('hide'),400);}fill.style.width=prog+'%';pct.textContent=Math.floor(prog)+'%';},80);
+
+// THEME
+function toggleTheme(){
+  const html=document.documentElement;
+  const isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  document.getElementById('themeToggle').textContent=isDark?'🌙':'☀️';
+}
+
+// VIDEO
+function openVid(id){
+  if(!id){alert('Video coming soon!');return;}
+  document.getElementById('vidFrame').src=`https://www.youtube.com/embed/${id}?autoplay=1`;
+  document.getElementById('vidModal').classList.add('show');
+}
+function closeVid(){document.getElementById('vidModal').classList.remove('show');document.getElementById('vidFrame').src='';}
+
+// PARTICLES
+(function(){
+  const c=document.getElementById('particles');
+  const cols=['rgba(0,245,255,','rgba(255,0,110,','rgba(191,0,255,','rgba(0,255,136,'];
+  for(let i=0;i<25;i++){const p=document.createElement('div');p.className='particle';const sz=Math.random()*4+2,col=cols[Math.floor(Math.random()*4)];p.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;background:${col}${Math.random()*.6+.2});animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;c.appendChild(p);}
+})();
+
+// SCROLL
+window.addEventListener('scroll',()=>{
+  const sc=document.documentElement.scrollTop,sh=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+  document.getElementById('scrollBar').style.width=(sc/sh*100)+'%';
+  const bt=document.getElementById('backTop');sc>300?bt.classList.add('show'):bt.classList.remove('show');
+});
+
+// 3D
+(function(){
+  const canvas=document.getElementById('scene3d');
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));renderer.setSize(window.innerWidth,window.innerHeight);
+  const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,100);
+  camera.position.z=5;
+  const objs=[];
+  const ico=new THREE.Mesh(new THREE.IcosahedronGeometry(1.2,1),new THREE.MeshBasicMaterial({color:0x00f5ff,wireframe:true,transparent:true,opacity:0.12}));
+  ico.position.set(3.2,0.5,-1);scene.add(ico);objs.push({mesh:ico,rx:.003,ry:.005});
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(1.6,.006,8,80),new THREE.MeshBasicMaterial({color:0x00f5ff,transparent:true,opacity:0.18}));
+  ring.position.set(3.2,0.5,-1);ring.rotation.x=1.2;scene.add(ring);objs.push({mesh:ring,rx:.006,ry:.003});
+  const oct=new THREE.Mesh(new THREE.OctahedronGeometry(.9,0),new THREE.MeshBasicMaterial({color:0xff006e,wireframe:true,transparent:true,opacity:0.14}));
+  oct.position.set(-3.5,-.5,-1);scene.add(oct);objs.push({mesh:oct,rx:.004,ry:-.006});
+  const grid=new THREE.GridHelper(30,30,0x00f5ff,0x0d2535);grid.position.y=-3.5;grid.material.transparent=true;grid.material.opacity=0.15;scene.add(grid);
+  let mx=0,my=0;
+  document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-.5)*.5;my=(e.clientY/window.innerHeight-.5)*.3;});
+  window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
+  let t=0;(function a(){requestAnimationFrame(a);t+=.008;objs.forEach(o=>{o.mesh.rotation.x+=o.rx;o.mesh.rotation.y+=o.ry;});grid.position.y=-3.5+Math.sin(t)*.15;camera.position.x+=(mx-camera.position.x)*.04;camera.position.y+=(-my-camera.position.y)*.04;camera.lookAt(0,0,0);renderer.render(scene,camera);})();
+})();
+
+// CURSOR
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+let mx2=0,my2=0,rx2=0,ry2=0;
+const trails=[];
+for(let i=0;i<8;i++){const t=document.createElement('div');t.className='trail';t.style.cssText=`background:${['#00f5ff','#ff006e','#bf00ff','#00ff88'][i%4]};opacity:${1-i*.1};width:${8-i}px;height:${8-i}px;`;document.body.appendChild(t);trails.push({el:t,x:0,y:0});}
+document.addEventListener('mousemove',e=>{mx2=e.clientX;my2=e.clientY;});
+(function animC(){cur.style.left=mx2+'px';cur.style.top=my2+'px';rx2+=(mx2-rx2)*.12;ry2+=(my2-ry2)*.12;cur2.style.left=rx2+'px';cur2.style.top=ry2+'px';let px=mx2,py=my2;trails.forEach(t=>{t.x+=(px-t.x)*.3;t.y+=(py-t.y)*.3;t.el.style.left=t.x+'px';t.el.style.top=t.y+'px';px=t.x;py=t.y;});requestAnimationFrame(animC);})();
+
+// FLOAT CSS
+const s=document.createElement('style');
+s.textContent='@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}';
+document.head.appendChild(s);
+
+// REVEAL
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on');});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+// FAQ
+function toggleFaq(el){const item=el.parentElement;document.querySelectorAll('.faq-item').forEach(f=>{if(f!==item)f.classList.remove('open');});item.classList.toggle('open');}
+
+// ── LOAD FROM FIREBASE ──
+
+// STATS
+db.collection('sitedata').doc('stats').get().then(doc=>{
+  if(doc.exists){
+    const s=doc.data();
+    document.getElementById('s1').textContent=s.projects||150;
+    document.getElementById('s2').textContent=s.clients||80;
+    document.getElementById('s3').textContent=s.views||50;
+    document.getElementById('s4').textContent=s.years||3;
+  }
+}).catch(()=>{});
+
+// PORTFOLIO
+db.collection('portfolio').orderBy('order','asc').get().then(snap=>{
+  const grid=document.getElementById('portfolioGrid');
+  if(snap.empty){
+    grid.innerHTML='<div style="grid-column:span 3;text-align:center;padding:60px;font-family:\'Share Tech Mono\',monospace;font-size:11px;color:var(--text);">No portfolio items yet — Add them in Admin Panel!</div>';
+    return;
+  }
+  const bgMap={pink:'linear-gradient(135deg,#0a0020,#1a0035)',green:'linear-gradient(135deg,#0d1a00,#1a3000)',cyan:'linear-gradient(135deg,#1a0000,#300010)',purple:'linear-gradient(135deg,#00101a,#001a30)',yellow:'linear-gradient(135deg,#1a1000,#2a1800)'};
+  grid.innerHTML=snap.docs.map(d=>{
+    const p=d.data();
+    const color=colorMap[p.color||'cyan'];
+    const bg=bgMap[p.color||'cyan']||bgMap.cyan;
+    const isLg=p.size==='large';
+    return `<div class="port-item${isLg?' lg':''}" onclick="openVid('${p.videoId||''}')">
+      <div class="port-thumb" style="background:${bg}">
+        <svg width="55" height="55" viewBox="0 0 80 80" style="opacity:.35"><circle cx="40" cy="40" r="36" stroke="${color}" stroke-width="1" fill="none"/><polygon points="32,24 60,40 32,56" fill="${color}"/></svg>
+      </div>
+      <div class="port-overlay">
+        <div class="play-ic" style="border-color:${color}"></div>
+        <span class="p-tag" style="color:${color};border-color:${color}">${p.type||'Video'}</span>
+        <div class="p-title">${p.title||''}</div>
+        <div class="p-desc">${p.desc||'Click to watch ▶'}</div>
+      </div>
+      <div class="p-lbl">${p.title||''}</div>
+    </div>`;
+  }).join('');
+}).catch(()=>{
+  document.getElementById('portfolioGrid').innerHTML='<div style="grid-column:span 3;text-align:center;padding:40px;color:var(--text);">Add portfolio items from Admin Panel!</div>';
+});
+
+// PRICING
+db.collection('pricing').orderBy('order','asc').get().then(snap=>{
+  const grid=document.getElementById('pricingGrid');
+  if(snap.empty){
+    // Default pricing
+    grid.innerHTML=`
+      <div class="price-card"><div class="price-name">STARTER</div><div class="price-amt">₹2,999<span>/video</span></div><ul class="price-list"><li>1 Short Form Reel</li><li>Basic Color Grade</li><li>Music Sync</li><li>2 Revisions</li><li>3 Day Delivery</li></ul><a href="#contact" class="price-btn">Get Started</a></div>
+      <div class="price-card popular"><div class="price-name">PRO</div><div class="price-amt">₹7,999<span>/video</span></div><ul class="price-list"><li>YouTube Long Form</li><li>Pro Color Grading</li><li>Motion Graphics</li><li>Unlimited Revisions</li><li>5 Day Delivery</li></ul><a href="#contact" class="price-btn">Get Started</a></div>
+      <div class="price-card"><div class="price-name">BRAND</div><div class="price-amt">₹19,999<span>/mo</span></div><ul class="price-list"><li>8 Videos/Month</li><li>Cinematic Grade</li><li>Priority Support</li><li>Dedicated Editor</li><li>Same Day Revisions</li></ul><a href="#contact" class="price-btn">Get Started</a></div>`;
+    return;
+  }
+  grid.innerHTML=snap.docs.map(d=>{
+    const p=d.data();
+    const isPopular=p.popular==='true'||p.popular===true;
+    const features=(p.features||[]).map(f=>`<li>${f}</li>`).join('');
+    return `<div class="price-card${isPopular?' popular':''}">
+      <div class="price-name">${p.name||''}</div>
+      <div class="price-amt">₹${Number(p.price||0).toLocaleString()}<span>${p.period||''}</span></div>
+      <ul class="price-list">${features}</ul>
+      <a href="#contact" class="price-btn">${p.btnText||'Get Started'}</a>
+    </div>`;
+  }).join('');
+}).catch(()=>{});
+
+// TESTIMONIALS
+db.collection('testimonials').get().then(snap=>{
+  if(snap.empty) return;
+  const grid=document.getElementById('testimonialsGrid');
+  grid.innerHTML=snap.docs.map(d=>{
+    const t=d.data();
+    const stars='★'.repeat(parseInt(t.stars)||5);
+    const initials=(t.name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+    return `<div class="test-card">
+      <div class="t-stars">${stars}</div>
+      <div class="t-text">"${t.text||''}"</div>
+      <div class="t-author">
+        <div class="t-av">${initials}</div>
+        <div><div class="t-name">${t.name||''}</div><div class="t-role">${t.role||''}</div></div>
+      </div>
+    </div>`;
+  }).join('');
+}).catch(()=>{});
+
+// BLOG
+db.collection('blog').orderBy('createdAt','desc').get().then(snap=>{
+  if(snap.empty) return;
+  const grid=document.getElementById('blogGrid');
+  const catColors={Editing:'
